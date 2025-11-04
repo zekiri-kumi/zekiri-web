@@ -1,0 +1,92 @@
+import { messages } from "@/lib/i18n";
+import { useLanguage } from "@/components/LanguageProvider";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { toast } from "sonner";
+
+export function Contact() {
+  const { language } = useLanguage();
+  const t = messages[language];
+  const [status, setStatus] = useState<null | { type: "ok" | "error"; message: string }>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus(null);
+    setIsSubmitting(true);
+    const form = new FormData(e.currentTarget);
+    const payload = Object.fromEntries(form.entries());
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = (await res.json()) as { success: boolean; message?: string };
+      console.log(data);
+      if (data.success) {
+        setStatus({ type: "ok", message: data.message ?? (language === "en" ? "Sent." : "Enviado.") });
+        toast.success(language === "en" ? "Message sent successfully" : "Mensaje enviado exitosamente");
+        (e.target as HTMLFormElement).reset();
+      } else {
+        setStatus({ type: "error", message: data.message ?? (language === "en" ? "Error." : "Error.") });
+        toast.error(data.message ?? (language === "en" ? "Submission error" : "Error al enviar"));
+      }
+    } catch {
+      setStatus({ type: "error", message: language === "en" ? "Network error" : "Error de red" });
+      toast.error(language === "en" ? "Network error" : "Error de red");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <section id="contact" className="bg-accent/50">
+      <div className="mx-auto max-w-6xl px-4 py-16">
+        <h2 className="text-2xl font-semibold text-foreground md:text-3xl">{t.contact.title}</h2>
+        <p className="mt-2 text-foreground/80 md:text-lg">{t.contact.subtitle}</p>
+        <motion.form
+          onSubmit={onSubmit}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="mt-8 grid gap-4 md:grid-cols-2"
+        >
+          <div className="space-y-2">
+            <Label htmlFor="name">{t.contact.form.name}</Label>
+            <Input id="name" name="name" required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="email">{t.contact.form.email}</Label>
+            <Input id="email" name="email" type="email" required />
+          </div>
+          <div className="space-y-2 md:col-span-2">
+            <Label htmlFor="company">{t.contact.form.company}</Label>
+            <Input id="company" name="company" />
+          </div>
+          <div className="space-y-2 md:col-span-2">
+            <Label htmlFor="message">{t.contact.form.message}</Label>
+            <Textarea id="message" name="message" required />
+          </div>
+          <div className="md:col-span-2">
+            <Button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? (language === "en" ? "Sending..." : "Enviando...") : t.contact.form.submit}
+            </Button>
+          </div>
+        </motion.form>
+        {status && (
+          <div className={`mt-4 text-sm ${status.type === "ok" ? "text-green-600" : "text-red-600"}`}>
+            {status.message}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+
