@@ -20,25 +20,32 @@ export function Contact() {
     setIsSubmitting(true);
     const form = new FormData(e.currentTarget);
     const payload = Object.fromEntries(form.entries());
+    
+    // Use the API endpoint directly, or fallback to external endpoint if configured
+    const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT || "/api/contact";
+    
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(endpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(payload),
       });
-      const data = (await res.json()) as { success: boolean; message?: string };
-      console.log(data);
-      if (data.success) {
-        setStatus({ type: "ok", message: data.message ?? (language === "en" ? "Sent." : "Enviado.") });
+
+      const data = (await res.json().catch(() => undefined)) as { success?: boolean; message?: string } | undefined;
+
+      if (res.ok && data?.success) {
+        setStatus({ type: "ok", message: data.message || (language === "en" ? "Sent." : "Enviado.") });
         toast.success(language === "en" ? "Message sent successfully" : "Mensaje enviado exitosamente");
         (e.target as HTMLFormElement).reset();
       } else {
-        setStatus({ type: "error", message: data.message ?? (language === "en" ? "Error." : "Error.") });
-        toast.error(data.message ?? (language === "en" ? "Submission error" : "Error al enviar"));
+        const errorMessage = data?.message || (language === "en" ? "Error." : "Error.");
+        setStatus({ type: "error", message: errorMessage });
+        toast.error(errorMessage);
       }
-    } catch {
-      setStatus({ type: "error", message: language === "en" ? "Network error" : "Error de red" });
-      toast.error(language === "en" ? "Network error" : "Error de red");
+    } catch (error) {
+      const errorMessage = language === "en" ? "Network error" : "Error de red";
+      setStatus({ type: "error", message: errorMessage });
+      toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
