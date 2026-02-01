@@ -1,0 +1,12 @@
+# robots.txt — indexing rules for crawlers (SEO)
+# Allow all crawlers on public pages; disallow API and non-content paths.
+
+User-agent: *
+Allow: /
+
+# Prevent indexing of API and internal paths (no index leaks)
+Disallow: /api/
+Disallow: /markdown-page
+
+# Sitemap location (helps discovery)
+Sitemap: https://zekiri.io/sitemap.xml

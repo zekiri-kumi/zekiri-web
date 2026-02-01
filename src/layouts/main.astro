@@ -1,16 +1,144 @@
 ---
-import '../styles/global.css';
+/**
+ * Main layout: technical SEO, meta, Open Graph, Twitter, hreflang, JSON-LD.
+ * Canonical and alternate URLs prevent duplicate content; robots and preload
+ * improve indexing and LCP.
+ */
+import "../styles/global.css";
+import {
+  SITE_URL,
+  DEFAULT_OG_IMAGE,
+  OG_IMAGE_WIDTH,
+  OG_IMAGE_HEIGHT,
+  canonicalUrl,
+  alternateUrls,
+  organizationSchema,
+  websiteSchema,
+  breadcrumbSchema,
+} from "../lib/seo";
+
+interface LayoutContent {
+  title: string;
+  description: string;
+  language: string;
+  /** Canonical path (e.g. "/" or "/?lang=es"). Used for canonical URL and OG. */
+  canonicalPath?: string;
+  /** When true, add robots noindex,nofollow (e.g. test/staging pages). */
+  noindex?: boolean;
+  /** Override OG/Twitter image URL (absolute). */
+  ogImage?: string;
+  /** Additional JSON-LD schema objects to inject (e.g. FAQPage). */
+  jsonLd?: Record<string, unknown>[];
+}
+
 const { content } = Astro.props;
+const language = content.language || "en";
+const canonicalPath = content.canonicalPath ?? "/";
+const canonical = canonicalUrl(canonicalPath);
+const ogImage = content.ogImage || DEFAULT_OG_IMAGE;
+const alternates = alternateUrls(language);
+
+// SEO: robots — allow indexing unless noindex (e.g. markdown test page)
+const robotsContent = content.noindex ? "noindex, nofollow" : "index, follow";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/x-icon" href="/favicon.png" />
-		<title>{content.title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang={language}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <!-- Primary Meta Tags (SEO) -->
+    <title>{content.title}</title>
+    <meta name="title" content={content.title} />
+    <meta name="description" content={content.description} />
+    <meta name="robots" content={robotsContent} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- hreflang: language and locale for search engines -->
+    {alternates.map(({ lang, url }) => (
+      <link rel="alternate" hreflang={lang} href={url} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={SITE_URL + "/"} />
+
+    <!-- Open Graph (Facebook, LinkedIn, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={content.title} />
+    <meta property="og:description" content={content.description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
+    <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
+    <meta property="og:locale" content={language === "es" ? "es_MX" : "en_US"} />
+    <meta property="og:site_name" content="Zékiri" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:title" content={content.title} />
+    <meta name="twitter:description" content={content.description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Performance: preload LCP image (hero logo) -->
+    <link rel="preload" href="/assets/logo.png" as="image" />
+
+    <!-- JSON-LD: Organization (required for rich results) -->
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema())} />
+    <!-- JSON-LD: WebSite -->
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema(canonical))} />
+    <!-- JSON-LD: Breadcrumb -->
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema([{ name: "Home", url: SITE_URL + "/" }]))} />
+    <!-- Optional extra JSON-LD (e.g. FAQPage from page) -->
+    {content.jsonLd?.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
+
+    <!-- Google Search Console verification (set in env: PUBLIC_GOOGLE_SITE_VERIFICATION) -->
+    {import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION && (
+      <meta name="google-site-verification" content={import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION} />
+    )}
+  </head>
+  <body>
+    <slot />
+
+    <!-- Analytics: GA4 + Meta Pixel (prod only when IDs set); defer for performance -->
+    {import.meta.env.PUBLIC_GA4_MEASUREMENT_ID && (
+      <>
+        <script
+          is:inline
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA4_MEASUREMENT_ID}`}
+        />
+        <script
+          is:inline
+          define:vars={{
+            gaId: import.meta.env.PUBLIC_GA4_MEASUREMENT_ID,
+            requireConsent: import.meta.env.PUBLIC_ANALYTICS_REQUIRE_CONSENT === "true",
+          }}
+        >
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          if (!requireConsent || document.cookie.includes('analytics_consent=true')) {
+            gtag('config', gaId, requireConsent ? { send_page_view: false } : {});
+          }
+        </script>
+      </>
+    )}
+    {import.meta.env.PUBLIC_META_PIXEL_ID && (
+      <script
+        is:inline
+        define:vars={{
+          pixelId: import.meta.env.PUBLIC_META_PIXEL_ID,
+          requireConsent: import.meta.env.PUBLIC_ANALYTICS_REQUIRE_CONSENT === "true",
+        }}
+      >
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        if (!requireConsent || document.cookie.includes('analytics_consent=true')) {
+          fbq('init', pixelId);
+        }
+      </script>
+    )}
+  </body>
 </html>

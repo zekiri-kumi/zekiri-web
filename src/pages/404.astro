@@ -1,0 +1,30 @@
+---
+/**
+ * 404 page: SEO-safe (noindex), accessible, with link back to home.
+ */
+import Layout from "../layouts/main.astro";
+import { SITE_URL } from "@/lib/seo";
+
+const content = {
+  title: "Page not found | Zékiri",
+  description: "The page you are looking for does not exist. Return to Zékiri home.",
+  language: "en",
+  canonicalPath: "/404",
+  noindex: true,
+};
+---
+
+<Layout content={content}>
+  <main class="mx-auto flex min-h-[60vh] max-w-container-narrow flex-col items-center justify-center gap-6 px-6 py-16 text-center">
+    <h1 class="text-foreground text-3xl font-semibold md:text-4xl">Page not found</h1>
+    <p class="text-muted-foreground text-lg">
+      The page you are looking for does not exist or has been moved.
+    </p>
+    <a
+      href="/"
+      class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-8 text-base font-semibold text-primary-foreground transition-opacity hover:opacity-90 focus-visible:outline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+    >
+      Back to home
+    </a>
+  </main>
+</Layout>

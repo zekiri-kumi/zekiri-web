@@ -1,6 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/**
+ * Design tokens: colors and layout.
+ * - Colors: use bg-primary, text-foreground, bg-surface, etc. (see :root / .dark).
+ * - Containers: use max-w-container-nav | max-w-container-narrow | max-w-container-content
+ *   | max-w-container-carousel | max-w-container-wide | max-w-container-xl.
+ */
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -8,8 +15,13 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  /* Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-foreground-strong: var(--foreground-strong);
+  --color-surface: var(--surface);
+  --color-skeleton: var(--skeleton);
+  --color-muted-text: var(--muted-text);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
@@ -39,31 +51,42 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  /* Layout: container max-widths (single source of truth) */
+  --max-width-container-nav: 72rem;
+  --max-width-container-narrow: 62.5rem;
+  --max-width-container-content: 69.0625rem;
+  --max-width-container-carousel: 64rem;
+  --max-width-container-wide: 80rem;
+  --max-width-container-xl: 90rem;
 }
 
 :root {
   --radius: 0.625rem;
   /* Brand palette (light mode) */
-  --background: #ffffff; /* white */
-  --foreground: #2c3e51; /* dark slate */
+  --background: #ffffff;
+  --foreground: #2c3e51;
+  --foreground-strong: #1a2531;
+  --surface: #f8fafb;
+  --skeleton: #cdd0d8;
+  --muted-text: #959ea7;
   --card: #ffffff;
   --card-foreground: #2c3e51;
   --popover: #ffffff;
   --popover-foreground: #2c3e51;
-  --primary: #00b1e1; /* brand cyan */
-  --primary-foreground: #ffffff; /* on-cyan text */
-  --secondary: #f3f5f7; /* subtle light gray for UI */
+  --primary: #08b3e5;
+  --primary-foreground: #ffffff;
+  --secondary: #f3f5f7;
   --secondary-foreground: #2c3e51;
   --muted: #eef2f6;
   --muted-foreground: #5b6b7d;
-  --accent: #e6f9ff; /* light accent tinted by primary */
+  --accent: #e6f9ff;
   --accent-foreground: #2c3e51;
-  --destructive: #ef4444; /* red-500 */
-  --border: #e5e7eb; /* gray-200 */
+  --destructive: #ef4444;
+  --border: #e5e7eb;
   --input: #e5e7eb;
-  --ring: #00b1e1;
-  /* Charts (derived) */
-  --chart-1: #00b1e1;
+  --ring: #08b3e5;
+  /* Charts */
+  --chart-1: #08b3e5;
   --chart-2: #2c3e51;
   --chart-3: #89d8ef;
   --chart-4: #7aa0bb;
@@ -71,24 +94,27 @@
   /* Sidebar */
   --sidebar: #ffffff;
   --sidebar-foreground: #2c3e51;
-  --sidebar-primary: #00b1e1;
+  --sidebar-primary: #08b3e5;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #e6f9ff;
   --sidebar-accent-foreground: #2c3e51;
   --sidebar-border: #e5e7eb;
-  --sidebar-ring: #00b1e1;
+  --sidebar-ring: #08b3e5;
 }
 
 .dark {
-  /* Brand palette (dark mode) */
-  --background: #2c3e51; /* dark slate */
-  --foreground: #ffffff; /* white */
+  --background: #2c3e51;
+  --foreground: #ffffff;
+  --foreground-strong: #e2e8f0;
+  --surface: #223041;
+  --skeleton: #3b4d61;
+  --muted-text: #94a3b8;
   --card: #2f4358;
   --card-foreground: #ffffff;
   --popover: #2f4358;
   --popover-foreground: #ffffff;
-  --primary: #00b1e1;
-  --primary-foreground: #0b1f2d; /* contrast on bright primary */
+  --primary: #08b3e5;
+  --primary-foreground: #0b1f2d;
   --secondary: #223041;
   --secondary-foreground: #ffffff;
   --muted: #223041;
@@ -98,20 +124,20 @@
   --destructive: #f87171;
   --border: #3b4d61;
   --input: #3b4d61;
-  --ring: #00b1e1;
-  --chart-1: #00b1e1;
+  --ring: #08b3e5;
+  --chart-1: #08b3e5;
   --chart-2: #89d8ef;
   --chart-3: #7aa0bb;
   --chart-4: #ffffff;
   --chart-5: #cfd8e3;
   --sidebar: #2c3e51;
   --sidebar-foreground: #ffffff;
-  --sidebar-primary: #00b1e1;
+  --sidebar-primary: #08b3e5;
   --sidebar-primary-foreground: #0b1f2d;
   --sidebar-accent: #193041;
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #3b4d61;
-  --sidebar-ring: #00b1e1;
+  --sidebar-ring: #08b3e5;
 }
 
 @layer base {
@@ -120,5 +146,14 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@keyframes industries-marquee {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
   }
 }

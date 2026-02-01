@@ -19,13 +19,36 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>("en");
 
   useEffect(() => {
-    const saved = (typeof window !== "undefined" && window.localStorage.getItem("lang")) as Language | null;
-    if (saved === "en" || saved === "es") setLanguageState(saved);
+    // First check query params
+    if (typeof window !== "undefined") {
+      const urlParams = new URLSearchParams(window.location.search);
+      const langParam = urlParams.get("lang") as Language | null;
+      
+      if (langParam === "en" || langParam === "es") {
+        setLanguageState(langParam);
+        window.localStorage.setItem("lang", langParam);
+        document.documentElement.setAttribute("lang", langParam);
+        return;
+      }
+      
+      // Fallback to localStorage
+      const saved = window.localStorage.getItem("lang") as Language | null;
+      if (saved === "en" || saved === "es") {
+        setLanguageState(saved);
+        document.documentElement.setAttribute("lang", saved);
+      }
+    }
   }, []);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    if (typeof window !== "undefined") window.localStorage.setItem("lang", lang);
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("lang", lang);
+      // Update URL with query param
+      const url = new URL(window.location.href);
+      url.searchParams.set("lang", lang);
+      window.history.replaceState({}, "", url.toString());
+    }
     if (typeof document !== "undefined") document.documentElement.setAttribute("lang", lang);
   };
 

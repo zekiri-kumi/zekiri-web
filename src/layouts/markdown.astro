@@ -1,0 +1,19 @@
+---
+/**
+ * Layout for markdown/test pages: noindex so they are not indexed (SEO).
+ * Use this layout for any non-public or demo pages.
+ */
+import Layout from "./main.astro";
+
+const { title, description } = Astro.props.frontmatter ?? {};
+const content = {
+  title: title ? `${title} | Zékiri` : "Zékiri",
+  description: description ?? "Zékiri",
+  language: "en",
+  noindex: true,
+};
+---
+
+<Layout content={content}>
+  <slot />
+</Layout>

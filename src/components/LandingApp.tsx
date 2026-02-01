@@ -1,25 +1,38 @@
 import { LanguageProvider } from "@/components/LanguageProvider";
-import { Header } from "@/components/Header";
+import { TopBanner } from "@/components/TopBanner";
 import { Hero } from "@/components/Hero";
-import { About } from "@/components/About";
-import { Expertise } from "@/components/Expertise";
-import { AI } from "@/components/AI";
+import { IndustriesStrip } from "@/components/IndustriesStrip";
+import { QuoteSection } from "@/components/QuoteSection";
+import { PainPoints } from "@/components/PainPoints";
+import { Testimonials } from "@/components/Testimonials";
+import { WhatWeAutomate } from "@/components/WhatWeAutomate";
+import { ProcessSteps } from "@/components/ProcessSteps";
+import { FAQ } from "@/components/FAQ";
+import { FinalCta } from "@/components/FinalCta";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { Toaster } from "sonner";
+import { Analytics } from "@/components/Analytics";
+import { ConsentBanner } from "@/components/ConsentBanner";
 
 export default function LandingApp() {
-  // Composition Root: Compose feature components under a single provider.
   return (
     <LanguageProvider>
-      <div className="min-h-dvh bg-background text-foreground">
+      <Analytics />
+      <ConsentBanner />
+      <div className="min-h-dvh w-full overflow-hidden bg-background text-foreground flex flex-col items-stretch justify-start">
         <Toaster richColors position="top-right" />
-        <Header />
-        <main>
+        <TopBanner />
+        <main className="flex flex-col items-stretch">
           <Hero />
-          <About />
-          <Expertise />
-          <AI />
+          <IndustriesStrip />
+          <QuoteSection />
+          <PainPoints />
+          <Testimonials />
+          <WhatWeAutomate />
+          <ProcessSteps />
+          <FAQ />
+          <FinalCta />
           <Contact />
         </main>
         <Footer />
@@ -27,5 +40,3 @@ export default function LandingApp() {
     </LanguageProvider>
   );
 }
-
-

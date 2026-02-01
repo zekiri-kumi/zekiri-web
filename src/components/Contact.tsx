@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { toast } from "sonner";
+import { trackFormConversion } from "@/components/Analytics";
 
 export function Contact() {
   const { language } = useLanguage();
@@ -36,6 +37,7 @@ export function Contact() {
       if (res.ok && data?.success) {
         setStatus({ type: "ok", message: data.message || (language === "en" ? "Sent." : "Enviado.") });
         toast.success(language === "en" ? "Message sent successfully" : "Mensaje enviado exitosamente");
+        trackFormConversion();
         (e.target as HTMLFormElement).reset();
       } else {
         const errorMessage = data?.message || (language === "en" ? "Error." : "Error.");
@@ -53,7 +55,7 @@ export function Contact() {
 
   return (
     <section id="contact" className="bg-accent/50">
-      <div className="mx-auto max-w-6xl px-4 py-16">
+      <div className="mx-auto max-w-container-nav px-4 py-16">
         <h2 className="text-2xl font-semibold text-foreground md:text-3xl">{t.contact.title}</h2>
         <p className="mt-2 text-foreground/80 md:text-lg">{t.contact.subtitle}</p>
         <motion.form

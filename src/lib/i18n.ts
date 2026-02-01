@@ -1,58 +1,173 @@
 export type Language = "en" | "es";
 
 export type Translations = {
-  nav: { home: string; about: string; expertise: string; ai: string; contact: string };
-  hero: { title: string; subtitle: string; ctaPrimary: string; ctaSecondary: string };
-  about: { title: string; paragraphs: string[] };
-  expertise: { title: string; items: { title: string; body: string }[]; note: string };
-  ai: { title: string; subtitle: string; items: { title: string; body: string }[]; cta: string };
-  contact: { title: string; subtitle: string; form: { name: string; email: string; company: string; message: string; submit: string } };
-  footer: { rights: string; links: { home: string; about: string; services: string; contact: string } };
+  nav: { home: string; whatWeDo: string; process: string; faq: string; contact: string; cta: string };
+  banner: { text: string };
+  hero: {
+    titleHighlight: string;
+    titleRest: string;
+    bullets: string[];
+    cta: string;
+  };
+  industriesStrip: { subtitle: string };
+  quote: { prefix: string; highlight: string };
+  painPoints: { items: string[] };
+  testimonials: { title: string; cta: string; items: { quote: string; name: string; role: string }[] };
+  whatWeAutomate: {
+    title: string;
+    cta: string;
+    items: { title: string; body: string }[];
+  };
+  process: {
+    title: string;
+    cta: string;
+    steps: { number: string; title: string; body: string }[];
+  };
+  faq: { title: string; items: { question: string; answer: string }[] };
+  finalCta: { title: string; subtitle: string; cta: string };
+  contact: {
+    title: string;
+    subtitle: string;
+    form: { name: string; email: string; company: string; message: string; submit: string };
+  };
+  footer: {
+    email: string;
+    phone: string;
+    location: string;
+    rights: string;
+    privacy: string;
+    terms: string;
+  };
+  meta: { title: string; description: string };
 };
 
 export const messages: Record<Language, Translations> = {
   en: {
-    nav: { home: "Home", about: "About", expertise: "Expertise", ai: "AI Services", contact: "Contact" },
+    nav: {
+      home: "Home",
+      whatWeDo: "What we automate",
+      process: "Process",
+      faq: "FAQ",
+      contact: "Contact",
+      cta: "Get a quote",
+    },
+    banner: { text: "Lorem Ipsum — placeholder text for this area" },
     hero: {
-      title: "We’ve been building exceptional software for over 12 years.",
-      subtitle:
-        "Over 50 successful projects across industries like imports, construction, marketing, travel, and more.",
-      ctaPrimary: "Contact Us",
-      ctaSecondary: "See How We Work",
-    },
-    about: {
-      title: "Excellence, innovation, and commitment.",
-      paragraphs: [
-        "At Zekiri, we believe software development is not just about code—it’s about building solutions that transform businesses.",
-        "Our team combines over 12 years of experience with a constant passion for innovation and quality.",
+      titleHighlight: "AI Automation",
+      titleRest: "that frees time and multiplies results",
+      bullets: [
+        "Automate from repetitive tasks to intelligent decisions",
+        "Increase productivity and business efficiency",
       ],
+      cta: "Schedule a free consultation",
     },
-    expertise: {
-      title: "Our expertise spans multiple industries.",
+    industriesStrip: { subtitle: "Decades of experience across multiple industries" },
+    quote: {
+      prefix: "When operations grow faster than structure, decisions need ",
+      highlight: "reliable data, not intuition.",
+    },
+    painPoints: {
       items: [
-        { title: "Import Companies", body: "Stock control, invoicing, and logistics systems." },
-        { title: "Construction", body: "Project management, budgeting, and resource planning." },
-        { title: "Marketing Agencies", body: "Automation, reporting, and digital analytics." },
-        { title: "Travel Agencies", body: "Bookings, itineraries, and online payments." },
-        { title: "Entertainment", body: "Ticketing platforms and box office solutions." },
+        "Repetitive processes and manual tasks that consume valuable hours",
+        "High operational costs from human error and lack of standardization",
+        "Systems that don't integrate and duplicate work",
+        "Difficulty scaling without automation support",
       ],
-      note: "Each project strengthens our ability to adapt and deliver scalable, efficient solutions.",
     },
-    ai: {
-      title: "We transform your business with artificial intelligence.",
-      subtitle:
-        "We optimize processes, reduce costs, and enhance decision-making with AI solutions tailored to your business.",
+    testimonials: {
+      title: "Companies that already automated their growth",
+      cta: "Schedule a free consultation",
       items: [
-        { title: "Process Automation", body: "Boost operational efficiency with intelligent workflows." },
-        { title: "Predictive Analytics", body: "Anticipate outcomes and make data-driven decisions." },
-        { title: "Virtual Assistants", body: "Create smoother experiences with custom chatbots and assistants." },
-        { title: "AI Integration", body: "Seamlessly bring AI into your existing systems." },
+        {
+          quote: "We recovered 15 hours per person per week. ROI came in the first month.",
+          name: "Laura Méndez",
+          role: "COO • Fintech",
+        },
+        {
+          quote: "Integration was invisible to the team. They saw results before noticing the change.",
+          name: "Carlos Ruiz",
+          role: "Director of Operations • E-commerce",
+        },
+        {
+          quote: "It's not technology for technology's sake. It's a tool that solves real business problems.",
+          name: "Ana Sofía Torres",
+          role: "CEO • Consulting",
+        },
       ],
-      cta: "Request a free consultation",
+    },
+    whatWeAutomate: {
+      title: "What we can automate",
+      cta: "Schedule a free consultation",
+      items: [
+        {
+          title: "Operations & Administration",
+          body: "Approval automation, internal workflows, documentation and operational reporting",
+        },
+        {
+          title: "Data Analysis & Reporting",
+          body: "Automatic dashboards, smart alerts and trend prediction",
+        },
+        {
+          title: "Communication & Support",
+          body: "Smart chatbots, contextual responses and automated ticket management",
+        },
+        {
+          title: "System Integration",
+          body: "We connect CRM, ERP, communication tools and existing platforms",
+        },
+      ],
+    },
+    process: {
+      title: "How our process works",
+      cta: "Schedule a free consultation",
+      steps: [
+        {
+          number: "01",
+          title: "Diagnosis & Strategy",
+          body: "We analyze your current processes and goals to define optimal automation points",
+        },
+        {
+          number: "02",
+          title: "Intelligent solution design",
+          body: "We design flows and AI-based models tailored to your business and integrated with your current infrastructure",
+        },
+        {
+          number: "03",
+          title: "Implementation & rollout",
+          body: "We deploy and train your team so adoption is smooth and measurable",
+        },
+        {
+          number: "04",
+          title: "Optimization & scale",
+          body: "We monitor results and iterate so you can scale with confidence",
+        },
+      ],
+    },
+    faq: {
+      title: "Frequently asked questions",
+      items: [
+        {
+          question: "Do I need technical knowledge to use these solutions?",
+          answer: "No. Our solutions are delivered ready to use with support and training.",
+        },
+        {
+          question: "In which industries do these automations apply?",
+          answer: "From SMBs to large enterprises in sectors such as manufacturing, services, technology, finance, retail and more.",
+        },
+        {
+          question: "Will AI replace my team?",
+          answer: "AI empowers the team, speeds up repetitive tasks and frees time for high-value strategic work.",
+        },
+      ],
+    },
+    finalCta: {
+      title: "Free time. Scale with AI. Decide better.",
+      subtitle: "Schedule a free diagnosis and discover how intelligent automation can transform your operations.",
+      cta: "Schedule a free consultation",
     },
     contact: {
       title: "Ready to boost your business with technology?",
-      subtitle: "Tell us your idea or challenge, and let’s build the perfect solution together.",
+      subtitle: "Tell us your idea or challenge, and let's build the perfect solution together.",
       form: {
         name: "Name",
         email: "Email",
@@ -62,48 +177,140 @@ export const messages: Record<Language, Translations> = {
       },
     },
     footer: {
-      rights: "All rights reserved.",
-      links: { home: "Home", about: "About", services: "Services", contact: "Contact" },
+      email: "contact@zekiri.com",
+      phone: "+1 (234) 567-890",
+      location: "Mexico City, Mexico",
+      rights: "© 2026 Zékiri. All rights reserved.",
+      privacy: "Privacy policy",
+      terms: "Terms and conditions",
+    },
+    meta: {
+      title: "Zékiri — AI Automation",
+      description: "AI automation that frees time and multiplies results. Schedule a free consultation.",
     },
   },
   es: {
-    nav: { home: "Inicio", about: "Sobre Nosotros", expertise: "Experiencia", ai: "Servicios de IA", contact: "Contacto" },
+    nav: {
+      home: "Inicio",
+      whatWeDo: "Qué podemos automatizar",
+      process: "Proceso",
+      faq: "Preguntas frecuentes",
+      contact: "Contacto",
+      cta: "Solicitar cotización",
+    },
+    banner: { text: "Lorem Ipsum lo que se ponga en esta parte usualmente" },
     hero: {
-      title: "Desarrollamos software con excelencia desde hace más de 12 años",
-      subtitle:
-        "Más de 50 proyectos en distintos sectores: importadoras, construcción, marketing, viajes y más.",
-      ctaPrimary: "Contáctanos",
-      ctaSecondary: "Descubre cómo trabajamos",
-    },
-    about: {
-      title: "Excelencia, innovación y compromiso.",
-      paragraphs: [
-        "En Zekiri creemos que el desarrollo de software no solo se trata de código, sino de construir soluciones que transforman negocios.",
-        "Nuestro equipo combina más de 12 años de experiencia con una pasión constante por la innovación y la calidad.",
+      titleHighlight: "Automatización con IA",
+      titleRest: "que libera tiempo y multiplica resultados",
+      bullets: [
+        "→ Automatiza desde tareas repetitivas hasta decisiones inteligentes",
+        "→ Incrementa productividad y eficiencia empresarial",
       ],
+      cta: "Agenda una consultoría gratuita",
     },
-    expertise: {
-      title: "Nuestra experiencia abarca múltiples sectores.",
+    industriesStrip: { subtitle: "Décadas de experiencia en múltiples industrias" },
+    quote: {
+      prefix: "Cuando la operación crece más rápido que la estructura, las decisiones necesitan ",
+      highlight: "datos confiables, no intuición.",
+    },
+    painPoints: {
       items: [
-        { title: "Importadoras", body: "Sistemas de control de stock, facturación y logística." },
-        { title: "Construcción", body: "Gestión de obras, presupuestos y recursos." },
-        { title: "Agencias de Marketing", body: "Automatización, reportes y analítica digital." },
-        { title: "Agencias de Viajes", body: "Reservas, itinerarios y pagos online." },
-        { title: "Entretenimiento", body: "Plataformas de ticketing y venta de entradas." },
+        "Procesos repetitivos y tareas manuales que consumen horas valiosas",
+        "Costos operativos altos por errores humanos y falta de estandarización",
+        "Sistemas que no se integran y que duplican el trabajo",
+        "Dificultad para escalar sin automatización de apoyo",
       ],
-      note: "Cada proyecto refuerza nuestra capacidad de adaptarnos y ofrecer soluciones escalables y eficientes.",
     },
-    ai: {
-      title: "Transformamos tu empresa con inteligencia artificial.",
-      subtitle:
-        "Optimizamos procesos, reducimos costos y potenciamos decisiones con soluciones de IA adaptadas a tus necesidades.",
+    testimonials: {
+      title: "Empresas que ya automatizaron su crecimiento",
+      cta: "Agenda una consultoría gratuita",
       items: [
-        { title: "Automatización de procesos", body: "Mejoramos la eficiencia operativa mediante flujos inteligentes." },
-        { title: "Análisis predictivo", body: "Anticipa resultados y toma decisiones basadas en datos." },
-        { title: "Asistentes virtuales", body: "Experiencias más fluidas con chatbots y asistentes personalizados." },
-        { title: "Integración de IA", body: "Incorpora IA en tus sistemas existentes sin complicaciones." },
+        {
+          quote: "Recuperamos 15 horas semanales por persona. El ROI se dio en el primer mes.",
+          name: "Laura Méndez",
+          role: "COO • Fintech",
+        },
+        {
+          quote: "La integración fue invisible para el equipo. Empezaron a ver resultados antes de darse cuenta del cambio.",
+          name: "Carlos Ruiz",
+          role: "Director de Operaciones • E-commerce",
+        },
+        {
+          quote: "No es tecnología por tecnología. Es una herramienta que resuelve problemas reales de negocio.",
+          name: "Ana Sofía Torres",
+          role: "CEO • Consultoría",
+        },
       ],
-      cta: "Solicita una consultoría gratuita",
+    },
+    whatWeAutomate: {
+      title: "Qué podemos automatizar",
+      cta: "Agenda una consultoría gratuita",
+      items: [
+        {
+          title: "Operaciones & Administración",
+          body: "Automatización de aprobaciones, workflows internos, generación de documentación y reportes operativos",
+        },
+        {
+          title: "Análisis de Datos & Reporting",
+          body: "Dashboards automáticos, alertas inteligentes y predicción de tendencias",
+        },
+        {
+          title: "Comunicación & Soporte",
+          body: "Chatbots inteligentes, respuestas contextuales y gestión automática de tickets",
+        },
+        {
+          title: "Integración de Sistemas",
+          body: "Conectamos CRM, ERP, herramientas de comunicación y plataformas existentes",
+        },
+      ],
+    },
+    process: {
+      title: "Cómo funciona nuestro proceso",
+      cta: "Agenda una consultoría gratuita",
+      steps: [
+        {
+          number: "01",
+          title: "Diagnóstico & Estrategia",
+          body: "Realizamos un análisis profundo de tus procesos actuales y tus objetivos para definir los puntos óptimos de automatización",
+        },
+        {
+          number: "02",
+          title: "Diseño de solución inteligente",
+          body: "Diseñamos flujos y modelos basados en IA adaptados a tu modelo de negocio e integrados a tu infraestructura actual",
+        },
+        {
+          number: "03",
+          title: "Implementación y despliegue",
+          body: "Desplegamos y capacitamos a tu equipo para que la adopción sea fluida y medible",
+        },
+        {
+          number: "04",
+          title: "Optimización y escala",
+          body: "Monitoreamos resultados e iteramos para que puedas escalar con confianza",
+        },
+      ],
+    },
+    faq: {
+      title: "Preguntas frecuentes",
+      items: [
+        {
+          question: "¿Es necesario tener conocimientos técnicos para usar estas soluciones?",
+          answer: "No, nuestras soluciones se entregan 'listas para usar' con soporte y capacitación.",
+        },
+        {
+          question: "¿En qué industrias aplican estas automatizaciones?",
+          answer: "Desde pymes hasta empresas grandes en sectores como manufactura, servicios, tecnología, finanzas, comercio y más.",
+        },
+        {
+          question: "¿La IA reemplazará a mis colaboradores?",
+          answer: "La IA potencia al equipo, agiliza las tareas repetitivas y libera tiempo para actividades estratégicas de alto valor.",
+        },
+      ],
+    },
+    finalCta: {
+      title: "Libera tiempo. Escala con IA. Decide mejor.",
+      subtitle: "Agenda un diagnóstico gratuito y descubre cómo la automatización inteligente puede transformar tu operación.",
+      cta: "Agenda una consultoría gratuita",
     },
     contact: {
       title: "¿Listo para impulsar tu empresa con tecnología?",
@@ -117,10 +324,16 @@ export const messages: Record<Language, Translations> = {
       },
     },
     footer: {
-      rights: "Todos los derechos reservados.",
-      links: { home: "Inicio", about: "Sobre Nosotros", services: "Servicios", contact: "Contacto" },
+      email: "contacto@zekiri.com",
+      phone: "+1 (234) 567-890",
+      location: "Ciudad de México, México",
+      rights: "© 2026 Zékiri. Todos los derechos reservados.",
+      privacy: "Política de privacidad",
+      terms: "Términos y condiciones",
+    },
+    meta: {
+      title: "Zékiri — Automatización con IA",
+      description: "Automatización con IA que libera tiempo y multiplica resultados. Agenda una consultoría gratuita.",
     },
   },
 };
-
-

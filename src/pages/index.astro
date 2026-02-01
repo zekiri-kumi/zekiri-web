@@ -1,10 +1,28 @@
 ---
-export const prerender = true;
 import Layout from "../layouts/main.astro";
 import LandingApp from "@/components/LandingApp";
-const content = { title: "Zekiri — Software & AI" };
+import type { Language } from "@/lib/i18n";
+import { messages } from "@/lib/i18n";
+import { faqSchema } from "@/lib/seo";
+
+// Get language from query params, default to 'en'
+const url = Astro.url;
+const langParam = url.searchParams.get("lang") as Language | null;
+const language: Language = (langParam === "en" || langParam === "es") ? langParam : "en";
+const t = messages[language];
+
+// Canonical: one URL per language to avoid duplicate content (/?lang=es for Spanish)
+const canonicalPath = language === "es" ? "/?lang=es" : "/";
+
+const content = {
+  title: t.meta.title,
+  description: t.meta.description,
+  language,
+  canonicalPath,
+  jsonLd: [faqSchema(t.faq.items)],
+};
 ---
 
-<Layout {content}>
+<Layout content={content}>
     <LandingApp client:load />
 </Layout>
