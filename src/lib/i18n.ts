@@ -51,7 +51,7 @@ export const messages: Record<Language, Translations> = {
       contact: "Contact",
       cta: "Get a quote",
     },
-    banner: { text: "Lorem Ipsum — placeholder text for this area" },
+    banner: { text: "AI automation for operations — Free consultation. See how we help teams save 15+ hours per week." },
     hero: {
       titleHighlight: "AI Automation",
       titleRest: "that frees time and multiplies results",
@@ -198,7 +198,7 @@ export const messages: Record<Language, Translations> = {
       contact: "Contacto",
       cta: "Solicitar cotización",
     },
-    banner: { text: "Lorem Ipsum lo que se ponga en esta parte usualmente" },
+    banner: { text: "Automatización con IA para operaciones — Consulta gratuita. Descubre cómo ayudamos a equipos a ahorrar 15+ horas por semana." },
     hero: {
       titleHighlight: "Automatización con IA",
       titleRest: "que libera tiempo y multiplica resultados",
