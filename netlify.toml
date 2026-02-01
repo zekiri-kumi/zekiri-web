@@ -1,0 +1,4 @@
+# Netlify: build y publicación para Astro con adapter Netlify (SSR + API).
+[build]
+  command = "npm run build"
+  publish = "dist"
