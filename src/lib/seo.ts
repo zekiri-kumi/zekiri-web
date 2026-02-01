@@ -13,6 +13,9 @@ export const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/logo.png`;
 export const OG_IMAGE_WIDTH = 105;
 export const OG_IMAGE_HEIGHT = 34;
 
+/** Google Search Console: código de verificación (meta tag). Si env no está en build, se usa este. */
+export const GOOGLE_SITE_VERIFICATION = "qm0MYautpusZN1n3si5z4QmydNqRAYgih18QC2Fx7tI";
+
 /** Supported locales for hreflang. */
 export const LOCALES = ["en", "es"] as const;
 export type Locale = (typeof LOCALES)[number];

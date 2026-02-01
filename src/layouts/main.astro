@@ -10,6 +10,7 @@ import {
   DEFAULT_OG_IMAGE,
   OG_IMAGE_WIDTH,
   OG_IMAGE_HEIGHT,
+  GOOGLE_SITE_VERIFICATION,
   canonicalUrl,
   alternateUrls,
   organizationSchema,
@@ -94,10 +95,8 @@ const robotsContent = content.noindex ? "noindex, nofollow" : "index, follow";
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     ))}
 
-    <!-- Google Search Console verification (set in env: PUBLIC_GOOGLE_SITE_VERIFICATION) -->
-    {import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION && (
-      <meta name="google-site-verification" content={import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION} />
-    )}
+    <!-- Google Search Console: env en build o fallback en código para que Netlify siempre lo incluya -->
+    <meta name="google-site-verification" content={import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION || GOOGLE_SITE_VERIFICATION} />
   </head>
   <body>
     <slot />
