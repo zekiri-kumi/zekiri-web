@@ -49,7 +49,7 @@ export function organizationSchema() {
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
-      email: "contact@zekiri.com",
+      email: "contact@zekiri.io",
       availableLanguage: ["English", "Spanish"],
     },
   };

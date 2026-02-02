@@ -177,7 +177,7 @@ export const messages: Record<Language, Translations> = {
       },
     },
     footer: {
-      email: "contact@zekiri.com",
+      email: "contact@zekiri.io",
       phone: "+1 (234) 567-890",
       location: "Mexico City, Mexico",
       rights: "© 2026 Zékiri. All rights reserved.",
@@ -324,7 +324,7 @@ export const messages: Record<Language, Translations> = {
       },
     },
     footer: {
-      email: "contacto@zekiri.com",
+      email: "contact@zekiri.io",
       phone: "+1 (234) 567-890",
       location: "Ciudad de México, México",
       rights: "© 2026 Zékiri. Todos los derechos reservados.",
