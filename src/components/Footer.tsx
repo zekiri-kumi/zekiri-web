@@ -1,12 +1,20 @@
 import { messages } from "@/lib/i18n";
 import { useLanguage } from "@/components/LanguageProvider";
-import { Mail, Phone, MapPin } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Linkedin,
+  Twitter,
+  Instagram,
+  Facebook,
+} from "lucide-react";
 
 const socialLinks = [
-  { href: "#", label: "LinkedIn", icon: "linkedin" },
-  { href: "#", label: "Twitter", icon: "twitter" },
-  { href: "#", label: "Instagram", icon: "instagram" },
-  { href: "#", label: "Facebook", icon: "facebook" },
+  { href: "#", label: "LinkedIn", Icon: Linkedin },
+  { href: "#", label: "Twitter", Icon: Twitter },
+  { href: "#", label: "Instagram", Icon: Instagram },
+  { href: "#", label: "Facebook", Icon: Facebook },
 ] as const;
 
 export function Footer() {
@@ -25,7 +33,7 @@ export function Footer() {
         decoding="async"
       />
       <div className="flex items-center justify-center gap-6 self-stretch">
-        {socialLinks.map(({ href, label }) => (
+        {socialLinks.map(({ href, label, Icon }) => (
           <a
             key={label}
             href={href}
@@ -33,7 +41,7 @@ export function Footer() {
             aria-label={label}
           >
             <span className="sr-only">{label}</span>
-            <div className="h-5 w-5 rounded-full border-2 border-white" />
+            <Icon className="h-5 w-5" />
           </a>
         ))}
       </div>
