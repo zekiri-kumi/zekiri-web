@@ -2,6 +2,7 @@ import { LanguageProvider } from "@/components/LanguageProvider";
 import { TopBanner } from "@/components/TopBanner";
 import { Hero } from "@/components/Hero";
 import { IndustriesStrip } from "@/components/IndustriesStrip";
+import { IntegrationsSection } from "@/components/IntegrationsSection";
 import { QuoteSection } from "@/components/QuoteSection";
 import { PainPoints } from "@/components/PainPoints";
 import { Testimonials } from "@/components/Testimonials";
@@ -26,6 +27,7 @@ export default function LandingApp() {
         <main className="flex flex-col items-stretch">
           <Hero />
           <IndustriesStrip />
+          <IntegrationsSection />
           <QuoteSection />
           <PainPoints />
           <Testimonials />

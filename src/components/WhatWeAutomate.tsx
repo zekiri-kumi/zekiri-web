@@ -20,12 +20,12 @@ export function WhatWeAutomate() {
       className="flex flex-col items-center justify-start gap-12 self-stretch py-12"
     >
       <div className="flex justify-center self-stretch px-2.5">
-        <h2 className="text-center text-foreground text-3xl font-semibold leading-[64px] md:text-[48px]">
+        <h2 className="text-center text-foreground text-3xl font-semibold leading-tight md:text-[48px] md:leading-[64px]">
           {title}
         </h2>
       </div>
       <div className="flex flex-col items-center gap-12 self-stretch">
-        <div className="mx-auto w-full max-w-container-narrow">
+        <div className="mx-auto w-full max-w-container-narrow px-[25px] md:px-0">
           <div className="grid grid-cols-1 gap-9 self-stretch md:grid-cols-2">
             {items.map((item, i) => {
             const Icon = icons[i] ?? LayoutGrid;

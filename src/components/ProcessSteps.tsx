@@ -12,16 +12,16 @@ export function ProcessSteps() {
       className="flex flex-col items-center justify-start gap-12 self-stretch bg-surface py-14"
     >
       <div className="flex justify-center self-stretch px-2.5">
-        <h2 className="flex-1 text-center text-foreground text-3xl font-semibold leading-[64px] md:text-[48px]">
+        <h2 className="flex-1 text-center text-foreground text-3xl font-semibold leading-tight md:text-[48px] md:leading-[64px]">
           {title}
         </h2>
       </div>
       <div className="flex flex-col items-center gap-12 self-stretch">
-        <div className="flex flex-wrap content-start items-start justify-center gap-9 self-stretch">
+        <div className="flex flex-wrap content-start items-start justify-center gap-9 self-stretch px-[25px] md:px-0">
           {steps.map((step) => (
             <div
               key={step.number}
-              className="flex w-[250px] flex-col gap-4 rounded-[15px] bg-surface px-9 py-0"
+              className="flex w-full flex-col gap-4 rounded-[15px] bg-surface px-9 py-0 md:w-[250px]"
             >
               <p className="text-primary text-[72px] font-medium leading-[88px]" aria-hidden>
                 {step.number}

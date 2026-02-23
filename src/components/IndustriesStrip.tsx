@@ -1,16 +1,63 @@
 import { useLanguage } from "@/components/LanguageProvider";
 import { messages } from "@/lib/i18n";
 
-const LOGO_PLACEHOLDER_COUNT = 8;
+const BRAND_LOGOS = [
+  "centroMovil.svg",
+  "clicket.webp",
+  "cocredito.png",
+  "dud.jpg",
+  "arrieta.png",
+  "kovar.jpg",
+  "panalfresh.png",
+  "nume",
+  "pista8.png",
+  "qfix.jpg",
+  "kumi.png",
+  "softruck.png",
+  "nume.svg"
+] as const;
 
-function LogoItem() {
+function LogoItem({ src }: { src: string }) {
   return (
     <div
-      className="flex h-12 shrink-0 items-center gap-3"
+      className="flex h-12 shrink-0 items-center justify-center"
       aria-hidden
     >
-      <div className="h-11 w-11 shrink-0 rounded bg-skeleton" />
-      <div className="h-6 w-24 rounded bg-skeleton" />
+      <img
+        src={src}
+        alt=""
+        className="h-full w-auto max-w-32 object-contain object-center opacity-90"
+        style={{
+          filter: "grayscale(100%) brightness(0.85) contrast(1.1)",
+        }}
+      />
+    </div>
+  );
+}
+
+function MarqueeRow({
+  logos,
+  direction,
+}: {
+  logos: readonly string[];
+  direction: "right" | "left";
+}) {
+  const duplicated = [...logos, ...logos];
+  const animation =
+    direction === "right" ? "industries-marquee 40s linear infinite" : "industries-marquee-reverse 40s linear infinite";
+  return (
+    <div className="w-full overflow-hidden">
+      <div
+        className="flex items-center gap-16 px-6"
+        style={{
+          width: "max-content",
+          animation,
+        }}
+      >
+        {duplicated.map((src, idx) => (
+          <LogoItem key={`${src}-${idx}`} src={src} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -19,7 +66,9 @@ export function IndustriesStrip() {
   const { language } = useLanguage();
   const subtitle = messages[language].industriesStrip.subtitle;
 
-  const logos = Array.from({ length: LOGO_PLACEHOLDER_COUNT }, (_, i) => i);
+  const logoUrls = BRAND_LOGOS.map(
+    (name) => `/assets/brands/${name}`,
+  );
 
   return (
     <section className="flex flex-col items-center justify-center self-stretch py-1.5">
@@ -28,18 +77,14 @@ export function IndustriesStrip() {
           {subtitle}
         </p>
       </div>
-      <div className="w-full overflow-hidden py-8">
-        <div
-          className="flex items-center gap-16 px-6"
-          style={{
-            width: "max-content",
-            animation: "industries-marquee 40s linear infinite",
-          }}
-        >
-          {[...logos, ...logos].map((i, idx) => (
-            <LogoItem key={idx} />
-          ))}
-        </div>
+      {/* Desktop: single row scrolling right */}
+      <div className="hidden w-full overflow-hidden py-8 md:block">
+        <MarqueeRow logos={logoUrls} direction="right" />
+      </div>
+      {/* Mobile: two rows — top right, bottom left */}
+      <div className="flex w-full flex-col gap-6 py-8 md:hidden">
+        <MarqueeRow logos={logoUrls} direction="right" />
+        <MarqueeRow logos={logoUrls} direction="left" />
       </div>
     </section>
   );

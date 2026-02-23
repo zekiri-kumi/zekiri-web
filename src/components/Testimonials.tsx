@@ -46,9 +46,9 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="flex flex-col items-center justify-center gap-12 self-stretch bg-surface py-12"
+      className="flex flex-col items-center justify-center gap-12 self-stretch bg-surface px-[25px] py-12 md:px-0"
     >
-      <h2 className="self-stretch text-center text-foreground text-3xl font-semibold leading-[64px] md:text-[48px]">
+      <h2 className="self-stretch text-center text-foreground text-3xl font-semibold leading-tight md:text-[48px] md:leading-[64px]">
         {title}
       </h2>
 

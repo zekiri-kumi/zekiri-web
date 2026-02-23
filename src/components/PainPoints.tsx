@@ -16,7 +16,7 @@ export function PainPoints() {
 
   return (
     <section className="flex flex-col items-center justify-center gap-12 self-stretch py-12">
-      <div className="grid w-full max-w-container-narrow grid-cols-1 gap-12 md:grid-cols-2">
+      <div className="grid w-full max-w-container-narrow grid-cols-1 gap-12 px-[25px] md:grid-cols-2 md:px-0">
         {items.map((text, i) => {
           const Icon = icons[i] ?? Repeat;
           return (

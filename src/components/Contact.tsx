@@ -3,7 +3,6 @@ import { useLanguage } from "@/components/LanguageProvider";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -21,10 +20,9 @@ export function Contact() {
     setIsSubmitting(true);
     const form = new FormData(e.currentTarget);
     const payload = Object.fromEntries(form.entries());
-    
-    // Use the API endpoint directly, or fallback to external endpoint if configured
+
     const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT || "/api/contact";
-    
+
     try {
       const res = await fetch(endpoint, {
         method: "POST",
@@ -54,42 +52,85 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="bg-accent/50">
-      <div className="mx-auto max-w-container-nav px-4 py-16">
-        <h2 className="text-2xl font-semibold text-foreground md:text-3xl">{t.contact.title}</h2>
-        <p className="mt-2 text-foreground/80 md:text-lg">{t.contact.subtitle}</p>
+    <section
+      id="contact"
+      className="flex flex-col items-center justify-center gap-12 self-stretch bg-surface px-[25px] py-14 md:px-0"
+    >
+      <div className="flex w-full max-w-container-narrow flex-col items-center gap-6">
+        <h2 className="self-stretch text-center text-foreground text-3xl font-semibold leading-tight md:text-[48px] md:leading-[64px]">
+          {t.contact.title}
+        </h2>
+        <p className="self-stretch text-center text-lg font-normal leading-7 text-foreground/80">
+          {t.contact.subtitle}
+        </p>
+
         <motion.form
           onSubmit={onSubmit}
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
-          className="mt-8 grid gap-4 md:grid-cols-2"
+          className="mt-4 grid w-full max-w-container-narrow gap-6 md:grid-cols-2"
         >
           <div className="space-y-2">
-            <Label htmlFor="name">{t.contact.form.name}</Label>
-            <Input id="name" name="name" required />
+            <Label htmlFor="name" className="text-foreground">
+              {t.contact.form.name}
+            </Label>
+            <Input
+              id="name"
+              name="name"
+              required
+              className="rounded-[15px] border-primary bg-card h-12 text-base"
+            />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="email">{t.contact.form.email}</Label>
-            <Input id="email" name="email" type="email" required />
+            <Label htmlFor="email" className="text-foreground">
+              {t.contact.form.email}
+            </Label>
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              required
+              className="rounded-[15px] border-primary bg-card h-12 text-base"
+            />
           </div>
           <div className="space-y-2 md:col-span-2">
-            <Label htmlFor="company">{t.contact.form.company}</Label>
-            <Input id="company" name="company" />
+            <Label htmlFor="company" className="text-foreground">
+              {t.contact.form.company}
+            </Label>
+            <Input
+              id="company"
+              name="company"
+              className="rounded-[15px] border-primary bg-card h-12 text-base"
+            />
           </div>
           <div className="space-y-2 md:col-span-2">
-            <Label htmlFor="message">{t.contact.form.message}</Label>
-            <Textarea id="message" name="message" required />
+            <Label htmlFor="message" className="text-foreground">
+              {t.contact.form.message}
+            </Label>
+            <Textarea
+              id="message"
+              name="message"
+              required
+              className="min-h-[140px] rounded-[15px] border-primary bg-card resize-none py-3 text-base"
+            />
           </div>
-          <div className="md:col-span-2">
-            <Button type="submit" disabled={isSubmitting}>
+          <div className="flex justify-center md:col-span-2">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="inline-flex h-[60px] min-w-[200px] items-center justify-center rounded-[30px] bg-primary px-11 py-2.5 text-base font-semibold leading-[25px] text-primary-foreground transition-opacity hover:opacity-90 focus-visible:outline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none"
+            >
               {isSubmitting ? (language === "en" ? "Sending..." : "Enviando...") : t.contact.form.submit}
-            </Button>
+            </button>
           </div>
         </motion.form>
+
         {status && (
-          <div className={`mt-4 text-sm ${status.type === "ok" ? "text-green-600" : "text-red-600"}`}>
+          <div
+            className={`mt-2 text-center text-sm ${status.type === "ok" ? "text-green-600" : "text-red-600"}`}
+          >
             {status.message}
           </div>
         )}
@@ -97,5 +138,3 @@ export function Contact() {
     </section>
   );
 }
-
-

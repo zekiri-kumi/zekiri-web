@@ -10,6 +10,10 @@ export type Translations = {
     cta: string;
   };
   industriesStrip: { subtitle: string };
+  integrations: {
+    title: string;
+    subtitle: string;
+  };
   quote: { prefix: string; highlight: string };
   painPoints: { items: string[] };
   testimonials: { title: string; cta: string; items: { quote: string; name: string; role: string }[] };
@@ -62,6 +66,10 @@ export const messages: Record<Language, Translations> = {
       cta: "Schedule a free consultation",
     },
     industriesStrip: { subtitle: "Decades of experience across multiple industries" },
+    integrations: {
+      title: "We integrate with your stack",
+      subtitle: "Connect your existing tools and scale without changing how you work.",
+    },
     quote: {
       prefix: "When operations grow faster than structure, decisions need ",
       highlight: "reliable data, not intuition.",
@@ -173,7 +181,7 @@ export const messages: Record<Language, Translations> = {
         email: "Email",
         company: "Company",
         message: "Message",
-        submit: "Send message",
+        submit: "Schedule free consultation",
       },
     },
     footer: {
@@ -209,6 +217,10 @@ export const messages: Record<Language, Translations> = {
       cta: "Agenda una consultoría gratuita",
     },
     industriesStrip: { subtitle: "Décadas de experiencia en múltiples industrias" },
+    integrations: {
+      title: "Nos integramos con tu stack",
+      subtitle: "Conecta las herramientas que ya usas y escala sin cambiar tu forma de trabajar.",
+    },
     quote: {
       prefix: "Cuando la operación crece más rápido que la estructura, las decisiones necesitan ",
       highlight: "datos confiables, no intuición.",
@@ -320,7 +332,7 @@ export const messages: Record<Language, Translations> = {
         email: "Email",
         company: "Empresa",
         message: "Mensaje",
-        submit: "Enviar mensaje",
+        submit: "Agenda consultoría gratuita",
       },
     },
     footer: {

@@ -157,3 +157,12 @@
     transform: translateX(0);
   }
 }
+
+@keyframes industries-marquee-reverse {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
