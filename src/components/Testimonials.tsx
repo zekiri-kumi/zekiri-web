@@ -64,7 +64,7 @@ export function Testimonials() {
                 className="min-w-0 flex-[0_0_100%] md:flex-[0_0_calc((100%-2rem)/2)] lg:flex-[0_0_calc((100%-4rem)/3)]"
               >
                 <article
-                  className="flex h-full min-h-(--card-min-height) flex-col gap-8 rounded-[15px] border border-black/8 bg-white p-8 shadow-sm"
+                  className="flex h-full min-h-(--card-min-height) flex-col gap-8 rounded-[15px] border border-border/40 bg-card p-8 shadow-sm"
                   style={{ "--card-min-height": CARD_MIN_HEIGHT } as React.CSSProperties}
                 >
                   <blockquote className="flex-1 text-foreground-strong text-lg font-normal leading-7">

@@ -22,7 +22,7 @@ export function PainPoints() {
           return (
             <div
               key={i}
-              className="flex flex-wrap content-start items-start gap-4 rounded-[15px] border border-primary bg-card p-10"
+              className="flex flex-wrap content-start items-start gap-4 rounded-[15px] bg-card p-10"
             >
               <div className="flex shrink-0 items-center justify-center text-primary">
                 <Icon className="h-6 w-6" strokeWidth={1.5} />

@@ -47,65 +47,65 @@ export function Footer() {
       </div>
       <div className="flex flex-wrap items-start justify-center gap-5 self-stretch md:gap-24">
         <div className="flex min-w-0 max-w-[190px] flex-1 basis-full items-start gap-3 sm:basis-auto sm:flex-initial">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-linear-to-br from-cyan-200/20 to-primary/20 text-primary">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-card text-primary">
             <Mail className="h-5 w-5" />
           </div>
           <div className="flex min-w-0 flex-col gap-1.5">
-            <span className="text-xs font-normal leading-[21px] text-black/50">
+            <span className="text-xs font-normal leading-[21px] text-muted-foreground">
               Email
             </span>
             <a
               href={`mailto:${t.email}`}
-              className="text-xs font-normal leading-6 text-black/70 hover:underline"
+              className="text-xs font-normal leading-6 text-foreground/80 hover:underline"
             >
               {t.email}
             </a>
           </div>
         </div>
         <div className="flex min-w-0 max-w-[190px] flex-1 basis-full items-start gap-3 sm:basis-auto sm:flex-initial">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-linear-to-br from-cyan-200/20 to-primary/20 text-primary">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-card text-primary">
             <Phone className="h-5 w-5" />
           </div>
           <div className="flex min-w-0 flex-col gap-1.5">
-            <span className="text-xs font-normal leading-[21px] text-black/50">
+            <span className="text-xs font-normal leading-[21px] text-muted-foreground">
               {language === "es" ? "Teléfono" : "Phone"}
             </span>
             <a
               href={`tel:${t.phone.replace(/\s/g, "")}`}
-              className="text-xs font-normal leading-6 text-black/70 hover:underline"
+              className="text-xs font-normal leading-6 text-foreground/80 hover:underline"
             >
               {t.phone}
             </a>
           </div>
         </div>
         <div className="flex min-w-0 max-w-[190px] flex-1 basis-full items-start gap-3 sm:basis-auto sm:flex-initial">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-linear-to-br from-cyan-200/20 to-primary/20 text-primary">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-card text-primary">
             <MapPin className="h-5 w-5" />
           </div>
           <div className="flex min-w-0 flex-col gap-1">
-            <span className="text-xs font-normal leading-[21px] text-black/50">
+            <span className="text-xs font-normal leading-[21px] text-muted-foreground">
               {language === "es" ? "Ubicación" : "Location"}
             </span>
-            <span className="text-xs font-normal leading-4 text-black/70">
+            <span className="text-xs font-normal leading-4 text-foreground/80">
               {t.location}
             </span>
           </div>
         </div>
       </div>
       <div className="flex w-full max-w-[253px] flex-col items-center gap-2.5 border-t border-primary/20 py-4 text-center md:max-w-none md:flex-row md:justify-between md:px-8 md:py-1.5 md:text-left">
-        <p className="text-xs font-normal leading-4 text-black/60 md:flex-1">
+        <p className="text-xs font-normal leading-4 text-muted-foreground md:flex-1">
           {t.rights}
         </p>
         <div className="flex flex-col items-center gap-2.5 md:flex-row md:gap-6 md:items-start">
           <a
             href="#"
-            className="text-xs font-normal leading-4 text-black/60 hover:underline"
+            className="text-xs font-normal leading-4 text-muted-foreground hover:underline"
           >
             {t.privacy}
           </a>
           <a
             href="#"
-            className="text-xs font-normal leading-4 text-black/60 hover:underline"
+            className="text-xs font-normal leading-4 text-muted-foreground hover:underline"
           >
             {t.terms}
           </a>

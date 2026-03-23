@@ -32,7 +32,7 @@ export function WhatWeAutomate() {
             return (
               <div
                 key={item.title}
-                className="flex flex-col gap-4 rounded-[15px] border border-primary bg-card p-9"
+                className="flex flex-col gap-4 rounded-[15px] bg-card p-9"
               >
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center text-primary">
                   <Icon className="h-8 w-8" strokeWidth={2} />

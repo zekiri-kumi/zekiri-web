@@ -105,7 +105,7 @@ export function IntegrationsSection() {
         {INTEGRATION_GROUPS.map((group) => (
           <div
             key={group.labelKey}
-            className="flex flex-col gap-5 rounded-2xl border border-border/60 bg-card/80 p-6 shadow-sm"
+            className="flex flex-col gap-5 rounded-2xl border border-border/60 bg-card p-6 shadow-sm"
           >
             <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
               {labels[group.labelKey]}

@@ -3,6 +3,7 @@ export type Language = "en" | "es";
 export type Translations = {
   nav: { home: string; whatWeDo: string; process: string; faq: string; contact: string; cta: string };
   banner: { text: string };
+  theme: { switchToDark: string; switchToLight: string };
   hero: {
     titleHighlight: string;
     titleRest: string;
@@ -56,6 +57,7 @@ export const messages: Record<Language, Translations> = {
       cta: "Get a quote",
     },
     banner: { text: "AI automation for operations — Free consultation. See how we help teams save 15+ hours per week." },
+    theme: { switchToDark: "Switch to dark mode", switchToLight: "Switch to light mode" },
     hero: {
       titleHighlight: "AI Automation",
       titleRest: "that frees time and multiplies results",
@@ -207,6 +209,7 @@ export const messages: Record<Language, Translations> = {
       cta: "Solicitar cotización",
     },
     banner: { text: "Automatización con IA para operaciones — Consulta gratuita. Descubre cómo ayudamos a equipos a ahorrar 15+ horas por semana." },
+    theme: { switchToDark: "Cambiar a modo oscuro", switchToLight: "Cambiar a modo claro" },
     hero: {
       titleHighlight: "Automatización con IA",
       titleRest: "que libera tiempo y multiplica resultados",

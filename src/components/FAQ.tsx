@@ -12,7 +12,7 @@ export function FAQ() {
   return (
     <section
       id="faq"
-      className="flex flex-col items-center justify-start gap-12 self-stretch overflow-hidden bg-white px-6 py-12 md:px-[88px]"
+      className="flex flex-col items-center justify-start gap-12 self-stretch overflow-hidden bg-background px-6 py-12 md:px-[88px]"
     >
       <h2 className="text-center text-foreground text-3xl font-semibold leading-9 md:text-[48px]">
         {title}
@@ -23,7 +23,7 @@ export function FAQ() {
           return (
             <div
               key={i}
-              className="overflow-hidden rounded-2xl border border-transparent bg-surface"
+              className="overflow-hidden rounded-2xl border border-transparent bg-card"
             >
               <button
                 type="button"
@@ -51,7 +51,7 @@ export function FAQ() {
                 role="region"
                 aria-labelledby={`faq-question-${i}`}
                 className={cn(
-                  "overflow-hidden border-t border-primary bg-surface transition-[height]",
+                  "overflow-hidden border-t border-primary bg-card transition-[height]",
                   isOpen ? "visible" : "hidden"
                 )}
               >

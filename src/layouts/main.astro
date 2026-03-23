@@ -46,6 +46,14 @@ const robotsContent = content.noindex ? "noindex, nofollow" : "index, follow";
 <html lang={language}>
   <head>
     <meta charset="utf-8" />
+    <!-- Theme: default light; dark only when user chose it (localStorage). Runs before paint to avoid flash. -->
+    <script is:inline>
+      try {
+        if (localStorage.getItem("zekiri-theme") === "dark") {
+          document.documentElement.classList.add("dark");
+        }
+      } catch {}
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" href="/favicon.png" />
