@@ -18,7 +18,7 @@ function CtaAccent({ className }: { className?: string }) {
       data-ga-event="cta_click"
       data-ga-label="automatizaciones_diagnostico"
       className={cn(
-        "inline-flex items-center justify-center gap-2.5 rounded-xl bg-[#F7C95C] px-6 py-4 text-base font-semibold leading-5 text-[#2E3D4D] transition-opacity hover:opacity-90 focus-visible:outline focus-visible:ring-2 focus-visible:ring-[#52B1E1] focus-visible:ring-offset-2",
+        "inline-flex items-center justify-center gap-2.5 rounded-xl bg-[#F7C95C] px-6 py-4 text-base font-semibold leading-5 text-[#2E3D4D] transition-opacity hover:opacity-90 focus-visible:outline focus-visible:ring-2 focus-visible:ring-[#52B1E1] focus-visible:ring-offset-2 dark:focus-visible:ring-[#6BC3ED]",
         className
       )}
     >
@@ -29,22 +29,26 @@ function CtaAccent({ className }: { className?: string }) {
 
 function CheckRow({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex w-full items-center gap-4">
-      <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#52B1E1]/10">
-        <Check className="h-4 w-4 text-[#52B1E1]" strokeWidth={2.5} aria-hidden />
+    <div className="flex w-full items-center gap-3 sm:gap-4">
+      <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#52B1E1]/10 dark:bg-[#6BC3ED]/15">
+        <Check className="h-4 w-4 text-[#52B1E1] dark:text-[#6BC3ED]" strokeWidth={2.5} aria-hidden />
       </div>
-      <p className="flex-1 text-lg font-normal leading-7 text-[#2E3D4D]">{children}</p>
+      <p className="flex-1 text-base font-normal leading-6 text-[#2E3D4D] dark:text-[#F1F3F4] sm:text-lg sm:leading-7">
+        {children}
+      </p>
     </div>
   );
 }
 
 function BenefitCard({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex w-full items-center gap-3 rounded-2xl bg-white/90 p-[30px] shadow-[0px_2px_8px_rgba(0,0,0,0.04)]">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] bg-[#52B1E1]">
+    <div className="flex w-full items-center gap-3 rounded-[15px] bg-white p-5 shadow-[0px_8px_32px_rgba(0,0,0,0.08)] dark:bg-[#2E3D4D]/90 sm:p-[30px]">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] bg-[#52B1E1] dark:bg-[#6BC3ED]">
         <Check className="h-5 w-5 text-white" strokeWidth={2.5} aria-hidden />
       </div>
-      <p className="flex-1 text-lg font-normal leading-7 text-[#2E3D4D]">{children}</p>
+      <p className="flex-1 text-base font-normal leading-6 text-[#2E3D4D] dark:text-[#F1F3F4] sm:text-lg sm:leading-7">
+        {children}
+      </p>
     </div>
   );
 }
@@ -92,7 +96,7 @@ export function AutomatizacionesPage() {
 
   return (
     <div
-      className="min-h-dvh w-full overflow-x-hidden bg-white text-[#2E3D4D]"
+      className="min-h-dvh w-full overflow-x-hidden bg-white text-[#2E3D4D] dark:bg-[#1A252F] dark:text-[#F1F3F4]"
       style={
         {
           ["--font-display" as string]: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif",
@@ -100,11 +104,11 @@ export function AutomatizacionesPage() {
         } as React.CSSProperties
       }
     >
-      <div className="flex w-full flex-col items-center bg-white">
+      <div className="flex w-full flex-col items-center bg-white dark:bg-[#1A252F]">
         {/* Promo bar */}
         <div className="flex w-full justify-center bg-[#2E3D4D] px-2.5 py-2.5">
           <p
-            className="max-w-[52rem] text-center text-sm font-normal leading-5 text-[#F7C95C]"
+            className="max-w-208 text-center text-sm font-normal leading-5 text-[#F7C95C]"
             style={{ fontFamily: "var(--font-body)" }}
           >
             ¡Libera 20 horas de tu tiempo semanal e incrementa tu conversión!
@@ -113,62 +117,90 @@ export function AutomatizacionesPage() {
 
         {/* Hero */}
         <section
-          className="flex w-full max-w-[1440px] flex-col items-start gap-8 bg-cover bg-center px-[50px] pb-20 pt-12"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.85)), url(https://placehold.co/1280x719/e8eef2/2E3D4D?text=)",
-          }}
+          className="relative z-0 w-full overflow-hidden"
         >
-          <a href="/" className="block h-[35px] w-[100px] shrink-0">
+          <picture className="absolute inset-0 z-0 block dark:hidden">
+            <source media="(min-width: 640px)" srcSet="/assets/content-creators/desktop_light_hero.webp" />
             <img
-              src="/assets/logo.png"
-              alt="Zékiri"
-              width={100}
-              height={35}
-              className="h-[35px] w-auto object-contain"
+              src="/assets/content-creators/mobile_light_hero.webp"
+              alt=""
+              className="h-full w-full object-cover"
               loading="eager"
               decoding="async"
             />
-          </a>
+          </picture>
+          <picture className="absolute inset-0 z-0 hidden dark:block">
+            <source media="(min-width: 640px)" srcSet="/assets/content-creators/desktop_hero_dark.webp" />
+            <img
+              src="/assets/content-creators/mobile_dark_hero.webp"
+              alt=""
+              className="h-full w-full object-cover"
+              loading="eager"
+              decoding="async"
+            />
+          </picture>
+          <div className="absolute inset-0 z-1 bg-white/70 dark:bg-[#1A252F]/55" aria-hidden />
 
-          <div className="flex w-full flex-wrap items-center justify-center gap-10 lg:gap-[39px]">
-            <div className="flex min-w-[min(100%,320px)] flex-1 flex-col items-start justify-center gap-10 rounded-2xl bg-white/85 p-10 shadow-[0px_8px_32px_rgba(0,0,0,0.08)]">
-              <h1
-                className="text-4xl font-bold leading-tight sm:text-5xl sm:leading-[64px] lg:text-[56px]"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                <span className="text-[#2E3D4D]">Automatizaciones que se sienten humanas a una </span>
-                <span className="text-[#52B1E1]">velocidad sobrehumana</span>
-              </h1>
-              <p
-                className="text-lg font-normal leading-7 text-[#2E3D4D]"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                Tu crecimiento no debería sentirse como descontrol. No necesitas trabajar más.
-                Necesitas automatizaciones que trabajen por ti.
-              </p>
-              <CtaAccent />
-            </div>
+          <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-col items-start gap-[11px] px-4 pb-12 pt-2.5 sm:gap-8 sm:px-[50px] sm:pb-20 sm:pt-12">
+            <a href="/" className="block h-[27px] w-20 shrink-0 sm:h-[35px] sm:w-[100px]">
+              <img
+                src="/assets/logo.png"
+                alt="Zékiri"
+                width={100}
+                height={35}
+                className="h-full w-auto object-contain"
+                loading="eager"
+                decoding="async"
+              />
+            </a>
 
-            <div className="flex w-full max-w-[416px] shrink-0 flex-col gap-6">
-              <BenefitCard>Nunca vuelvas a perder un lead</BenefitCard>
-              <BenefitCard>Recupera 15-20 horas semanales</BenefitCard>
-              <BenefitCard>Aumenta tu conversión 30-50%</BenefitCard>
-              <BenefitCard>Cero conocimiento técnico</BenefitCard>
+            <div className="flex w-full flex-col items-center justify-center gap-10 lg:flex-row lg:gap-[39px]">
+              <div className="flex w-full flex-col items-start justify-center gap-6 rounded-2xl bg-white/85 p-6 shadow-[0px_8px_32px_rgba(0,0,0,0.08)] dark:bg-[#2E3D4D]/90 sm:gap-10 sm:p-10 lg:min-w-[min(100%,320px)] lg:flex-1">
+                <h1
+                  className="text-center text-[32px] font-bold leading-[38px] sm:text-left sm:text-5xl sm:leading-[64px] lg:text-[56px]"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  <span className="text-[#2E3D4D] dark:text-[#F1F3F4]">
+                    Automatizaciones que se sienten humanas a una{" "}
+                  </span>
+                  <span className="text-[#52B1E1] dark:text-[#6BC3ED]">velocidad sobrehumana</span>
+                </h1>
+                <p
+                  className="text-center text-base font-normal leading-6 text-[#2E3D4D] dark:text-[#F1F3F4] sm:text-left sm:text-lg sm:leading-7"
+                  style={{ fontFamily: "var(--font-body)" }}
+                >
+                  Tu crecimiento no debería sentirse como descontrol. No necesitas trabajar más.
+                  Necesitas automatizaciones que trabajen por ti.
+                </p>
+                <CtaAccent className="w-full sm:w-auto" />
+                <div className="flex w-full flex-col gap-3 sm:hidden">
+                  <CheckRow>Nunca vuelvas a perder un lead</CheckRow>
+                  <CheckRow>Recupera 15-20 horas semanales</CheckRow>
+                  <CheckRow>Aumenta tu conversión 30-50%</CheckRow>
+                  <CheckRow>Cero conocimiento técnico</CheckRow>
+                </div>
+              </div>
+
+              <div className="hidden w-full max-w-[416px] shrink-0 flex-col gap-6 sm:flex">
+                <BenefitCard>Nunca vuelvas a perder un lead</BenefitCard>
+                <BenefitCard>Recupera 15-20 horas semanales</BenefitCard>
+                <BenefitCard>Aumenta tu conversión 30-50%</BenefitCard>
+                <BenefitCard>Cero conocimiento técnico</BenefitCard>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Pain section */}
-        <section className="flex w-full flex-col items-center gap-6 bg-[#F1F3F4] py-20">
-          <div className="flex w-full max-w-[1440px] flex-col gap-6 px-[50px] md:px-[100px]">
+        <section className="flex w-full flex-col items-center gap-6 bg-[#F1F3F4] px-6 py-12 dark:bg-[#2E3D4D] sm:py-20">
+          <div className="flex w-full max-w-[1440px] flex-col gap-6 sm:px-[50px] md:px-[100px]">
             <h2
-              className="text-center text-3xl font-bold leading-9 text-[#2E3D4D] md:text-[40px] md:leading-[48px]"
+              className="text-center text-2xl font-bold leading-[30px] text-[#2E3D4D] dark:text-[#F1F3F4] md:text-[40px] md:leading-[48px]"
               style={{ fontFamily: "var(--font-display)" }}
             >
               Estas creciendo, pero en tu día a día...
             </h2>
-            <div className="flex flex-wrap justify-center gap-[50px] py-6">
+            <div className="flex flex-wrap justify-center gap-4 py-2 sm:gap-[50px] sm:py-6">
               {[
                 {
                   icon: MessageSquare,
@@ -186,13 +218,13 @@ export function AutomatizacionesPage() {
               ].map(({ icon: Icon, text }) => (
                 <div
                   key={text}
-                  className="flex w-full max-w-[450px] items-center gap-4 rounded-[15px] bg-white p-10 shadow-[0px_8px_32px_rgba(0,0,0,0.08)]"
+                  className="flex w-full max-w-[450px] items-center gap-4 rounded-[15px] bg-white p-5 shadow-[0px_8px_32px_rgba(0,0,0,0.08)] dark:bg-[#1A252F] sm:p-10"
                 >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center text-[#52B1E1]">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center text-[#52B1E1] dark:text-[#6BC3ED]">
                     <Icon className="h-9 w-9" strokeWidth={1.75} aria-hidden />
                   </div>
                   <p
-                    className="min-w-0 flex-1 text-lg font-normal leading-7 text-[#2E3D4D]"
+                    className="min-w-0 flex-1 text-base font-normal leading-6 text-[#2E3D4D] dark:text-[#F1F3F4] sm:text-lg sm:leading-7"
                     style={{ fontFamily: "var(--font-body)" }}
                   >
                     {text}
@@ -204,33 +236,54 @@ export function AutomatizacionesPage() {
         </section>
 
         {/* Channels */}
-        <section className="flex w-full flex-col items-center bg-white pb-20 pt-20">
-          <div className="flex w-full max-w-[1440px] flex-col items-center gap-4 px-[50px]">
+        <section className="flex w-full flex-col items-center bg-white px-6 pb-12 pt-12 dark:bg-[#1A252F] sm:pb-20 sm:pt-20">
+          <div className="flex w-full max-w-[1440px] flex-col items-center gap-4 sm:px-[50px]">
             <h2
-              className="text-center text-3xl font-bold leading-9 text-[#2E3D4D] md:text-[40px] md:leading-[48px]"
+              className="text-center text-2xl font-bold leading-[30px] text-[#2E3D4D] dark:text-[#F1F3F4] md:text-[40px] md:leading-[48px]"
               style={{ fontFamily: "var(--font-display)" }}
             >
               Interactúa con los mensajes de todos tus canales
             </h2>
             <p
-              className="max-w-3xl text-center text-lg font-normal leading-7 text-[#848D8F]"
+              className="max-w-3xl text-center text-base font-normal leading-6 text-[#848D8F] dark:text-[#F1F3F4] sm:text-lg sm:leading-7"
               style={{ fontFamily: "var(--font-body)" }}
             >
               Centraliza Instagram, WhatsApp, YouTube, TikTok, LinkedIn y formularios en un solo
               sistema automatizado.
             </p>
           </div>
-          <div className="mt-20 flex w-full flex-col items-center gap-20 px-[50px]">
-            <img
-              src="https://placehold.co/1180x707/e8eef2/2E3D4D?text=Dashboard"
-              alt="Vista del sistema de mensajes unificados"
-              width={1180}
-              height={707}
-              className="h-auto w-full max-w-[1180px] rounded-2xl shadow-[0px_8px_32px_rgba(0,0,0,0.08)]"
-              loading="lazy"
-              decoding="async"
-            />
-            <div className="flex w-full max-w-[1200px] flex-wrap justify-center gap-16 px-6">
+          <div className="mt-6 flex w-full flex-col items-center gap-12 sm:mt-20 sm:gap-20 sm:px-[50px]">
+            <picture className="w-full max-w-[1180px] dark:hidden">
+              <source
+                media="(min-width: 640px)"
+                srcSet="/assets/content-creators/dashboard_desktop_light.webp"
+              />
+              <img
+                src="/assets/content-creators/dashboard_mobile_light.webp"
+                alt="Vista del sistema de mensajes unificados"
+                width={1180}
+                height={707}
+                className="h-auto w-full rounded-2xl shadow-[0px_8px_32px_rgba(0,0,0,0.08)]"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+            <picture className="hidden w-full max-w-[1180px] dark:block">
+              <source
+                media="(min-width: 640px)"
+                srcSet="/assets/content-creators/dashboard_desktop_dark.webp"
+              />
+              <img
+                src="/assets/content-creators/dashboard_mobile_dark.webp"
+                alt="Vista del sistema de mensajes unificados"
+                width={1180}
+                height={707}
+                className="h-auto w-full rounded-2xl shadow-[0px_8px_32px_rgba(0,0,0,0.08)]"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+            <div className="flex w-full max-w-[1200px] flex-col justify-center gap-10 px-0 sm:flex-row sm:flex-wrap sm:gap-16 sm:px-6">
               {[
                 {
                   title: "0% Leads Perdidos",
@@ -250,19 +303,19 @@ export function AutomatizacionesPage() {
               ].map(({ title, body, icon: Icon }) => (
                 <div
                   key={title}
-                  className="flex w-full max-w-[325px] flex-col items-center gap-5 text-center"
+                    className="flex w-full max-w-[325px] flex-col items-center gap-4 text-center sm:gap-5"
                 >
                   <div className="flex h-10 w-10 items-center justify-center text-[#52B1E1]">
                     <Icon className="h-9 w-9" strokeWidth={1.75} aria-hidden />
                   </div>
                   <h3
-                    className="text-2xl font-semibold leading-9 text-[#2E3D4D]"
+                    className="text-[20px] font-semibold leading-[26px] text-[#2E3D4D] dark:text-[#F1F3F4] sm:text-2xl sm:leading-9"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {title}
                   </h3>
                   <p
-                    className="text-lg font-normal leading-7 text-[#2E3D4D]"
+                    className="text-base font-normal leading-6 text-[#2E3D4D] dark:text-[#F1F3F4] sm:text-lg sm:leading-7"
                     style={{ fontFamily: "var(--font-body)" }}
                   >
                     {body}
@@ -274,21 +327,21 @@ export function AutomatizacionesPage() {
         </section>
 
         {/* Stats + CTA */}
-        <section className="flex w-full flex-col items-center gap-12 bg-[#F1F3F4] px-6 py-20">
+        <section className="flex w-full flex-col items-center gap-6 bg-[#F1F3F4] px-6 py-12 dark:bg-[#2E3D4D] sm:gap-12 sm:py-20">
           <h2
-            className="max-w-[983px] text-center text-3xl font-bold leading-9 text-[#2E3D4D] md:text-[40px] md:leading-[48px]"
+            className="max-w-[983px] text-center text-2xl font-bold leading-[30px] text-[#2E3D4D] dark:text-[#F1F3F4] md:text-[40px] md:leading-[48px]"
             style={{ fontFamily: "var(--font-display)" }}
           >
             <span>No es una herramienta más.</span>
             <br />
             <span>Son automatizaciones </span>
-            <span className="text-[#52B1E1]">
+            <span className="text-[#52B1E1] dark:text-[#6BC3ED]">
               justo para creadores de contenido y consultores
             </span>
             <span> </span>
-            <span className="text-[#52B1E1]">como tú</span>
+            <span className="text-[#52B1E1] dark:text-[#6BC3ED]">como tú</span>
           </h2>
-          <div className="flex w-full max-w-[1200px] flex-wrap justify-center gap-12">
+          <div className="flex w-full max-w-[1200px] flex-col justify-center gap-6 sm:flex-row sm:flex-wrap sm:gap-12">
             {[
               { stat: "15–20h", label: "Ahorradas por semana" },
               { stat: "30–50%", label: "Aumento en conversión" },
@@ -299,13 +352,13 @@ export function AutomatizacionesPage() {
                 className="flex w-full max-w-[350px] flex-col items-center gap-2 text-center"
               >
                 <p
-                  className="text-4xl font-bold leading-[48px] text-[#2E3D4D] md:text-[40px]"
+                  className="text-2xl font-bold leading-[30px] text-[#2E3D4D] dark:text-[#F1F3F4] md:text-[40px]"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   {stat}
                 </p>
                 <p
-                  className="text-lg font-normal leading-7 text-[#2E3D4D]"
+                  className="text-base font-normal leading-6 text-[#2E3D4D] dark:text-[#F1F3F4] sm:text-lg sm:leading-7"
                   style={{ fontFamily: "var(--font-body)" }}
                 >
                   {label}
@@ -313,24 +366,24 @@ export function AutomatizacionesPage() {
               </div>
             ))}
           </div>
-          <CtaAccent />
+          <CtaAccent className="w-full sm:w-auto" />
         </section>
 
         {/* Timeline */}
-        <section className="flex w-full flex-col items-center gap-14 bg-white px-6 py-[50px] md:px-12">
+        <section className="flex w-full flex-col items-center gap-12 bg-white px-6 py-12 dark:bg-[#1A252F] md:px-12 md:py-[50px]">
           <h2
-            className="max-w-[900px] text-center text-3xl font-bold leading-9 text-[#2E3D4D] md:text-[40px] md:leading-[48px]"
+            className="max-w-[900px] text-center text-2xl font-bold leading-[30px] text-[#2E3D4D] dark:text-[#F1F3F4] md:text-[40px] md:leading-[48px]"
             style={{ fontFamily: "var(--font-display)" }}
           >
             <span>Automatizaciones que se implementan</span>
             <br />
             <span>en semanas, </span>
-            <span className="text-[#52B1E1]">no meses</span>
+            <span className="text-[#52B1E1] dark:text-[#6BC3ED]">no meses</span>
           </h2>
 
-          <div className="relative flex w-full max-w-[640px] flex-col gap-12 pl-2 md:pl-0">
+          <div className="relative flex w-full max-w-[640px] flex-col gap-10 pl-2 md:pl-0">
             <div
-              className="absolute left-[11px] top-3 bottom-3 w-0.5 bg-[#52B1E1]/30 md:left-1/2 md:-ml-px"
+              className="absolute left-[11px] top-3 bottom-3 w-0.5 bg-[#52B1E1]/30 dark:bg-[#6BC3ED]/30 md:left-1/2 md:-ml-px"
               aria-hidden
             />
             {timeline.map((block, i) => (
@@ -348,24 +401,24 @@ export function AutomatizacionesPage() {
                   )}
                 >
                   <div
-                    className="absolute left-0 top-2 flex h-5 w-5 items-center justify-center rounded-full bg-[#52B1E1] md:left-1/2 md:-ml-2.5"
+                    className="absolute left-0 top-2 flex h-5 w-5 items-center justify-center rounded-full bg-[#52B1E1] dark:bg-[#6BC3ED] md:left-1/2 md:-ml-2.5"
                     aria-hidden
                   />
                   <p
-                    className="text-base font-semibold leading-6 text-[#52B1E1]"
+                    className="text-sm font-normal leading-5 text-[#52B1E1] dark:text-[#6BC3ED] sm:text-base sm:font-semibold sm:leading-6"
                     style={{ fontFamily: "var(--font-body)" }}
                   >
                     {block.week}
                   </p>
                   <h3
-                    className="mt-1 text-2xl font-semibold leading-9 text-[#2E3D4D]"
+                    className="mt-1 text-[20px] font-semibold leading-[26px] text-[#2E3D4D] dark:text-[#F1F3F4] sm:text-2xl sm:leading-9"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {block.title}
                   </h3>
                   <ul
                     className={cn(
-                      "mt-4 space-y-2 text-lg leading-7 text-[#848D8F]",
+                      "mt-4 space-y-2 text-base leading-6 text-[#848D8F] dark:text-[#F1F3F4] sm:text-lg sm:leading-7",
                       i % 2 === 0 ? "md:ml-auto md:max-w-md" : "md:max-w-md"
                     )}
                     style={{ fontFamily: "var(--font-body)" }}
@@ -382,29 +435,29 @@ export function AutomatizacionesPage() {
         </section>
 
         {/* Pricing */}
-        <section className="flex w-full flex-col items-center gap-8 bg-[#F1F3F4] px-[50px] py-[100px]">
+        <section className="flex w-full flex-col items-center gap-6 bg-[#F1F3F4] px-6 py-12 dark:bg-[#2E3D4D] sm:gap-8 sm:px-[50px] sm:py-[100px]">
           <h2
-            className="text-center text-3xl font-bold leading-9 text-[#2E3D4D] md:text-[40px] md:leading-[48px]"
+            className="text-center text-2xl font-bold leading-[30px] text-[#2E3D4D] dark:text-[#F1F3F4] md:text-[40px] md:leading-[48px]"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Inversión inteligente en tu crecimiento
           </h2>
           <p
-            className="max-w-2xl text-center text-lg leading-7 text-[#848D8F]"
+            className="max-w-2xl text-center text-base leading-6 text-[#848D8F] dark:text-[#F1F3F4] sm:text-lg sm:leading-7"
             style={{ fontFamily: "var(--font-body)" }}
           >
             Implementamos rápido. Optimizamos inteligente. Escalas con control.
           </p>
-          <div className="flex w-full max-w-[696px] flex-col items-center gap-10 rounded-2xl bg-white p-14 shadow-[0px_8px_32px_-6px_rgba(0,0,0,0.08)]">
+          <div className="flex w-full max-w-[696px] flex-col items-center gap-6 rounded-2xl bg-white p-6 shadow-[0px_8px_32px_-6px_rgba(0,0,0,0.08)] dark:bg-[#1A252F] sm:gap-10 sm:p-14">
             <div className="flex flex-col items-center gap-2">
               <p
-                className="text-5xl font-bold leading-[64px] text-[#2E3D4D] sm:text-[56px]"
+                className="text-[32px] font-bold leading-[38px] text-[#2E3D4D] dark:text-[#F1F3F4] sm:text-[56px] sm:leading-[64px]"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 $50
               </p>
               <p
-                className="text-center text-2xl font-semibold leading-9 text-[#848D8F]"
+                className="text-center text-[20px] font-semibold leading-[26px] text-[#848D8F] dark:text-[#F1F3F4] sm:text-2xl sm:leading-9"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 mensual
@@ -415,9 +468,9 @@ export function AutomatizacionesPage() {
               <CheckRow>Optimización continua (A/B testing)</CheckRow>
               <CheckRow>Soporte técnico limitado</CheckRow>
             </div>
-            <div className="w-full rounded-2xl bg-gradient-to-br from-[rgba(247,201,92,0.1)] to-[rgba(247,201,92,0.05)] p-8">
+            <div className="w-full rounded-2xl bg-linear-to-br from-[rgba(247,201,92,0.1)] to-[rgba(247,201,92,0.05)] p-5 sm:p-8">
               <p
-                className="text-center text-2xl font-semibold leading-9 text-[#2E3D4D]"
+                className="text-center text-[20px] font-semibold leading-[26px] text-[#2E3D4D] dark:text-[#F1F3F4] sm:text-2xl sm:leading-9"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 Se paga solo durante los primeros <br />
@@ -425,21 +478,27 @@ export function AutomatizacionesPage() {
               </p>
             </div>
             <div className="flex max-w-[355px] flex-col gap-2 text-center">
-              <p className="text-lg leading-7 text-[#848D8F]" style={{ fontFamily: "var(--font-body)" }}>
+              <p
+                className="text-base leading-6 text-[#848D8F] dark:text-[#F1F3F4] sm:text-lg sm:leading-7"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
                 Evolucionamos al ritmo de tu audiencia.
               </p>
-              <p className="text-lg leading-7 text-[#848D8F]" style={{ fontFamily: "var(--font-body)" }}>
+              <p
+                className="text-base leading-6 text-[#848D8F] dark:text-[#F1F3F4] sm:text-lg sm:leading-7"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
                 Nuevas necesidades = nuevas automatizaciones a medida.
               </p>
             </div>
-            <CtaAccent />
+            <CtaAccent className="w-full sm:w-auto" />
           </div>
         </section>
 
         {/* FAQ */}
-        <section className="flex w-full flex-col items-center gap-12 bg-white px-6 py-[100px] md:px-[100px]">
+        <section className="flex w-full flex-col items-center gap-6 bg-white px-6 py-12 dark:bg-[#1A252F] sm:gap-12 sm:py-[100px] md:px-[100px]">
           <h2
-            className="text-center text-3xl font-bold leading-9 text-[#2E3D4D] md:text-[40px] md:leading-[48px]"
+            className="text-center text-2xl font-bold leading-[30px] text-[#2E3D4D] dark:text-[#F1F3F4] md:text-[40px] md:leading-[48px]"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Preguntas frecuentes
@@ -450,30 +509,30 @@ export function AutomatizacionesPage() {
               return (
                 <div
                   key={item.q}
-                  className="overflow-hidden rounded-2xl border border-[#F1F3F4] bg-[#F1F3F4] p-px"
+                  className="overflow-hidden rounded-2xl border border-[#F1F3F4] bg-[#F1F3F4] p-px dark:border-[#2E3D4D] dark:bg-[#2E3D4D]"
                 >
                   <button
                     type="button"
                     onClick={() => setOpenFaq(open ? null : i)}
-                    className="flex w-full items-start justify-between gap-4 px-8 pt-8 text-left"
+                    className="flex w-full items-start justify-between gap-4 px-6 pt-6 text-left sm:px-8 sm:pt-8"
                     aria-expanded={open}
                     aria-controls={`auto-faq-${i}`}
                     id={`auto-faq-q-${i}`}
                   >
                     <span
-                      className="flex-1 pb-8 text-2xl font-semibold leading-9 text-[#2E3D4D]"
+                      className="flex-1 pb-6 text-[20px] font-semibold leading-[26px] text-[#2E3D4D] dark:text-[#F1F3F4] sm:pb-8 sm:text-2xl sm:leading-9"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
                       {item.q}
                     </span>
                     <span
                       className={cn(
-                        "flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[#2E3D4D] transition-transform",
+                        "flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[#2E3D4D] transition-transform dark:border-[#F1F3F4]",
                         open && "rotate-180"
                       )}
                       aria-hidden
                     >
-                      <ChevronDown className="h-5 w-5 text-[#2E3D4D]" />
+                      <ChevronDown className="h-5 w-5 text-[#2E3D4D] dark:text-[#F1F3F4]" />
                     </span>
                   </button>
                   <div
@@ -482,9 +541,9 @@ export function AutomatizacionesPage() {
                     aria-labelledby={`auto-faq-q-${i}`}
                     className={cn(!open && "hidden")}
                   >
-                    <div className="mx-8 h-px bg-[#52B1E1]" />
+                    <div className="mx-6 h-px bg-[#52B1E1] dark:bg-[#6BC3ED] sm:mx-8" />
                     <p
-                      className="px-8 pb-8 pt-4 text-lg font-normal leading-7 text-[#2E3D4D]"
+                      className="px-6 pb-6 pt-4 text-base font-normal leading-6 text-[#2E3D4D] dark:text-[#F1F3F4] sm:px-8 sm:pb-8 sm:text-lg sm:leading-7"
                       style={{ fontFamily: "var(--font-body)" }}
                     >
                       {item.a}
@@ -497,25 +556,25 @@ export function AutomatizacionesPage() {
         </section>
 
         {/* Final CTA */}
-        <section className="flex w-full flex-col items-center gap-10 bg-[#2E3D4D] px-[50px] py-[100px] text-center">
+        <section className="flex w-full flex-col items-center gap-6 bg-[#2E3D4D] px-6 py-12 text-center sm:gap-10 sm:px-[50px] sm:py-[100px]">
           <h2
-            className="max-w-4xl text-3xl font-bold leading-9 text-white md:text-[40px] md:leading-[48px]"
+            className="max-w-4xl text-2xl font-bold leading-[30px] text-white md:text-[40px] md:leading-[48px]"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Escalar a 7 cifras no debería costarte tu energía
           </h2>
           <p
-            className="max-w-[814px] text-lg font-normal leading-7 text-white"
+            className="max-w-[814px] text-base font-normal leading-6 text-white sm:text-lg sm:leading-7"
             style={{ fontFamily: "var(--font-body)" }}
           >
             Si tienes entre 50K y 250K seguidores, facturas más de $50K al año y estás al borde del
             burnout por la carga administrativa, estás en el momento perfecto.
           </p>
-          <CtaAccent />
+          <CtaAccent className="w-full sm:w-auto" />
         </section>
 
         {/* Footer strip (mockup style) */}
-        <footer className="flex w-full flex-col items-center gap-2.5 bg-white py-[50px]">
+        <footer className="flex w-full flex-col items-center gap-2.5 bg-white px-6 py-12 dark:bg-[#1A252F] sm:py-[50px]">
           <a href="/" className="block">
             <img
               src="/assets/logo.png"
@@ -527,24 +586,30 @@ export function AutomatizacionesPage() {
               decoding="async"
             />
           </a>
-          <p className="text-lg leading-7 text-[#848D8F]" style={{ fontFamily: "var(--font-body)" }}>
+          <p
+            className="text-sm leading-5 text-[#848D8F] dark:text-[#F1F3F4] sm:text-lg sm:leading-7"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
             Make it matter
           </p>
-          <div className="mt-1 flex w-full max-w-[1440px] flex-col items-center border-t border-[#52B1E1]/20 px-[50px] py-1.5 md:flex-row md:justify-between">
-            <p className="text-sm leading-5 text-[#848D8F]" style={{ fontFamily: "var(--font-body)" }}>
+          <div className="mt-1 flex w-full max-w-[1440px] flex-col items-center gap-3 border-t border-[#52B1E1]/20 px-6 py-3 sm:px-[50px] sm:py-1.5 md:flex-row md:justify-between">
+            <p
+              className="text-sm leading-5 text-[#848D8F] dark:text-[#F1F3F4]"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
               © 2026 Zékiri. Todos los derechos reservados.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-6 md:justify-end">
               <a
                 href="#"
-                className="text-sm leading-5 text-[#848D8F] hover:underline"
+                className="text-sm leading-5 text-[#848D8F] hover:underline dark:text-[#F1F3F4]"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 Política de privacidad
               </a>
               <a
                 href="#"
-                className="text-sm leading-5 text-[#848D8F] hover:underline"
+                className="text-sm leading-5 text-[#848D8F] hover:underline dark:text-[#F1F3F4]"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 Términos y condiciones

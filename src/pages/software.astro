@@ -1,0 +1,57 @@
+---
+import Layout from "../layouts/main.astro";
+import SoftwareApp from "@/components/software/SoftwareApp";
+import { SITE_URL, faqSchema, serviceSchema } from "@/lib/seo";
+
+const canonicalPath = "/software";
+
+const faqItems = [
+  {
+    question: "¿Se puede integrar un sistema sin API oficial?",
+    answer: "Sí, mediante conectores personalizados y arquitectura técnica especializada.",
+  },
+  {
+    question: "¿Se pierden datos durante la migración?",
+    answer: "No. Implementamos validación paralela y control de integridad.",
+  },
+  {
+    question: "¿Cuánto tiempo toma ver resultados?",
+    answer: "Empresas reportan beneficios medibles en 12-18 meses.",
+  },
+  {
+    question: "¿Es necesario reemplazar todo el sistema actual?",
+    answer: "No. Integramos progresivamente lo que ya funciona.",
+  },
+];
+
+const content = {
+  title: "Software enterprise y modernización de sistemas legacy | Zékiri",
+  description:
+    "Modernizamos sistemas legacy con arquitectura escalable, integración por APIs y migración faseada para reducir costos operativos y riesgo.",
+  language: "es",
+  canonicalPath,
+  breadcrumbItems: [
+    { name: "Inicio", url: SITE_URL + "/" },
+    { name: "Software", url: SITE_URL + canonicalPath },
+  ],
+  jsonLd: [
+    faqSchema(faqItems),
+    serviceSchema(
+      SITE_URL + canonicalPath,
+      "Software enterprise y modernización de sistemas legacy",
+      "Diseño e implementación de web apps, mobile y APIs para integrar sistemas heredados sin detener la operación."
+    ),
+  ],
+};
+---
+
+<Layout content={content}>
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com" />
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    slot="head"
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+  <SoftwareApp client:load />
+</Layout>
