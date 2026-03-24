@@ -7,6 +7,9 @@ import { useState, useEffect } from "react";
 const COOKIE_NAME = "analytics_consent";
 const COOKIE_MAX_AGE = 365 * 24 * 60 * 60; // 1 year
 
+/** Contentsquare UXA is enabled site-wide (see main.astro); used so consent banner still shows without GA/Meta. */
+const CONTENTSQUARE_ENABLED = true;
+
 export function ConsentBanner() {
   const [show, setShow] = useState(false);
   const gaId = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
@@ -14,7 +17,7 @@ export function ConsentBanner() {
   const requireConsent = import.meta.env.PUBLIC_ANALYTICS_REQUIRE_CONSENT === "true";
 
   useEffect(() => {
-    if (!requireConsent || (!gaId && !pixelId)) return;
+    if (!requireConsent || (!gaId && !pixelId && !CONTENTSQUARE_ENABLED)) return;
     const accepted = document.cookie.includes(`${COOKIE_NAME}=true`);
     const dismissed = document.cookie.includes(`${COOKIE_NAME}=dismissed`);
     if (!accepted && !dismissed) setShow(true);
@@ -35,6 +38,7 @@ export function ConsentBanner() {
         window.fbq("init", pixelId);
         window.fbq("track", "PageView");
       }
+      window.dispatchEvent(new Event("zekiri-analytics-consent"));
     }
   };
 
@@ -52,7 +56,7 @@ export function ConsentBanner() {
       className="fixed bottom-0 left-0 right-0 z-[100] border-t border-border bg-background p-4 shadow-lg md:flex md:items-center md:justify-between md:gap-4 md:px-8"
     >
       <p className="text-foreground text-sm md:max-w-2xl">
-        We use cookies to improve your experience and analyze traffic. By clicking &quot;Accept&quot; you consent to analytics (Google Analytics, Meta). You can decline and we will not load tracking scripts.
+        We use cookies to improve your experience and analyze traffic. By clicking &quot;Accept&quot; you consent to analytics (Google Analytics, Meta, Contentsquare). You can decline and we will not load tracking scripts.
       </p>
       <div className="mt-4 flex gap-3 md:mt-0">
         <button

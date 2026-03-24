@@ -1,0 +1,48 @@
+---
+import Layout from "../layouts/main.astro";
+import AutomatizacionesApp from "@/components/automatizaciones/AutomatizacionesApp";
+import { SITE_URL, faqSchema, serviceSchema } from "@/lib/seo";
+import { automatizacionesFaq } from "@/lib/automatizaciones-content";
+
+const canonicalPath = "/automatizaciones";
+
+const content = {
+  title: "Automatizaciones para creadores y consultores | Zékiri",
+  description:
+    "Automatizaciones que se sienten humanas: centraliza canales, recupera 15–20 horas a la semana y aumenta conversión. Implementación en semanas.",
+  language: "es",
+  canonicalPath,
+  breadcrumbItems: [
+    { name: "Inicio", url: SITE_URL + "/" },
+    { name: "Automatizaciones", url: SITE_URL + canonicalPath },
+  ],
+  jsonLd: [
+    faqSchema([...automatizacionesFaq]),
+    serviceSchema(
+      SITE_URL + canonicalPath,
+      "Automatizaciones para creadores y consultores",
+      "Centraliza Instagram, WhatsApp, YouTube, TikTok, LinkedIn y formularios en un sistema automatizado que mantiene tu voz y prioriza ventas."
+    ),
+  ],
+};
+---
+
+<Layout content={content}>
+  <link
+    slot="head"
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  />
+  <link
+    slot="head"
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
+  <link
+    slot="head"
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+  <AutomatizacionesApp client:load />
+</Layout>

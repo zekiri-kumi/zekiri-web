@@ -11,6 +11,7 @@ import {
   OG_IMAGE_WIDTH,
   OG_IMAGE_HEIGHT,
   GOOGLE_SITE_VERIFICATION,
+  type Locale,
   canonicalUrl,
   alternateUrls,
   organizationSchema,
@@ -22,6 +23,8 @@ interface LayoutContent {
   title: string;
   description: string;
   language: string;
+  /** BreadcrumbList segments (last = current page). Defaults to Home only. */
+  breadcrumbItems?: { name: string; url: string }[];
   /** Canonical path (e.g. "/" or "/?lang=es"). Used for canonical URL and OG. */
   canonicalPath?: string;
   /** When true, add robots noindex,nofollow (e.g. test/staging pages). */
@@ -32,12 +35,17 @@ interface LayoutContent {
   jsonLd?: Record<string, unknown>[];
 }
 
-const { content } = Astro.props;
+const { content } = Astro.props as { content: LayoutContent };
 const language = content.language || "en";
 const canonicalPath = content.canonicalPath ?? "/";
 const canonical = canonicalUrl(canonicalPath);
+const breadcrumbItems = content.breadcrumbItems ?? [
+  { name: "Home", url: SITE_URL + "/" },
+];
 const ogImage = content.ogImage || DEFAULT_OG_IMAGE;
-const alternates = alternateUrls(language);
+const locale: Locale = language === "es" ? "es" : "en";
+const alternates = alternateUrls(canonicalPath, locale);
+const xDefaultHref = alternates.find((item) => item.lang === "en")?.url ?? canonical;
 
 // SEO: robots — allow indexing unless noindex (e.g. markdown test page)
 const robotsContent = content.noindex ? "noindex, nofollow" : "index, follow";
@@ -69,7 +77,7 @@ const robotsContent = content.noindex ? "noindex, nofollow" : "index, follow";
     {alternates.map(({ lang, url }) => (
       <link rel="alternate" hreflang={lang} href={url} />
     ))}
-    <link rel="alternate" hreflang="x-default" href={SITE_URL + "/"} />
+    <link rel="alternate" hreflang="x-default" href={xDefaultHref} />
 
     <!-- Open Graph (Facebook, LinkedIn, etc.) -->
     <meta property="og:type" content="website" />
@@ -97,7 +105,7 @@ const robotsContent = content.noindex ? "noindex, nofollow" : "index, follow";
     <!-- JSON-LD: WebSite -->
     <script type="application/ld+json" set:html={JSON.stringify(websiteSchema(canonical))} />
     <!-- JSON-LD: Breadcrumb -->
-    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema([{ name: "Home", url: SITE_URL + "/" }]))} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema(breadcrumbItems))} />
     <!-- Optional extra JSON-LD (e.g. FAQPage from page) -->
     {content.jsonLd?.map((schema) => (
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
@@ -105,6 +113,8 @@ const robotsContent = content.noindex ? "noindex, nofollow" : "index, follow";
 
     <!-- Google Search Console: env en build o fallback en código para que Netlify siempre lo incluya -->
     <meta name="google-site-verification" content={import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION || GOOGLE_SITE_VERIFICATION} />
+
+    <slot name="head" />
   </head>
   <body>
     <slot />
@@ -147,5 +157,32 @@ const robotsContent = content.noindex ? "noindex, nofollow" : "index, follow";
         }
       </script>
     )}
+
+    <!-- Contentsquare (UXA): same consent rule as GA / Meta when PUBLIC_ANALYTICS_REQUIRE_CONSENT is true -->
+    <script
+      is:inline
+      define:vars={{
+        requireConsent: import.meta.env.PUBLIC_ANALYTICS_REQUIRE_CONSENT === "true",
+        contentsquareSrc: "https://t.contentsquare.net/uxa/99253a5fd861f.js",
+      }}
+    >
+      (function () {
+        function loadContentsquare() {
+          if (window.__zekiriContentsquareLoaded) return;
+          window.__zekiriContentsquareLoaded = true;
+          var s = document.createElement("script");
+          s.src = contentsquareSrc;
+          s.async = true;
+          document.head.appendChild(s);
+        }
+        function maybeLoad() {
+          if (!requireConsent || document.cookie.includes("analytics_consent=true")) {
+            loadContentsquare();
+          }
+        }
+        maybeLoad();
+        window.addEventListener("zekiri-analytics-consent", loadContentsquare);
+      })();
+    </script>
   </body>
 </html>

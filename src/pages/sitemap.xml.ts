@@ -9,6 +9,7 @@ import { SITE_URL } from "@/lib/seo";
 const SITE_ENTRIES: { path: string; changefreq?: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never"; priority?: number }[] = [
   { path: "/", changefreq: "weekly", priority: 1 },
   { path: "/?lang=es", changefreq: "weekly", priority: 1 },
+  { path: "/automatizaciones", changefreq: "weekly", priority: 0.9 },
 ];
 
 function escapeXml(unsafe: string): string {
@@ -30,7 +31,6 @@ export const GET: APIRoute = async () => {
 ${SITE_ENTRIES.map(
   (entry) => `  <url>
     <loc>${escapeXml(SITE_URL + (entry.path.startsWith("/") ? entry.path : "/" + entry.path))}</loc>
-    <lastmod>${new Date().toISOString().slice(0, 10)}</lastmod>
     ${entry.changefreq ? `<changefreq>${entry.changefreq}</changefreq>` : ""}
     ${entry.priority != null ? `<priority>${Number(entry.priority).toFixed(1)}</priority>` : ""}
   </url>`

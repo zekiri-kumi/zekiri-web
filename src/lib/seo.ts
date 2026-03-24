@@ -27,13 +27,21 @@ export function canonicalUrl(path: string): string {
   return `${SITE_URL}${withoutTrailing}`;
 }
 
-/** Build alternate URLs for hreflang (index: / and /?lang=es). */
-export function alternateUrls(language: string): { lang: string; url: string }[] {
-  const base = `${SITE_URL}/`;
-  return LOCALES.map((locale) => ({
-    lang: locale === "en" ? "en" : "es",
-    url: locale === "en" ? base : `${base}?lang=es`,
-  }));
+/** Build hreflang URLs for a canonical path; only include real alternates. */
+export function alternateUrls(canonicalPath: string, language: Locale): { lang: string; url: string }[] {
+  const clean = canonicalPath.startsWith("/") ? canonicalPath : `/${canonicalPath}`;
+  const withoutTrailing = clean.replace(/\/+$/, "") || "/";
+
+  // Home has two language versions: / (en) and /?lang=es (es).
+  if (withoutTrailing === "/" || withoutTrailing === "/?lang=es") {
+    return [
+      { lang: "en", url: `${SITE_URL}/` },
+      { lang: "es", url: `${SITE_URL}/?lang=es` },
+    ];
+  }
+
+  // Other pages only expose their own locale unless an explicit alternate exists.
+  return [{ lang: language, url: canonicalUrl(withoutTrailing) }];
 }
 
 /** Organization JSON-LD (validates with Google Rich Results). */
