@@ -3,7 +3,7 @@ import { ThemeProvider, useTheme } from "@/components/ThemeProvider";
 import { Analytics } from "@/components/Analytics";
 import { ConsentBanner } from "@/components/ConsentBanner";
 import { Toaster } from "sonner";
-import { SoftwarePage } from "./SoftwarePage";
+import { SoftwarePage } from "./SoftwarePage.tsx";
 
 function ThemedToaster() {
   const { theme } = useTheme();

@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from "react";
+import { useId, useState, type ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
   ArrowRightLeft,
@@ -16,6 +16,8 @@ import {
   Webhook,
   X,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
+import styles from "./SoftwarePage.module.css";
 
 // -----------------------------------------------------------------------------
 // Datos de página (contenido)
@@ -140,38 +142,13 @@ const INCLUYE_ITEMS = [
 ] as const;
 
 // -----------------------------------------------------------------------------
-// Utilidad: CSS inline desde string (export Figma)
-// -----------------------------------------------------------------------------
-
-function s(css: string): CSSProperties {
-  const out: Record<string, string> = {};
-  for (const decl of css.split(";")) {
-    const trimmed = decl.trim();
-    if (!trimmed) continue;
-    const colon = trimmed.indexOf(":");
-    if (colon === -1) continue;
-    const prop = trimmed.slice(0, colon).trim();
-    const val = trimmed.slice(colon + 1).trim();
-    const camel = prop.replace(/-([a-z])/gi, (_: string, letter: string) =>
-      letter.toUpperCase()
-    );
-    out[camel] = val;
-  }
-  return out as CSSProperties;
-}
-
-// -----------------------------------------------------------------------------
-// Piezas reutilizables
+// Piezas reutilizables (BEM: bajo bloque softwarePage)
 // -----------------------------------------------------------------------------
 
 function FiveStars() {
   const gold = "#F7C95C";
   return (
-    <div
-      style={s(
-        `align-self: stretch; min-height: 16px; justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex`
-      )}
-    >
+    <div className={styles.softwarePage__starsRow}>
       {Array.from({ length: 5 }, (_, i) => (
         <Star key={i} size={15} strokeWidth={1.5} fill={gold} color={gold} aria-hidden />
       ))}
@@ -180,93 +157,56 @@ function FiveStars() {
 }
 
 function IconSlot24({ children }: { children: ReactNode }) {
-  return (
-    <div
-      style={s(
-        `width: 24px; height: 24px; display: flex; flex-shrink: 0; align-items: center; justify-content: center`
-      )}
-    >
-      {children}
-    </div>
-  );
+  return <div className={styles.softwarePage__iconSlot24}>{children}</div>;
 }
 
 function IconSlot48({ children }: { children: ReactNode }) {
-  return (
-    <div
-      style={s(
-        `width: 48px; height: 48px; display: flex; flex-shrink: 0; align-items: center; justify-content: center`
-      )}
-    >
-      {children}
-    </div>
-  );
+  return <div className={styles.softwarePage__iconSlot48}>{children}</div>;
 }
 
 function FaqItem({ question, answer }: { question: string; answer: string }) {
-  const chevronWrap = s(
-    `width: 40px; height: 40px; display: flex; flex-shrink: 0; align-items: center; justify-content: center`
-  );
+  const [open, setOpen] = useState(false);
+  const headerId = useId();
+  const panelId = useId();
+
   return (
-    <div
-      style={s(
-        `width: 100%; max-width: 1440px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex`
-      )}
-    >
-      <div
-        style={s(
-          `align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex`
-        )}
-      >
-        <div
-          style={s(
-            `align-self: stretch; padding: 1px; background: var(--Color-Background-White, white); overflow: hidden; border-radius: 16px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex`
-          )}
-        >
-          <div
-            style={s(
-              `align-self: stretch; padding-top: 32px; padding-left: 32px; padding-right: 32px; justify-content: space-between; align-items: flex-start; display: inline-flex`
-            )}
+    <div className={styles.softwarePage__faqItem}>
+      <div className={styles.softwarePage__faqItemInner}>
+        <div className={styles.softwarePage__faqCard}>
+          <button
+            type="button"
+            id={headerId}
+            className={cn(styles.softwarePage__faqCardHeader, styles.softwarePage__faqCardHeader_toggle)}
+            aria-expanded={open}
+            aria-controls={panelId}
+            onClick={() => setOpen((v) => !v)}
           >
-            <div
-              style={s(
-                `flex: 1 1 0; padding-bottom: 32px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: flex; flex-wrap: wrap; align-content: flex-start`
-              )}
-            >
-              <div
-                style={s(
-                  `flex: 1 1 0; color: var(--Color-Text-Primary, #2E3D4D); font-size: 28px; font-family: Plus Jakarta Sans; font-weight: 600; line-height: 36px; word-wrap: break-word`
+            <div className={styles.softwarePage__faqQuestionWrap}>
+              <span className={styles.softwarePage__faqQuestion}>{question}</span>
+            </div>
+            <div className={styles.softwarePage__faqChevronWrap}>
+              <ChevronDown
+                size={26}
+                strokeWidth={2}
+                aria-hidden
+                className={cn(
+                  styles.softwarePage__lucideInk,
+                  styles.softwarePage__faqChevron,
+                  open && styles.softwarePage__faqChevron_open
                 )}
-              >
-                {question}
-              </div>
+              />
             </div>
-            <div style={chevronWrap}>
-              <ChevronDown size={26} strokeWidth={2} color="#2E3D4D" aria-hidden />
-            </div>
-          </div>
+          </button>
           <div
-            style={s(
-              `align-self: stretch; padding-left: 32px; padding-right: 32px; border-radius: 15px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex`
-            )}
+            id={panelId}
+            role="region"
+            aria-labelledby={headerId}
+            hidden={!open}
+            className={styles.softwarePage__faqBody}
           >
-            <div
-              style={s(
-                `align-self: stretch; height: 1px; position: relative; background: var(--Color-Icons-Blue, #52B1E1); border-radius: 33554400px`
-              )}
-            />
-            <div
-              style={s(
-                `align-self: stretch; padding-bottom: 32px; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex; flex-wrap: wrap; align-content: center`
-              )}
-            >
-              <div
-                style={s(
-                  `flex: 1 1 0; color: var(--Color-Text-Primary, #2E3D4D); font-size: 18px; font-family: Open Sans; font-weight: 400; line-height: 28px; word-wrap: break-word`
-                )}
-              >
-                {answer}
-              </div>
+            <div className={styles.softwarePage__faqDivider} />
+            <div className={styles.softwarePage__faqAnswerWrap}>
+              <div className={styles.softwarePage__faqAnswer}>{answer}</div>
             </div>
           </div>
         </div>
@@ -285,76 +225,38 @@ function ProcessStepCard({
   title: string;
 }) {
   return (
-    <div
-      style={s(
-        `width: 250px; flex-direction: column; justify-content: center; align-items: center; gap: 10px; display: inline-flex`
-      )}
-    >
+    <div className={styles.softwarePage__processStep}>
       <IconSlot48>
-        <Icon size={28} strokeWidth={2} color="#52B1E1" aria-hidden />
+        <Icon className={styles.softwarePage__lucideBlue} size={28} strokeWidth={2} aria-hidden />
       </IconSlot48>
-      <div
-        style={s(
-          `align-self: stretch; padding-left: 134px; padding-right: 134px; justify-content: center; align-items: center; gap: 10px; display: inline-flex`
-        )}
-      >
-        <div
-          style={s(
-            `text-align: center; color: var(--Color-Text-Secondary, #848D8F); font-size: 18px; font-family: Open Sans; font-weight: 400; line-height: 28px; word-wrap: break-word`
-          )}
-        >
-          {stepLabel}
-        </div>
+      <div className={styles.softwarePage__processStepLabelWrap}>
+        <div className={styles.softwarePage__processStepLabel}>{stepLabel}</div>
       </div>
-      <div
-        style={s(
-          `align-self: stretch; padding-left: 23px; padding-right: 23px; justify-content: center; align-items: center; gap: 10px; display: inline-flex`
-        )}
-      >
-        <div
-          style={s(
-            `width: 279px; text-align: center; color: var(--Color-Text-Primary, #2E3D4D); font-size: 18px; font-family: Open Sans; font-weight: 400; line-height: 28px; word-wrap: break-word`
-          )}
-        >
-          {title}
-        </div>
+      <div className={styles.softwarePage__processStepTitleWrap}>
+        <div className={styles.softwarePage__processStepTitle}>{title}</div>
       </div>
     </div>
   );
 }
 
 // -----------------------------------------------------------------------------
-// Secciones (orden = orden en pantalla)
+// Secciones
 // -----------------------------------------------------------------------------
 
 function SectionTopBar() {
   return (
-    <div
-      style={s(
-        `align-self: stretch; height: 90px; padding-left: 120px; padding-right: 120px; padding-top: 10px; padding-bottom: 10px; background: var(--Plomo-primario, #2E3D4D); justify-content: space-between; align-items: center; display: inline-flex; flex-wrap: wrap; align-content: center`
-      )}
-    >
-      <a href="/" style={s(`display: flex; align-items: center`)}>
+    <div className={styles.softwarePage__topBar}>
+      <a href="/" className={styles.softwarePage__brandLink}>
         <img
-          style={s(`width: 100px; height: 35px; object-fit: contain`)}
+          className={styles.softwarePage__logoTop}
           src="/assets/logo-w.png"
           alt="Zékiri"
           width={100}
           height={35}
         />
       </a>
-      <div
-        style={s(
-          `padding-left: 24px; padding-right: 24px; padding-top: 16px; padding-bottom: 16px; background: var(--Color-CTA-Blue, #52B1E1); border-radius: 12px; justify-content: center; align-items: center; gap: 10px; display: flex`
-        )}
-      >
-        <div
-          style={s(
-            `color: var(--Color-Text-CTA, white); font-size: 16px; font-family: Open Sans; font-weight: 600; line-height: 20px; word-wrap: break-word`
-          )}
-        >
-          Agendar llamada
-        </div>
+      <div className={cn(styles.softwarePage__cta, styles.softwarePage__cta_blue)}>
+        <div className={styles.softwarePage__ctaLabel_white}>Agendar llamada</div>
       </div>
     </div>
   );
@@ -362,69 +264,29 @@ function SectionTopBar() {
 
 function SectionHero() {
   return (
-    <div
-      style={s(
-        `align-self: stretch; padding-left: 120px; padding-right: 120px; padding-top: 160px; padding-bottom: 160px; background-image: url(https://placehold.co/1440x704); flex-direction: column; justify-content: center; align-items: center; gap: 32px; display: flex`
-      )}
-    >
-      <div
-        style={s(
-          `align-self: stretch; text-align: center; justify-content: center; display: flex; flex-direction: column`
-        )}
-      >
-        <span
-          style={s(
-            `color: var(--Color-Text-Primary, #2E3D4D); font-size: 56px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 64px; word-wrap: break-word`
-          )}
-        >
+    <div className={styles.softwarePage__hero}>
+      <div className={styles.softwarePage__heroTitle}>
+        <span className={styles.softwarePage__heroTitleLine}>
           Moderniza tus sistemas legacy<br />
           y reduce hasta{" "}
         </span>
-        <span
-          style={s(
-            `color: var(--Color-Text-Link, #52B1E1); font-size: 56px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 64px; word-wrap: break-word`
-          )}
-        >
-          50%
-        </span>
-        <span
-          style={s(
-            `color: var(--Color-Text-Primary, #2E3D4D); font-size: 56px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 64px; word-wrap: break-word`
-          )}
-        >
+        <span className={styles.softwarePage__heroTitleLine_accent}>50%</span>
+        <span className={styles.softwarePage__heroTitleLine}>
           {" "}
           tus costos<br />
           operativos sin detener tu operación{" "}
         </span>
       </div>
-      <div
-        style={s(
-          `align-self: stretch; padding: 10px; justify-content: center; align-items: center; gap: 10px; display: inline-flex`
-        )}
-      >
-        <div
-          style={s(
-            `flex: 1 1 0; text-align: center; justify-content: center; display: flex; flex-direction: column; color: var(--Color-Text-Primary, #2E3D4D); font-size: 18px; font-family: Open Sans; font-weight: 400; line-height: 28px; word-wrap: break-word`
-          )}
-        >
+      <div className={styles.softwarePage__heroSubWrap}>
+        <div className={styles.softwarePage__heroSub}>
           Diseñamos Web Applications, Mobile (iOS/Android) y APIs para empresas enterprise que
           necesitan escalar,
           <br />
           eliminar procesos manuales y proteger datos críticos — con ROI reportado de hasta 362%.
         </div>
       </div>
-      <div
-        style={s(
-          `padding-left: 24px; padding-right: 24px; padding-top: 16px; padding-bottom: 16px; background: var(--Color-CTA-Yellow, #F7C95C); border-radius: 12px; justify-content: center; align-items: center; gap: 10px; display: inline-flex`
-        )}
-      >
-        <div
-          style={s(
-            `color: var(--Color-Text-CTA-accent, #2E3D4D); font-size: 16px; font-family: Open Sans; font-weight: 600; line-height: 20px; word-wrap: break-word`
-          )}
-        >
-          Agendar diagnóstico gratuito
-        </div>
+      <div className={cn(styles.softwarePage__cta, styles.softwarePage__cta_yellow)}>
+        <div className={styles.softwarePage__ctaLabel_dark}>Agendar diagnóstico gratuito</div>
       </div>
     </div>
   );
@@ -432,40 +294,19 @@ function SectionHero() {
 
 function SectionTrustLogos() {
   return (
-    <div
-      style={s(
-        `align-self: stretch; padding-left: 120px; padding-right: 120px; padding-top: 80px; padding-bottom: 80px; background: var(--Color-Background-White, white); flex-direction: column; justify-content: center; align-items: center; gap: 32px; display: flex`
-      )}
-    >
-      <div
-        style={s(
-          `align-self: stretch; justify-content: center; align-items: center; gap: 10px; display: inline-flex`
-        )}
-      >
-        <div
-          style={s(
-            `width: 1280px; text-align: center; justify-content: center; display: flex; flex-direction: column; color: var(--Color-Text-Secondary, #848D8F); font-size: 16px; font-family: Open Sans; font-weight: 400; line-height: 24px; word-wrap: break-word`
-          )}
-        >
+    <div className={styles.softwarePage__trust}>
+      <div className={styles.softwarePage__trustHeadingRow}>
+        <div className={styles.softwarePage__trustHeading}>
           Empresas que ya confiaron en Zékiri
         </div>
       </div>
-      <div
-        style={s(
-          `width: 100%; max-width: 1440px; min-width: 390px; padding-top: 30px; padding-bottom: 30px; justify-content: center; align-items: center; gap: 40px; row-gap: 24px; display: flex; flex-wrap: wrap; align-content: center`
-        )}
-      >
+      <div className={styles.softwarePage__trustGrid}>
         {BRAND_LOGOS.map((name) => (
-          <div
-            key={name}
-            style={s(`height: 48px; display: flex; align-items: center; justify-content: center`)}
-          >
+          <div key={name} className={styles.softwarePage__trustLogoCell}>
             <img
               src={`/assets/brands/${name}`}
               alt=""
-              style={s(
-                `max-height: 48px; max-width: 160px; width: auto; object-fit: contain; filter: grayscale(100%) brightness(0.85) contrast(1.1)`
-              )}
+              className={styles.softwarePage__trustLogoImg}
             />
           </div>
         ))}
@@ -475,92 +316,42 @@ function SectionTrustLogos() {
 }
 
 function SectionTestimonials() {
-  const card = s(
-    `width: 320px; padding: 24px; background: var(--Color-Background-White, white); border-radius: 14px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 32px; display: inline-flex`
-  );
-  const quoteWrap = s(`align-self: stretch; justify-content: center; align-items: center; display: inline-flex`);
-  const quoteText = s(
-    `flex: 1 1 0; color: var(--Color-Text-Primary, #2E3D4D); font-size: 18px; font-family: Open Sans; font-weight: 400; line-height: 28px; word-wrap: break-word`
-  );
-  const footer = s(
-    `align-self: stretch; height: 60px; padding-top: 8px; padding-bottom: 8px; border-top: 1px var(--Color-Text-Secondary, #848D8F) solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex`
-  );
-  const author = s(
-    `align-self: stretch; color: var(--Color-Text-Secondary, #848D8F); font-size: 14px; font-family: Open Sans; font-weight: 400; line-height: 20px; word-wrap: break-word`
-  );
-
   return (
-    <div
-      style={s(
-        `align-self: stretch; padding-left: 120px; padding-right: 120px; padding-top: 80px; padding-bottom: 80px; background: var(--Color-Background-Default, #F1F3F4); flex-direction: column; justify-content: center; align-items: center; gap: 80px; display: flex`
-      )}
-    >
-      <div
-        style={s(
-          `align-self: stretch; padding: 10px; justify-content: center; align-items: center; gap: 10px; display: inline-flex; flex-wrap: wrap; align-content: center`
-        )}
-      >
-        <div
-          style={s(
-            `flex: 1 1 0; text-align: center; color: var(--Color-Text-Primary, #2E3D4D); font-size: 40px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 48px; word-wrap: break-word`
-          )}
-        >
+    <div className={styles.softwarePage__testimonials}>
+      <div className={styles.softwarePage__heading40Wrap}>
+        <div className={styles.softwarePage__heading40}>
           Modernización con impacto medible y bajo riesgo
         </div>
       </div>
 
-      <div
-        style={s(
-          `align-self: stretch; justify-content: center; align-items: flex-start; gap: 32px; display: inline-flex; flex-wrap: wrap; align-content: flex-start`
-        )}
-      >
+      <div className={styles.softwarePage__rowWrap32}>
         {TESTIMONIALS.map((t) => (
-          <div key={t.author} style={card}>
-            <div style={quoteWrap}>
-              <div style={quoteText}>{t.quote}</div>
+          <div key={t.author} className={styles.softwarePage__testimonialCard}>
+            <div className={styles.softwarePage__testimonialQuoteWrap}>
+              <div className={styles.softwarePage__testimonialQuote}>{t.quote}</div>
             </div>
-            <div style={footer}>
-              <div style={author}>{t.author}</div>
+            <div className={styles.softwarePage__testimonialFooter}>
+              <div className={styles.softwarePage__testimonialAuthor}>{t.author}</div>
               <FiveStars />
             </div>
           </div>
         ))}
       </div>
 
-      <div
-        style={s(
-          `padding-left: 24px; padding-right: 24px; padding-top: 16px; padding-bottom: 16px; background: var(--Color-CTA-White, white); border-radius: 12px; outline: 1px var(--Color-Icons-Default, #2E3D4D) solid; outline-offset: -1px; justify-content: center; align-items: center; gap: 10px; display: inline-flex`
-        )}
-      >
-        <div
-          style={s(
-            `color: var(--Color-Text-CTA-accent, #2E3D4D); font-size: 16px; font-family: Open Sans; font-weight: 600; line-height: 20px; word-wrap: break-word`
-          )}
-        >
-          Ver más casos de éxito
-        </div>
+      <div className={cn(styles.softwarePage__cta, styles.softwarePage__cta_outline)}>
+        <div className={styles.softwarePage__ctaLabel_dark}>Ver más casos de éxito</div>
       </div>
     </div>
   );
 }
 
 function SectionProblemSolution() {
-  const row = s(
-    `align-self: stretch; justify-content: flex-start; align-items: flex-start; gap: 16px; display: inline-flex`
-  );
-  const body = s(
-    `flex: 1 1 0; color: var(--Color-Text-Primary, #2E3D4D); font-size: 18px; font-family: Open Sans; font-weight: 400; line-height: 28px; word-wrap: break-word`
-  );
-  const bodyInverse = s(
-    `flex: 1 1 0; color: var(--Color-Text-Inverse, white); font-size: 18px; font-family: Open Sans; font-weight: 400; line-height: 28px; word-wrap: break-word`
-  );
-
   const painPoints = [
     "70% del presupuesto TI en mantenimiento legacy",
     "Procesos manuales con errores recurrentes",
     "Sistemas aislados sin interoperabilidad",
   ];
-  const helpPoints = [
+  const helpPoints: ReactNode[] = [
     "Integración completa mediante APIs",
     "Automatización que reduce tareas repetitivas hasta 50%",
     <>
@@ -571,132 +362,55 @@ function SectionProblemSolution() {
   ];
 
   return (
-    <div
-      style={s(
-        `align-self: stretch; padding-left: 120px; padding-right: 120px; padding-top: 80px; padding-bottom: 80px; background: var(--Color-Background-White, white); flex-direction: column; justify-content: flex-start; align-items: center; gap: 80px; display: flex`
-      )}
-    >
-      <div
-        style={s(
-          `align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 32px; display: flex`
-        )}
-      >
-        <div
-          style={s(
-            `align-self: stretch; padding: 10px; justify-content: center; align-items: center; gap: 10px; display: inline-flex; flex-wrap: wrap; align-content: center`
-          )}
-        >
-          <div
-            style={s(
-              `flex: 1 1 0; text-align: center; color: var(--Color-Text-Primary, #2E3D4D); font-size: 40px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 48px; word-wrap: break-word`
-            )}
-          >
+    <div className={styles.softwarePage__problemSolution}>
+      <div className={styles.softwarePage__flexColStretch}>
+        <div className={styles.softwarePage__heading40Wrap}>
+          <div className={styles.softwarePage__heading40}>
             Si estás obligado a mantener sistemas costosos y procesos manuales, considera integrar
             todos tus sistemas en una arquitectura escalable
           </div>
         </div>
       </div>
 
-      <div
-        style={s(
-          `align-self: stretch; justify-content: center; align-items: flex-start; gap: 32px; display: inline-flex; flex-wrap: wrap; align-content: flex-start`
-        )}
-      >
-        <div
-          style={s(
-            `width: 500px; height: 272px; padding: 30px; background: var(--Color-Background-Default, #F1F3F4); border-radius: 15px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: inline-flex`
-          )}
-        >
-          <div
-            style={s(
-              `align-self: stretch; color: var(--Color-Text-Primary, #2E3D4D); font-size: 28px; font-family: Plus Jakarta Sans; font-weight: 600; line-height: 36px; word-wrap: break-word`
-            )}
-          >
-            Si hoy tienes:
-          </div>
+      <div className={styles.softwarePage__rowWrap32}>
+        <div className={styles.softwarePage__painCard}>
+          <div className={styles.softwarePage__painTitle}>Si hoy tienes:</div>
           {painPoints.map((text) => (
-            <div key={text} style={row}>
+            <div key={text} className={styles.softwarePage__listRow}>
               <IconSlot24>
-                <X size={18} strokeWidth={2.5} color="#2E3D4D" aria-hidden />
+                <X className={styles.softwarePage__lucideInk} size={18} strokeWidth={2.5} aria-hidden />
               </IconSlot24>
-              <div style={body}>{text}</div>
+              <div className={styles.softwarePage__textBody}>{text}</div>
             </div>
           ))}
         </div>
 
-        <div
-          style={s(
-            `width: 500px; padding: 24px; background: var(--Color-Background-Inverse-Gray, #2E3D4D); border-radius: 15px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: inline-flex`
-          )}
-        >
-          <div
-            style={s(
-              `align-self: stretch; color: var(--Color-Icons-Accent, #F7C95C); font-size: 28px; font-family: Plus Jakarta Sans; font-weight: 600; line-height: 36px; word-wrap: break-word`
-            )}
-          >
-            Te ayudamos con:
-          </div>
+        <div className={styles.softwarePage__helpCard}>
+          <div className={styles.softwarePage__helpTitle}>Te ayudamos con:</div>
           {helpPoints.map((content, i) => (
-            <div key={i} style={row}>
+            <div key={i} className={styles.softwarePage__listRow}>
               <IconSlot24>
-                <Check size={18} strokeWidth={2.5} color="#F7C95C" aria-hidden />
+                <Check className={styles.softwarePage__lucideYellow} size={18} strokeWidth={2.5} aria-hidden />
               </IconSlot24>
-              <div style={bodyInverse}>{content}</div>
+              <div className={styles.softwarePage__textBodyInverse}>{content}</div>
             </div>
           ))}
         </div>
       </div>
 
-      <div
-        style={s(
-          `padding-left: 24px; padding-right: 24px; padding-top: 16px; padding-bottom: 16px; background: var(--Color-CTA-Blue, #52B1E1); border-radius: 12px; justify-content: center; align-items: center; gap: 10px; display: inline-flex`
-        )}
-      >
-        <div
-          style={s(
-            `color: var(--Color-Text-CTA, white); font-size: 16px; font-family: Open Sans; font-weight: 600; line-height: 20px; word-wrap: break-word`
-          )}
-        >
-          Evaluar mi arquitectura actual
-        </div>
+      <div className={cn(styles.softwarePage__cta, styles.softwarePage__cta_blue)}>
+        <div className={styles.softwarePage__ctaLabel_white}>Evaluar mi arquitectura actual</div>
       </div>
     </div>
   );
 }
 
 function SectionSolutions() {
-  const card = s(
-    `width: 500px; padding: 35px; background: var(--Color-Background-White, white); border-radius: 15px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: inline-flex`
-  );
-  const titleStyle = s(
-    `color: var(--Color-Text-Primary, #2E3D4D); font-size: 28px; font-family: Plus Jakarta Sans; font-weight: 600; line-height: 36px; word-wrap: break-word`
-  );
-  const spacer = s(`color: #2E3F51; font-size: 18px; font-family: Inter; font-weight: 400; line-height: 28px; word-wrap: break-word`);
-  const desc = s(
-    `color: var(--Color-Text-Secondary, #848D8F); font-size: 18px; font-family: Open Sans; font-weight: 400; line-height: 28px; word-wrap: break-word`
-  );
-
   return (
-    <div
-      style={s(
-        `align-self: stretch; padding-left: 120px; padding-right: 120px; padding-top: 80px; padding-bottom: 80px; background: var(--Color-Background-Default, #F1F3F4); flex-direction: column; justify-content: flex-start; align-items: center; gap: 80px; display: flex`
-      )}
-    >
-      <div
-        style={s(
-          `align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 32px; display: flex`
-        )}
-      >
-        <div
-          style={s(
-            `align-self: stretch; padding: 10px; justify-content: center; align-items: center; gap: 10px; display: inline-flex; flex-wrap: wrap; align-content: center`
-          )}
-        >
-          <div
-            style={s(
-              `flex: 1 1 0; text-align: center; color: var(--Color-Text-Primary, #2E3D4D); font-size: 40px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 48px; word-wrap: break-word`
-            )}
-          >
+    <div className={styles.softwarePage__solutions}>
+      <div className={styles.softwarePage__flexColStretch}>
+        <div className={styles.softwarePage__heading40Wrap}>
+          <div className={styles.softwarePage__heading40}>
             Soluciones que conectan tu operación actual
             <br />
             sin reemplazarla abruptamente
@@ -704,25 +418,21 @@ function SectionSolutions() {
         </div>
       </div>
 
-      <div
-        style={s(
-          `align-self: stretch; justify-content: center; align-items: flex-start; gap: 32px; display: inline-flex; flex-wrap: wrap; align-content: flex-start`
-        )}
-      >
+      <div className={styles.softwarePage__rowWrap32}>
         {SOLUTION_CARDS.map(({ icon: Icon, title, description }) => (
-          <div key={title} style={card}>
+          <div key={title} className={styles.softwarePage__solutionCard}>
             <IconSlot24>
-              <Icon size={22} strokeWidth={2} color="#52B1E1" aria-hidden />
+              <Icon className={styles.softwarePage__lucideBlue} size={22} strokeWidth={2} aria-hidden />
             </IconSlot24>
-            <div style={s(`align-self: stretch`)}>
-              <span style={titleStyle}>
+            <div className={styles.softwarePage__stretch}>
+              <span className={styles.softwarePage__solutionTitle}>
                 {title}
                 <br />
               </span>
-              <span style={spacer}>
+              <span className={styles.softwarePage__solutionSpacer}>
                 <br />
               </span>
-              <span style={desc}>{description}</span>
+              <span className={styles.softwarePage__solutionDesc}>{description}</span>
             </div>
           </div>
         ))}
@@ -732,68 +442,26 @@ function SectionSolutions() {
 }
 
 function SectionStats() {
-  const col = s(
-    `width: 300px; flex-direction: column; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex`
-  );
-  const value = s(
-    `align-self: stretch; text-align: center; color: var(--Color-Text-Primary, #2E3D4D); font-size: 48px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 64px; word-wrap: break-word`
-  );
-  const caption = s(
-    `flex: 1 1 0; text-align: center; color: var(--Color-Text-Secondary, #848D8F); font-size: 18px; font-family: Open Sans; font-weight: 400; line-height: 28px; word-wrap: break-word`
-  );
-
   return (
-    <div
-      style={s(
-        `align-self: stretch; padding-left: 120px; padding-right: 120px; padding-top: 80px; padding-bottom: 80px; background: var(--Color-Background-White, white); flex-direction: column; justify-content: flex-start; align-items: center; display: flex`
-      )}
-    >
-      <div
-        style={s(
-          `align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: center; display: flex`
-        )}
-      >
-        <div
-          style={s(
-            `align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 32px; display: flex`
-          )}
-        >
-          <div
-            style={s(
-              `align-self: stretch; padding: 10px; justify-content: center; align-items: center; gap: 10px; display: inline-flex; flex-wrap: wrap; align-content: center`
-            )}
-          >
-            <div
-              style={s(
-                `flex: 1 1 0; text-align: center; color: var(--Color-Text-Primary, #2E3D4D); font-size: 40px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 48px; word-wrap: break-word`
-              )}
-            >
+    <div className={styles.softwarePage__stats}>
+      <div className={styles.softwarePage__statsHeaderStack}>
+        <div className={styles.softwarePage__flexColStretch}>
+          <div className={styles.softwarePage__heading40Wrap}>
+            <div className={styles.softwarePage__heading40}>
               Beneficios medibles en 12 a 18 meses
             </div>
           </div>
         </div>
       </div>
 
-      <div
-        style={s(
-          `align-self: stretch; padding-top: 80px; justify-content: center; align-items: flex-start; gap: 120px; display: inline-flex; flex-wrap: wrap; align-content: flex-start`
-        )}
-      >
+      <div className={styles.softwarePage__statsGrid}>
         {STATS.map((item) => (
-          <div key={item.value} style={col}>
-            <div
-              style={s(
-                `align-self: stretch; flex-direction: column; justify-content: center; align-items: center; gap: 10px; display: flex`
-              )}
-            >
-              <div style={value}>{item.value}</div>
+          <div key={item.value} className={styles.softwarePage__statCol}>
+            <div className={styles.softwarePage__statValueWrap}>
+              <div className={styles.softwarePage__statValue}>{item.value}</div>
             </div>
-            <div
-              style={s(
-                `align-self: stretch; justify-content: center; align-items: center; gap: 10px; display: inline-flex`
-              )}
-            >
-              <div style={caption}>{item.caption}</div>
+            <div className={styles.softwarePage__statCaptionRow}>
+              <div className={styles.softwarePage__statCaption}>{item.caption}</div>
             </div>
           </div>
         ))}
@@ -804,96 +472,40 @@ function SectionStats() {
 
 function SectionKpiCtaBand() {
   return (
-    <div
-      style={s(
-        `align-self: stretch; padding-left: 120px; padding-right: 120px; padding-top: 80px; padding-bottom: 80px; background: var(--Plomo-primario, #2E3D4D); flex-direction: column; justify-content: center; align-items: center; gap: 43px; display: flex`
-      )}
-    >
-      <div
-        style={s(
-          `align-self: stretch; text-align: center; color: var(--Color-Text-Inverse, white); font-size: 48px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 64px; word-wrap: break-word`
-        )}
-      >
+    <div className={styles.softwarePage__kpiBand}>
+      <div className={styles.softwarePage__kpiTitle}>
         Diseñamos sistemas que se integran a tus procesos y optimizan tus KPIs operativos
       </div>
-      <div
-        style={s(
-          `align-self: stretch; padding-left: 22px; padding-right: 22px; justify-content: center; align-items: center; gap: 10px; display: inline-flex`
-        )}
-      >
-        <div
-          style={s(
-            `flex: 1 1 0; text-align: center; color: var(--Color-Text-Inverse, white); font-size: 18px; font-family: Open Sans; font-weight: 400; line-height: 28px; word-wrap: break-word`
-          )}
-        >
+      <div className={styles.softwarePage__kpiSubWrap}>
+        <div className={styles.softwarePage__kpiSub}>
           Solicita un diagnóstico técnico estructurado para identificar riesgos, oportunidades de
           integración y plan de modernización.
         </div>
       </div>
-      <div
-        style={s(
-          `padding-left: 24px; padding-right: 24px; padding-top: 16px; padding-bottom: 16px; background: var(--Color-CTA-Yellow, #F7C95C); border-radius: 12px; justify-content: center; align-items: center; gap: 10px; display: inline-flex`
-        )}
-      >
-        <div
-          style={s(
-            `color: var(--Color-Text-CTA-accent, #2E3D4D); font-size: 16px; font-family: Open Sans; font-weight: 600; line-height: 20px; word-wrap: break-word`
-          )}
-        >
-          Agendar diagnóstico gratuito
-        </div>
+      <div className={cn(styles.softwarePage__cta, styles.softwarePage__cta_yellow)}>
+        <div className={styles.softwarePage__ctaLabel_dark}>Agendar diagnóstico gratuito</div>
       </div>
     </div>
   );
 }
 
 function SectionProcessAndIncludes() {
-  const checkRow = s(
-    `align-self: stretch; justify-content: flex-start; align-items: flex-start; gap: 16px; display: inline-flex`
-  );
-  const checkText = s(
-    `flex: 1 1 0; color: var(--Color-Text-Primary, #2E3D4D); font-size: 18px; font-family: Open Sans; font-weight: 400; line-height: 28px; word-wrap: break-word`
-  );
   const col1 = INCLUYE_ITEMS.slice(0, 3);
   const col2 = INCLUYE_ITEMS.slice(3);
 
   return (
-    <div
-      style={s(
-        `padding-bottom: 80px; align-self: stretch; background: var(--Color-Background-White, white); flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex`
-      )}
-    >
-      <div
-        style={s(
-          `align-self: stretch; padding-top: 80px; padding-left: 120px; padding-right: 120px; flex-direction: column; justify-content: flex-start; align-items: center; display: flex`
-        )}
-      >
-        <div
-          style={s(
-            `align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 32px; display: flex`
-          )}
-        >
-          <div
-            style={s(
-              `align-self: stretch; padding: 10px; justify-content: center; align-items: center; gap: 10px; display: inline-flex; flex-wrap: wrap; align-content: center`
-            )}
-          >
-            <div
-              style={s(
-                `flex: 1 1 0; text-align: center; color: var(--Color-Text-Primary, #2E3D4D); font-size: 40px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 48px; word-wrap: break-word`
-              )}
-            >
+    <div className={styles.softwarePage__process}>
+      <div className={styles.softwarePage__processIntro}>
+        <div className={styles.softwarePage__flexColStretch}>
+          <div className={styles.softwarePage__heading40Wrap}>
+            <div className={styles.softwarePage__heading40}>
               Proceso estructurado para modernizar sin riesgo
             </div>
           </div>
         </div>
       </div>
 
-      <div
-        style={s(
-          `align-self: stretch; padding-left: 120px; padding-right: 120px; padding-top: 80px; padding-bottom: 80px; justify-content: center; align-items: center; gap: 120px; display: inline-flex; flex-wrap: wrap; align-content: center`
-        )}
-      >
+      <div className={styles.softwarePage__processStepsRow}>
         {PROCESS_STEPS.map((step) => (
           <ProcessStepCard
             key={step.title}
@@ -905,48 +517,26 @@ function SectionProcessAndIncludes() {
 
       
       </div>
-      <div
-          style={s(
-            `margin: 0 auto; width: 840px; padding: 24px; background: var(--Color-Background-Default, #F1F3F4); border-radius: 15px; flex-direction: column; justify-content: flex-start; align-items: center; gap: 32px; display: inline-flex`
-          )}
-        >
-          <div
-            style={s(
-              `align-self: stretch; text-align: center; color: var(--Color-Text-Link, #52B1E1); font-size: 28px; font-family: Plus Jakarta Sans; font-weight: 600; line-height: 36px; word-wrap: break-word`
-            )}
-          >
-            Incluye
-          </div>
-          <div
-            style={s(
-              `align-self: stretch; justify-content: center; align-items: flex-start; gap: 32px; display: inline-flex`
-            )}
-          >
-            <div
-              style={s(
-                `flex: 1 1 0; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: inline-flex`
-              )}
-            >
+      <div className={styles.softwarePage__includes}>
+          <div className={styles.softwarePage__includesTitle}>Incluye</div>
+          <div className={styles.softwarePage__includesCols}>
+            <div className={styles.softwarePage__includesCol}>
               {col1.map((label) => (
-                <div key={label} style={checkRow}>
+                <div key={label} className={styles.softwarePage__includesRow}>
                   <IconSlot24>
-                    <Check size={18} strokeWidth={2.5} color="#52B1E1" aria-hidden />
+                    <Check className={styles.softwarePage__lucideBlue} size={18} strokeWidth={2.5} aria-hidden />
                   </IconSlot24>
-                  <div style={checkText}>{label}</div>
+                  <div className={styles.softwarePage__includesText}>{label}</div>
                 </div>
               ))}
             </div>
-            <div
-              style={s(
-                `flex: 1 1 0; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: inline-flex`
-              )}
-            >
+            <div className={styles.softwarePage__includesCol}>
               {col2.map((label) => (
-                <div key={label} style={checkRow}>
+                <div key={label} className={styles.softwarePage__includesRow}>
                   <IconSlot24>
-                    <Check size={18} strokeWidth={2.5} color="#52B1E1" aria-hidden />
+                    <Check className={styles.softwarePage__lucideBlue} size={18} strokeWidth={2.5} aria-hidden />
                   </IconSlot24>
-                  <div style={checkText}>{label}</div>
+                  <div className={styles.softwarePage__includesText}>{label}</div>
                 </div>
               ))}
             </div>
@@ -958,36 +548,14 @@ function SectionProcessAndIncludes() {
 
 function SectionFaq() {
   return (
-    <div
-      style={s(
-        `align-self: stretch; padding-left: 120px; padding-right: 120px; padding-top: 80px; padding-bottom: 80px; background: var(--Color-Background-Default, #F1F3F4); overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: center; gap: 80px; display: flex`
-      )}
-    >
-      <div
-        style={s(
-          `align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: center; gap: 16px; display: flex`
-        )}
-      >
-        <div
-          style={s(
-            `align-self: stretch; padding-left: 181px; padding-right: 181px; justify-content: center; align-items: center; gap: 10px; display: inline-flex`
-          )}
-        >
-          <div
-            style={s(
-              `text-align: center; color: var(--Color-Text-Primary, #2E3D4D); font-size: 40px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 48px; word-wrap: break-word`
-            )}
-          >
-            Preguntas frecuentes
-          </div>
+    <div className={styles.softwarePage__faq}>
+      <div className={styles.softwarePage__faqTitleSection}>
+        <div className={styles.softwarePage__faqTitleRow}>
+          <div className={styles.softwarePage__faqTitle}>Preguntas frecuentes</div>
         </div>
       </div>
 
-      <div
-        style={s(
-          `align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: center; gap: 32px; display: flex`
-        )}
-      >
+      <div className={styles.softwarePage__faqList}>
         {FAQ_ITEMS.map((item) => (
           <FaqItem key={item.question} question={item.question} answer={item.answer} />
         ))}
@@ -998,45 +566,17 @@ function SectionFaq() {
 
 function SectionClosingCta() {
   return (
-    <div
-      style={s(
-        `align-self: stretch; padding-left: 120px; padding-right: 120px; padding-top: 80px; padding-bottom: 80px; background: var(--Plomo-primario, #2E3D4D); flex-direction: column; justify-content: center; align-items: center; gap: 43px; display: flex`
-      )}
-    >
-      <div
-        style={s(
-          `align-self: stretch; text-align: center; color: var(--Color-Text-Inverse, white); font-size: 40px; font-family: Plus Jakarta Sans; font-weight: 700; line-height: 48px; word-wrap: break-word`
-        )}
-      >
-        Moderniza hoy para reducir costos mañana
-      </div>
-      <div
-        style={s(
-          `align-self: stretch; padding-left: 22px; padding-right: 22px; justify-content: center; align-items: center; gap: 10px; display: inline-flex`
-        )}
-      >
-        <div
-          style={s(
-            `flex: 1 1 0; text-align: center; color: var(--Color-Text-Inverse, white); font-size: 18px; font-family: Open Sans; font-weight: 400; line-height: 28px; word-wrap: break-word`
-          )}
-        >
+    <div className={styles.softwarePage__closing}>
+      <div className={styles.softwarePage__closingTitle}>Moderniza hoy para reducir costos mañana</div>
+      <div className={styles.softwarePage__closingSubWrap}>
+        <div className={styles.softwarePage__closingSub}>
           Cada año que retrasas la modernización incrementa costos y riesgo operativo entre 10–15%.
           <br />
           Evalúa tu arquitectura actual y descubre el potencial de ahorro y eficiencia.
         </div>
       </div>
-      <div
-        style={s(
-          `padding-left: 24px; padding-right: 24px; padding-top: 16px; padding-bottom: 16px; background: var(--Color-CTA-Yellow, #F7C95C); border-radius: 12px; justify-content: center; align-items: center; gap: 10px; display: inline-flex`
-        )}
-      >
-        <div
-          style={s(
-            `color: var(--Color-Text-CTA-accent, #2E3D4D); font-size: 16px; font-family: Open Sans; font-weight: 600; line-height: 20px; word-wrap: break-word`
-          )}
-        >
-          Agendar diagnóstico gratuito
-        </div>
+      <div className={cn(styles.softwarePage__cta, styles.softwarePage__cta_yellow)}>
+        <div className={styles.softwarePage__ctaLabel_dark}>Agendar diagnóstico gratuito</div>
       </div>
     </div>
   );
@@ -1044,72 +584,37 @@ function SectionClosingCta() {
 
 function SectionFooter() {
   return (
-    <div
-      style={s(
-        `align-self: stretch; padding-top: 50px; padding-bottom: 50px; background: var(--Color-Background-White, white); flex-direction: column; justify-content: flex-start; align-items: center; gap: 10px; display: flex`
-      )}
-    >
-      <a href="/" style={s(`display: flex; align-items: center`)}>
+    <div className={styles.softwarePage__footer}>
+      <a href="/" className={styles.softwarePage__brandLink}>
         <img
-          style={s(`width: 100px; height: 34px; object-fit: contain`)}
+          className={styles.softwarePage__logoFooter}
           src="/assets/logo.png"
           alt="Zékiri"
           width={100}
           height={34}
         />
+        <img
+          className={styles.softwarePage__logoFooter_onDark}
+          src="/assets/logo-w.png"
+          alt="Zékiri"
+          width={100}
+          height={34}
+        />
       </a>
-      <div
-        style={s(
-          `color: var(--Color-Text-Secondary, #848D8F); font-size: 18px; font-family: Open Sans; font-weight: 400; line-height: 28px; word-wrap: break-word`
-        )}
-      >
-        Make it matter
-      </div>
-      <div
-        style={s(
-          `width: 100%; max-width: 1440px; padding-left: 50px; padding-right: 50px; padding-top: 5px; padding-bottom: 5px; border-top: 1px var(--Color-Icons-Blue, #52B1E1) solid; flex-direction: column; justify-content: center; align-items: center; display: flex`
-        )}
-      >
-        <div
-          style={s(
-            `align-self: stretch; justify-content: space-between; align-items: center; display: inline-flex`
-          )}
-        >
-          <div
-            style={s(
-              `flex: 1 1 0; justify-content: flex-start; align-items: center; gap: 10px; display: flex`
-            )}
-          >
-            <div
-              style={s(
-                `width: 311px; color: var(--Color-Text-Secondary, #848D8F); font-size: 14px; font-family: Open Sans; font-weight: 400; line-height: 20px; word-wrap: break-word`
-              )}
-            >
+      <div className={styles.softwarePage__footerTagline}>Make it matter</div>
+      <div className={styles.softwarePage__footerRule}>
+        <div className={styles.softwarePage__footerBottom}>
+          <div className={styles.softwarePage__footerCopyRow}>
+            <div className={styles.softwarePage__footerCopy}>
               © 2026 Zékiri. Todos los derechos reservados.
             </div>
           </div>
-          <div
-            style={s(
-              `width: 321.38px; justify-content: flex-end; align-items: flex-start; gap: 24px; display: flex`
-            )}
-          >
-            <div style={s(`width: 141.58px; height: 21px; position: relative`)}>
-              <div
-                style={s(
-                  `left: 0px; top: 0px; position: absolute; color: var(--Color-Text-Secondary, #848D8F); font-size: 14px; font-family: Open Sans; font-weight: 400; line-height: 20px; word-wrap: break-word`
-                )}
-              >
-                Política de privacidad
-              </div>
+          <div className={styles.softwarePage__footerLinks}>
+            <div className={styles.softwarePage__footerLinkSlot}>
+              <div className={styles.softwarePage__footerLink}>Política de privacidad</div>
             </div>
-            <div style={s(`flex: 1 1 0; height: 21px; position: relative`)}>
-              <div
-                style={s(
-                  `left: 0px; top: 0px; position: absolute; color: var(--Color-Text-Secondary, #848D8F); font-size: 14px; font-family: Open Sans; font-weight: 400; line-height: 20px; word-wrap: break-word`
-                )}
-              >
-                Términos y condiciones
-              </div>
+            <div className={styles.softwarePage__footerLinkSlotGrow}>
+              <div className={styles.softwarePage__footerLink}>Términos y condiciones</div>
             </div>
           </div>
         </div>
@@ -1124,11 +629,7 @@ function SectionFooter() {
 
 export function SoftwarePage() {
   return (
-    <div
-      style={s(
-        `width: 100%; height: 100%; background: white; overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: flex-end; display: inline-flex`
-      )}
-    >
+    <div className={styles.softwarePage}>
       <SectionTopBar />
       <SectionHero />
       <SectionTrustLogos />

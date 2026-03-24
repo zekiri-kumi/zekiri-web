@@ -1,0 +1,1836 @@
+/**
+ * BEM: bloque `softwarePage`
+ * Elementos: `softwarePage__elemento`
+ * Modificadores: en CSS usamos `softwarePage__elemento_modifier` cuando el nombre debe ser
+ * un identificador JS válido (CSS Modules). Equivale a BEM `__elemento--modifier`.
+ */
+
+/* -------------------------------------------------------------------------- */
+/* Bloque raíz */
+/* -------------------------------------------------------------------------- */
+
+.softwarePage {
+  width: 100%;
+  height: 100%;
+  background: white;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  display: inline-flex;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Utilidades compartidas (elementos de layout / tipografía) */
+/* -------------------------------------------------------------------------- */
+
+.softwarePage__heading40 {
+  flex: 1 1 0;
+  text-align: center;
+  color: var(--Color-Text-Primary, #2e3d4d);
+  font-size: 40px;
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 48px;
+  word-wrap: break-word;
+}
+
+.softwarePage__heading40Wrap {
+  align-self: stretch;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.softwarePage__rowWrap32 {
+  align-self: stretch;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.softwarePage__flexColStretch {
+  align-self: stretch;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 32px;
+  display: flex;
+}
+
+.softwarePage__stretch {
+  align-self: stretch;
+}
+
+.softwarePage__brandLink {
+  display: flex;
+  align-items: center;
+}
+
+.softwarePage__logoTop {
+  width: 100px;
+  height: 35px;
+  object-fit: contain;
+}
+
+.softwarePage__logoFooter {
+  width: 100px;
+  height: 34px;
+  object-fit: contain;
+}
+
+/* CTAs: bloque interno softwarePage__cta + modificadores */
+.softwarePage__cta {
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-radius: 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: inline-flex;
+}
+
+.softwarePage__cta_blue {
+  background: var(--Color-CTA-Blue, #52b1e1);
+  /* BEM: --blue */
+}
+
+.softwarePage__cta_yellow {
+  background: var(--Color-CTA-Yellow, #f7c95c);
+  /* BEM: --yellow */
+}
+
+.softwarePage__cta_outline {
+  background: var(--Color-CTA-White, white);
+  outline: 1px var(--Color-Icons-Default, #2e3d4d) solid;
+  outline-offset: -1px;
+}
+
+.softwarePage__ctaLabel_white {
+  color: var(--Color-Text-CTA, white);
+  font-size: 16px;
+  font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  line-height: 20px;
+  word-wrap: break-word;
+}
+
+.softwarePage__ctaLabel_dark {
+  color: var(--Color-Text-CTA-accent, #2e3d4d);
+  font-size: 16px;
+  font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  line-height: 20px;
+  word-wrap: break-word;
+}
+
+/* Icon slots */
+.softwarePage__iconSlot24 {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.softwarePage__iconSlot48 {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.softwarePage__starsRow {
+  align-self: stretch;
+  min-height: 16px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
+  display: inline-flex;
+}
+
+/* Lucide: color vía currentColor (dark mode en prefers-color-scheme) */
+.softwarePage__lucideBlue {
+  color: #52b1e1;
+}
+
+.softwarePage__lucideInk {
+  color: #2e3d4d;
+}
+
+.softwarePage__lucideYellow {
+  color: #f7c95c;
+}
+
+.softwarePage__logoFooter_onDark {
+  display: none;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Barra superior */
+/* -------------------------------------------------------------------------- */
+
+.softwarePage__topBar {
+  align-self: stretch;
+  height: 90px;
+  padding-left: 120px;
+  padding-right: 120px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: var(--Plomo-primario, #2e3d4d);
+  justify-content: space-between;
+  align-items: center;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Hero */
+/* -------------------------------------------------------------------------- */
+
+.softwarePage__hero {
+  align-self: stretch;
+  padding-left: 120px;
+  padding-right: 120px;
+  padding-top: 160px;
+  padding-bottom: 160px;
+  background-color: #f1f3f4;
+  background-image: url(/assets/software/hero-light.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  display: flex;
+}
+
+.softwarePage__heroTitle {
+  align-self: stretch;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.softwarePage__heroTitleLine {
+  color: var(--Color-Text-Primary, #2e3d4d);
+  font-size: 56px;
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 64px;
+  word-wrap: break-word;
+}
+
+.softwarePage__heroTitleLine_accent {
+  color: var(--Color-Text-Link, #52b1e1);
+  font-size: 56px;
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 64px;
+  word-wrap: break-word;
+}
+
+.softwarePage__heroSubWrap {
+  align-self: stretch;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: inline-flex;
+}
+
+.softwarePage__heroSub {
+  flex: 1 1 0;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  color: var(--Color-Text-Primary, #2e3d4d);
+  font-size: 18px;
+  font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 28px;
+  word-wrap: break-word;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Marcas / confianza */
+/* -------------------------------------------------------------------------- */
+
+.softwarePage__trust {
+  align-self: stretch;
+  padding-left: 120px;
+  padding-right: 120px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background: var(--Color-Background-White, white);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  display: flex;
+}
+
+.softwarePage__trustHeadingRow {
+  align-self: stretch;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: inline-flex;
+}
+
+.softwarePage__trustHeading {
+  width: 1280px;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  color: var(--Color-Text-Secondary, #848d8f);
+  font-size: 16px;
+  font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 24px;
+  word-wrap: break-word;
+}
+
+.softwarePage__trustGrid {
+  width: 100%;
+  max-width: 1440px;
+  min-width: 390px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  row-gap: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.softwarePage__trustLogoCell {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.softwarePage__trustLogoImg {
+  max-height: 48px;
+  max-width: 160px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(0.85) contrast(1.1);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Testimonios */
+/* -------------------------------------------------------------------------- */
+
+.softwarePage__testimonials {
+  align-self: stretch;
+  padding-left: 120px;
+  padding-right: 120px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background: var(--Color-Background-Default, #f1f3f4);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  display: flex;
+}
+
+.softwarePage__testimonialCard {
+  width: 320px;
+  padding: 24px;
+  background: var(--Color-Background-White, white);
+  border-radius: 14px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 32px;
+  display: inline-flex;
+}
+
+.softwarePage__testimonialQuoteWrap {
+  align-self: stretch;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+}
+
+.softwarePage__testimonialQuote {
+  flex: 1 1 0;
+  color: var(--Color-Text-Primary, #2e3d4d);
+  font-size: 18px;
+  font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 28px;
+  word-wrap: break-word;
+}
+
+.softwarePage__testimonialFooter {
+  align-self: stretch;
+  height: 60px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-top: 1px var(--Color-Text-Secondary, #848d8f) solid;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+  display: flex;
+}
+
+.softwarePage__testimonialAuthor {
+  align-self: stretch;
+  color: var(--Color-Text-Secondary, #848d8f);
+  font-size: 14px;
+  font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 20px;
+  word-wrap: break-word;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Problema / solución */
+/* -------------------------------------------------------------------------- */
+
+.softwarePage__problemSolution {
+  align-self: stretch;
+  padding-left: 120px;
+  padding-right: 120px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background: var(--Color-Background-White, white);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 80px;
+  display: flex;
+}
+
+.softwarePage__painCard {
+  width: 500px;
+  height: 272px;
+  padding: 30px;
+  background: var(--Color-Background-Default, #f1f3f4);
+  border-radius: 15px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+  display: inline-flex;
+}
+
+.softwarePage__painTitle {
+  align-self: stretch;
+  color: var(--Color-Text-Primary, #2e3d4d);
+  font-size: 28px;
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  line-height: 36px;
+  word-wrap: break-word;
+}
+
+.softwarePage__listRow {
+  align-self: stretch;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+  display: inline-flex;
+}
+
+.softwarePage__textBody {
+  flex: 1 1 0;
+  color: var(--Color-Text-Primary, #2e3d4d);
+  font-size: 18px;
+  font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 28px;
+  word-wrap: break-word;
+}
+
+.softwarePage__helpCard {
+  width: 500px;
+  padding: 24px;
+  background: var(--Color-Background-Inverse-Gray, #2e3d4d);
+  border-radius: 15px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+  display: inline-flex;
+}
+
+.softwarePage__helpTitle {
+  align-self: stretch;
+  color: var(--Color-Icons-Accent, #f7c95c);
+  font-size: 28px;
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  line-height: 36px;
+  word-wrap: break-word;
+}
+
+.softwarePage__textBodyInverse {
+  flex: 1 1 0;
+  color: var(--Color-Text-Inverse, white);
+  font-size: 18px;
+  font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 28px;
+  word-wrap: break-word;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Soluciones (tarjetas) */
+/* -------------------------------------------------------------------------- */
+
+.softwarePage__solutions {
+  align-self: stretch;
+  padding-left: 120px;
+  padding-right: 120px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background: var(--Color-Background-Default, #f1f3f4);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 80px;
+  display: flex;
+}
+
+.softwarePage__solutionCard {
+  width: 500px;
+  padding: 35px;
+  background: var(--Color-Background-White, white);
+  border-radius: 15px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+  display: inline-flex;
+}
+
+.softwarePage__solutionTitle {
+  color: var(--Color-Text-Primary, #2e3d4d);
+  font-size: 28px;
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  line-height: 36px;
+  word-wrap: break-word;
+}
+
+.softwarePage__solutionSpacer {
+  color: #2e3f51;
+  font-size: 18px;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 28px;
+  word-wrap: break-word;
+}
+
+.softwarePage__solutionDesc {
+  color: var(--Color-Text-Secondary, #848d8f);
+  font-size: 18px;
+  font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 28px;
+  word-wrap: break-word;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Estadísticas */
+/* -------------------------------------------------------------------------- */
+
+.softwarePage__stats {
+  align-self: stretch;
+  padding-left: 120px;
+  padding-right: 120px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background: var(--Color-Background-White, white);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.softwarePage__statsHeaderStack {
+  align-self: stretch;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.softwarePage__statsGrid {
+  align-self: stretch;
+  padding-top: 80px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 120px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.softwarePage__statCol {
+  width: 300px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  display: inline-flex;
+}
+
+.softwarePage__statValueWrap {
+  align-self: stretch;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: flex;
+}
+
+.softwarePage__statValue {
+  align-self: stretch;
+  text-align: center;
+  color: var(--Color-Text-Primary, #2e3d4d);
+  font-size: 48px;
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 64px;
+  word-wrap: break-word;
+}
+
+.softwarePage__statCaptionRow {
+  align-self: stretch;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: inline-flex;
+}
+
+.softwarePage__statCaption {
+  flex: 1 1 0;
+  text-align: center;
+  color: var(--Color-Text-Secondary, #848d8f);
+  font-size: 18px;
+  font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 28px;
+  word-wrap: break-word;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Banda CTA KPI (oscuro) */
+/* -------------------------------------------------------------------------- */
+
+.softwarePage__kpiBand {
+  align-self: stretch;
+  padding-left: 120px;
+  padding-right: 120px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background: var(--Plomo-primario, #2e3d4d);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 43px;
+  display: flex;
+}
+
+.softwarePage__kpiTitle {
+  align-self: stretch;
+  text-align: center;
+  color: var(--Color-Text-Inverse, white);
+  font-size: 48px;
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 64px;
+  word-wrap: break-word;
+}
+
+.softwarePage__kpiSubWrap {
+  align-self: stretch;
+  padding-left: 22px;
+  padding-right: 22px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: inline-flex;
+}
+
+.softwarePage__kpiSub {
+  flex: 1 1 0;
+  text-align: center;
+  color: var(--Color-Text-Inverse, white);
+  font-size: 18px;
+  font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 28px;
+  word-wrap: break-word;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Proceso + Incluye */
+/* -------------------------------------------------------------------------- */
+
+.softwarePage__process {
+  align-self: stretch;
+  padding-bottom: 80px;
+  background: var(--Color-Background-White, white);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+  
+}
+
+.softwarePage__processIntro {
+  align-self: stretch;
+  padding-top: 80px;
+  padding-left: 120px;
+  padding-right: 120px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.softwarePage__processStepsRow {
+  align-self: stretch;
+  padding-left: 120px;
+  padding-right: 120px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  justify-content: center;
+  align-items: center;
+  gap: 120px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.softwarePage__processStep {
+  width: 250px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: inline-flex;
+}
+
+.softwarePage__processStepLabelWrap {
+  align-self: stretch;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: inline-flex;
+}
+
+.softwarePage__processStepLabel {
+  text-align: center;
+  color: var(--Color-Text-Secondary, #848d8f);
+  font-size: 18px;
+  font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 28px;
+  word-wrap: break-word;
+}
+
+.softwarePage__processStepTitleWrap {
+  align-self: stretch;
+  padding-left: 23px;
+  padding-right: 23px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: inline-flex;
+}
+
+.softwarePage__processStepTitle {
+  width: 279px;
+  text-align: center;
+  color: var(--Color-Text-Primary, #2e3d4d);
+  font-size: 18px;
+  font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 28px;
+  word-wrap: break-word;
+}
+
+.softwarePage__includes {
+  width: 840px;
+  margin: 0 auto;
+  padding: 24px;
+  background: var(--Color-Background-Default, #f1f3f4);
+  border-radius: 15px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 32px;
+  display: inline-flex;
+}
+
+.softwarePage__includesTitle {
+  align-self: stretch;
+  text-align: center;
+  color: var(--Color-Text-Link, #52b1e1);
+  font-size: 28px;
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  line-height: 36px;
+  word-wrap: break-word;
+}
+
+.softwarePage__includesCols {
+  align-self: stretch;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32px;
+  display: inline-flex;
+}
+
+.softwarePage__includesCol {
+  flex: 1 1 0;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+  display: inline-flex;
+}
+
+.softwarePage__includesRow {
+  align-self: stretch;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+  display: inline-flex;
+}
+
+.softwarePage__includesText {
+  flex: 1 1 0;
+  color: var(--Color-Text-Primary, #2e3d4d);
+  font-size: 18px;
+  font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 28px;
+  word-wrap: break-word;
+}
+
+/* -------------------------------------------------------------------------- */
+/* FAQ */
+/* -------------------------------------------------------------------------- */
+
+.softwarePage__faq {
+  align-self: stretch;
+  padding-left: 120px;
+  padding-right: 120px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background: var(--Color-Background-Default, #f1f3f4);
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 80px;
+  display: flex;
+}
+
+.softwarePage__faqTitleSection {
+  align-self: stretch;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+  display: flex;
+}
+
+.softwarePage__faqTitleRow {
+  align-self: stretch;
+  padding-left: 181px;
+  padding-right: 181px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: inline-flex;
+}
+
+.softwarePage__faqTitle {
+  text-align: center;
+  color: var(--Color-Text-Primary, #2e3d4d);
+  font-size: 40px;
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 48px;
+  word-wrap: break-word;
+}
+
+.softwarePage__faqList {
+  align-self: stretch;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 32px;
+  display: flex;
+}
+
+.softwarePage__faqItem {
+  width: 100%;
+  max-width: 1440px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+  display: flex;
+}
+
+.softwarePage__faqItemInner {
+  align-self: stretch;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+  display: flex;
+}
+
+.softwarePage__faqCard {
+  align-self: stretch;
+  padding: 1px;
+  background: var(--Color-Background-White, white);
+  overflow: hidden;
+  border-radius: 16px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+}
+
+.softwarePage__faqCardHeader {
+  align-self: stretch;
+  padding-top: 32px;
+  padding-left: 32px;
+  padding-right: 32px;
+  justify-content: space-between;
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+/* BEM modifier: --toggle (button reset for accessible FAQ trigger) */
+.softwarePage__faqCardHeader_toggle {
+  width: 100%;
+  margin: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  box-sizing: border-box;
+}
+
+.softwarePage__faqCardHeader_toggle:focus-visible {
+  outline: 2px solid var(--Color-Icons-Blue, #52b1e1);
+  outline-offset: 2px;
+}
+
+.softwarePage__faqQuestionWrap {
+  flex: 1 1 0;
+  padding-bottom: 32px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.softwarePage__faqQuestion {
+  flex: 1 1 0;
+  color: var(--Color-Text-Primary, #2e3d4d);
+  font-size: 28px;
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  line-height: 36px;
+  word-wrap: break-word;
+}
+
+.softwarePage__faqChevronWrap {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.softwarePage__faqChevron {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+/* BEM modifier: --open */
+.softwarePage__faqChevron_open {
+  transform: rotate(180deg);
+}
+
+.softwarePage__faqBody {
+  align-self: stretch;
+  padding-left: 32px;
+  padding-right: 32px;
+  border-radius: 15px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+  display: flex;
+}
+
+.softwarePage__faqDivider {
+  align-self: stretch;
+  height: 1px;
+  position: relative;
+  background: var(--Color-Icons-Blue, #52b1e1);
+  border-radius: 33554400px;
+}
+
+.softwarePage__faqAnswerWrap {
+  align-self: stretch;
+  padding-bottom: 32px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.softwarePage__faqAnswer {
+  flex: 1 1 0;
+  color: var(--Color-Text-Primary, #2e3d4d);
+  font-size: 18px;
+  font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 28px;
+  word-wrap: break-word;
+}
+
+/* -------------------------------------------------------------------------- */
+/* CTA cierre */
+/* -------------------------------------------------------------------------- */
+
+.softwarePage__closing {
+  align-self: stretch;
+  padding-left: 120px;
+  padding-right: 120px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background: var(--Plomo-primario, #2e3d4d);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 43px;
+  display: flex;
+}
+
+.softwarePage__closingTitle {
+  align-self: stretch;
+  text-align: center;
+  color: var(--Color-Text-Inverse, white);
+  font-size: 40px;
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 48px;
+  word-wrap: break-word;
+}
+
+.softwarePage__closingSubWrap {
+  align-self: stretch;
+  padding-left: 22px;
+  padding-right: 22px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: inline-flex;
+}
+
+.softwarePage__closingSub {
+  flex: 1 1 0;
+  text-align: center;
+  color: var(--Color-Text-Inverse, white);
+  font-size: 18px;
+  font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 28px;
+  word-wrap: break-word;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Footer */
+/* -------------------------------------------------------------------------- */
+
+.softwarePage__footer {
+  align-self: stretch;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background: var(--Color-Background-White, white);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  display: flex;
+}
+
+.softwarePage__footerTagline {
+  color: var(--Color-Text-Secondary, #848d8f);
+  font-size: 18px;
+  font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 28px;
+  word-wrap: break-word;
+}
+
+.softwarePage__footerRule {
+  width: 100%;
+  max-width: 1440px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-top: 1px var(--Color-Icons-Blue, #52b1e1) solid;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.softwarePage__footerBottom {
+  align-self: stretch;
+  justify-content: space-between;
+  align-items: center;
+  display: inline-flex;
+}
+
+.softwarePage__footerCopyRow {
+  flex: 1 1 0;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  display: flex;
+}
+
+.softwarePage__footerCopy {
+  width: 311px;
+  color: var(--Color-Text-Secondary, #848d8f);
+  font-size: 14px;
+  font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 20px;
+  word-wrap: break-word;
+}
+
+.softwarePage__footerLinks {
+  width: 321.38px;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 24px;
+  display: flex;
+}
+
+.softwarePage__footerLinkSlot {
+  width: 141.58px;
+  height: 21px;
+  position: relative;
+}
+
+.softwarePage__footerLinkSlotGrow {
+  flex: 1 1 0;
+  height: 21px;
+  position: relative;
+}
+
+.softwarePage__footerLink {
+  left: 0;
+  top: 0;
+  position: absolute;
+  color: var(--Color-Text-Secondary, #848d8f);
+  font-size: 14px;
+  font-family: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 20px;
+  word-wrap: break-word;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Móvil (diseño Figma ~390px; aplica hasta 767px) */
+/* -------------------------------------------------------------------------- */
+
+@media (max-width: 767px) {
+  .softwarePage {
+    align-items: flex-start;
+  }
+
+  .softwarePage__heading40 {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .softwarePage__rowWrap32 {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+
+  .softwarePage__logoTop {
+    width: 70px;
+    height: 24px;
+  }
+
+  .softwarePage__logoFooter {
+    width: 70px;
+    height: 24px;
+  }
+
+  .softwarePage__logoFooter_onDark {
+    width: 70px;
+    height: 24px;
+  }
+
+  .softwarePage__cta {
+    min-height: 48px;
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border-radius: 10px;
+  }
+
+  /* Barra superior */
+  .softwarePage__topBar {
+    height: 68px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  /* Hero (móvil claro: hero-light-mobile; oscuro se anula abajo con prefers-color-scheme) */
+  .softwarePage__hero {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    background-image: url(/assets/software/hero-light-mobile.png);
+    gap: 24px;
+  }
+
+  .softwarePage__heroTitleLine,
+  .softwarePage__heroTitleLine_accent {
+    font-size: 32px;
+    line-height: 38px;
+  }
+
+  .softwarePage__heroSub {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* Confianza / marcas */
+  .softwarePage__trust {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    gap: 24px;
+  }
+
+  .softwarePage__trustHeading {
+    width: 100%;
+    max-width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .softwarePage__trustGrid {
+    min-width: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    gap: 32px;
+    row-gap: 24px;
+  }
+
+  /* Testimonios */
+  .softwarePage__testimonials {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    gap: 24px;
+  }
+
+  .softwarePage__testimonialCard {
+    width: 100%;
+    max-width: 100%;
+    gap: 24px;
+  }
+
+  .softwarePage__testimonialQuote {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* Problema / solución */
+  .softwarePage__problemSolution {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    gap: 48px;
+  }
+
+  .softwarePage__flexColStretch {
+    gap: 32px;
+  }
+
+  .softwarePage__painCard {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 0;
+  }
+
+  .softwarePage__painTitle {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  .softwarePage__textBody,
+  .softwarePage__textBodyInverse {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .softwarePage__helpCard {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .softwarePage__helpTitle {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  /* Soluciones */
+  .softwarePage__solutions {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    gap: 48px;
+  }
+
+  .softwarePage__solutionCard {
+    width: 100%;
+    max-width: 100%;
+    padding: 24px;
+    gap: 12px;
+  }
+
+  .softwarePage__solutionTitle {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  .softwarePage__solutionSpacer {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .softwarePage__solutionDesc {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* Estadísticas */
+  .softwarePage__stats {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    gap: 48px;
+  }
+
+  .softwarePage__statsGrid {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0;
+    gap: 80px;
+  }
+
+  .softwarePage__statValue {
+    font-size: 32px;
+    line-height: 38px;
+  }
+
+  .softwarePage__statCaption {
+    color: var(--Color-Text-Primary, #2e3d4d);
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* Banda KPI */
+  .softwarePage__kpiBand {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    background: var(--Color-Background-Inverse-Gray, #2e3d4d);
+    gap: 24px;
+  }
+
+  .softwarePage__kpiTitle {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .softwarePage__kpiSub {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* Proceso + Incluye */
+  .softwarePage__process {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 48px;
+    align-items: stretch;
+  }
+
+  .softwarePage__processIntro {
+    padding-top: 48px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .softwarePage__processStepsRow {
+    flex-direction: column;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    gap: 48px;
+  }
+
+  .softwarePage__processStep {
+    width: 100%;
+    max-width: 250px;
+    align-self: center;
+  }
+
+  .softwarePage__processStepTitle {
+    width: 100%;
+    max-width: 279px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .softwarePage__includes {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    gap: 24px;
+  }
+
+  .softwarePage__includesTitle {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  .softwarePage__includesCols {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+
+  .softwarePage__includesText {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* FAQ */
+  .softwarePage__faq {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    gap: 48px;
+    align-items: stretch;
+  }
+
+  .softwarePage__faqTitleRow {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .softwarePage__faqTitle {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .softwarePage__faqList {
+    align-items: stretch;
+    gap: 24px;
+  }
+
+  .softwarePage__faqQuestion {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  .softwarePage__faqAnswer {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* Cierre */
+  .softwarePage__closing {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    gap: 24px;
+  }
+
+  .softwarePage__closingTitle {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .softwarePage__closingSub {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* Footer */
+  .softwarePage__footer {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    gap: 12px;
+  }
+
+  .softwarePage__footerTagline {
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--Plomo-secundario, #848d8f);
+  }
+
+  .softwarePage__footerRule {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .softwarePage__footerBottom {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .softwarePage__footerCopyRow {
+    justify-content: center;
+  }
+
+  .softwarePage__footerCopy {
+    width: auto;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .softwarePage__footerLinks {
+    width: auto;
+    max-width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .softwarePage__footerLink {
+    position: static;
+    text-align: center;
+  }
+
+  .softwarePage__footerLinkSlot,
+  .softwarePage__footerLinkSlotGrow {
+    position: static;
+    width: auto;
+    height: auto;
+    flex: 0 0 auto;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Dark mode (prefers-color-scheme: solo sistema; no toggle en UI) */
+/* -------------------------------------------------------------------------- */
+
+@media (prefers-color-scheme: dark) {
+  .softwarePage {
+    background: #1a252f;
+    color-scheme: dark;
+  }
+
+  .softwarePage__lucideBlue {
+    color: #6bc3ed;
+  }
+
+  .softwarePage__lucideInk {
+    color: #ffffff;
+  }
+
+  .softwarePage__logoFooter {
+    display: none;
+  }
+
+  .softwarePage__logoFooter_onDark {
+    display: block;
+    object-fit: contain;
+  }
+
+  /* Hero */
+  .softwarePage__heroTitleLine {
+    color: #f1f3f4;
+  }
+
+  .softwarePage__heroTitleLine_accent {
+    color: #6bc3ed;
+  }
+
+  .softwarePage__heroSub {
+    color: #f1f3f4;
+  }
+
+  /* Marcas */
+  .softwarePage__trust {
+    background: #1a252f;
+  }
+
+  .softwarePage__trustHeading {
+    color: #f1f3f4;
+  }
+
+  .softwarePage__trustLogoImg {
+    filter: grayscale(100%) brightness(1.15) contrast(1.05);
+  }
+
+  /* Testimonios */
+  .softwarePage__testimonials {
+    background: #2e3d4d;
+  }
+
+  .softwarePage__heading40 {
+    color: #f1f3f4;
+  }
+
+  .softwarePage__testimonialCard {
+    background: #1a252f;
+  }
+
+  .softwarePage__testimonialQuote,
+  .softwarePage__testimonialAuthor {
+    color: #f1f3f4;
+  }
+
+  .softwarePage__testimonialFooter {
+    border-top-color: #f1f3f4;
+  }
+
+  .softwarePage__cta_outline {
+    background: #52b1e1;
+    outline: none;
+  }
+
+  .softwarePage__cta_outline .softwarePage__ctaLabel_dark {
+    color: #ffffff;
+  }
+
+  /* Problema / solución */
+  .softwarePage__problemSolution {
+    background: #1a252f;
+  }
+
+  .softwarePage__painCard {
+    background: #2e3d4d;
+  }
+
+  .softwarePage__painTitle,
+  .softwarePage__textBody {
+    color: #f1f3f4;
+  }
+
+  .softwarePage__helpCard {
+    background: #2e3d4d;
+  }
+
+  .softwarePage__textBodyInverse {
+    color: #f1f3f4;
+  }
+
+  /* Soluciones */
+  .softwarePage__solutions {
+    background: #2e3d4d;
+  }
+
+  .softwarePage__solutionCard {
+    background: #1a252f;
+  }
+
+  .softwarePage__solutionTitle {
+    color: #f1f3f4;
+  }
+
+  .softwarePage__solutionDesc {
+    color: #f1f3f4;
+  }
+
+  /* Stats */
+  .softwarePage__stats {
+    background: #1a252f;
+  }
+
+  .softwarePage__statValue,
+  .softwarePage__statCaption {
+    color: #f1f3f4;
+  }
+
+  /* Banda KPI */
+  .softwarePage__kpiTitle {
+    color: #f1f3f4;
+  }
+
+  .softwarePage__kpiSub {
+    color: #f1f3f4;
+  }
+
+  /* Proceso + Incluye */
+  .softwarePage__process {
+    background: #1a252f;
+  }
+
+  .softwarePage__processStepLabel {
+    color: #f1f3f4;
+  }
+
+  .softwarePage__processStepTitle {
+    color: #f1f3f4;
+  }
+
+  .softwarePage__includes {
+    background: #2e3d4d;
+  }
+
+  .softwarePage__includesTitle {
+    color: #6bc3ed;
+  }
+
+  .softwarePage__includesText {
+    color: #f1f3f4;
+  }
+
+  /* FAQ */
+  .softwarePage__faq {
+    background: #2e3d4d;
+  }
+
+  .softwarePage__faqTitle {
+    color: #f1f3f4;
+  }
+
+  .softwarePage__faqCard {
+    background: #1a252f;
+  }
+
+  .softwarePage__faqQuestion,
+  .softwarePage__faqAnswer {
+    color: #f1f3f4;
+  }
+
+  .softwarePage__faqDivider {
+    background: #6bc3ed;
+  }
+
+  .softwarePage__faqCardHeader_toggle:focus-visible {
+    outline-color: #6bc3ed;
+  }
+
+  /* Cierre */
+  .softwarePage__closing {
+    background: #1a252f;
+  }
+
+  .softwarePage__closingTitle {
+    color: #f1f3f4;
+  }
+
+  .softwarePage__closingSub {
+    color: #f1f3f4;
+  }
+
+  /* Footer */
+  .softwarePage__footer {
+    background: #2e3d4d;
+  }
+
+  .softwarePage__footerTagline,
+  .softwarePage__footerCopy,
+  .softwarePage__footerLink {
+    color: #f1f3f4;
+  }
+
+  .softwarePage__footerRule {
+    border-top-color: #6bc3ed;
+  }
+}
+
+/* Móvil + dark: alinear caption de stats y tagline del pie con tokens oscuros */
+@media (prefers-color-scheme: dark) and (min-width: 768px) {
+  .softwarePage__hero {
+    background-color: #1a252f;
+    background-image: url(/assets/software/hero-dark.png);
+  }
+}
+
+@media (max-width: 767px) and (prefers-color-scheme: dark) {
+  .softwarePage__hero {
+    background-color: #1a252f;
+    background-image: url(/assets/software/hero-dark-mobile.png);
+  }
+
+  .softwarePage__statCaption {
+    color: #f1f3f4;
+  }
+
+  .softwarePage__footerTagline {
+    color: #f1f3f4;
+  }
+}
