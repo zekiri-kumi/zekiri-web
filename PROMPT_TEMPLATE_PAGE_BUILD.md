@@ -19,7 +19,7 @@ You are a senior frontend engineer. Follow **all** sections strictly.
 **No basta con leer la tabla:** tienes que escribir el valor en **la línea siguiente** (marcada `ASSIGNEE_ROUTE`). Esa es la única línea “oficial” del documento para la URL pública; si el agente se detiene por § STOP, abre este archivo, busca `ASSIGNEE_ROUTE` o `NEW_PAGE_ROUTE=` y corrige **solo** lo que va después del `=` (mantén una barra inicial `/`).
 
 <!-- ASSIGNEE_ROUTE: edit the next line only; must look like /mi-ruta -->
-**`NEW_PAGE_ROUTE` =** `/sass`
+**`NEW_PAGE_ROUTE` =** `/REPLACE_WITH_ROUTE`
 
 *(Si añades o quitas líneas arriba, el número de línea cambia; por eso la búsqueda por texto `NEW_PAGE_ROUTE=` es más fiable que un número fijo.)*
 
