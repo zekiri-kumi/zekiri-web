@@ -1,0 +1,1363 @@
+/**
+ * Landing logística / automatización aduanera — BEM bloque: logisticaPage
+ * Elementos: logisticaPage__*
+ * Modificadores: logisticaPage__*--modifier o logisticaPage__cta_yellow (patrón existente en Software)
+ */
+
+.logisticaPage {
+  color-scheme: light;
+  --lp-bg: #f1f3f4;
+  --lp-bg-white: #ffffff;
+  --lp-ink: #2e3d4d;
+  --lp-muted: #848d8f;
+  --lp-link: #52b1e1;
+  --lp-accent: #f7c95c;
+  --lp-inverse: #2e3d4d;
+  --lp-pill-bg: var(--lp-bg);
+  --lp-hero-bg-base: #d8dee6;
+  --lp-hero-card-bg: rgba(255, 255, 255, 0.7);
+  --lp-cta-yellow-fg: #2e3d4d;
+  --lp-cta-blue-fg: #ffffff;
+  --lp-closing-bg: var(--lp-inverse);
+  --lp-closing-fg: #ffffff;
+  --lp-footer-surface: var(--lp-bg-white);
+  --lp-on-inverse-card: #ffffff;
+  --lp-icon-bullets: var(--lp-ink);
+  --lp-faq-card-border: rgba(82, 177, 225, 0.2);
+  --lp-radius-lg: 16px;
+  --lp-radius-md: 15px;
+  --lp-radius-sm: 12px;
+  --lp-pad-x: clamp(1.25rem, 5vw, 7.5rem);
+  --lp-section-y: clamp(3rem, 8vw, 5rem);
+  --lp-font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --lp-font-body: "Open Sans", system-ui, sans-serif;
+
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: var(--lp-bg-white);
+  color: var(--lp-ink);
+  font-family: var(--lp-font-body);
+  font-size: 18px;
+  line-height: 28px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Top bar */
+/* -------------------------------------------------------------------------- */
+
+.logisticaPage__topBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 55px;
+  padding: 10px var(--lp-pad-x);
+  background: var(--lp-inverse);
+}
+
+.logisticaPage__brandLink {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.logisticaPage__brandLink:focus-visible {
+  outline: 2px solid var(--lp-link);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.logisticaPage__logoTop {
+  width: 100px;
+  height: 35px;
+  object-fit: contain;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Hero */
+/* -------------------------------------------------------------------------- */
+
+.logisticaPage__hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  min-height: min(764px, 90vh);
+  padding: var(--lp-section-y) var(--lp-pad-x);
+  background-color: var(--lp-hero-bg-base);
+  background-image: linear-gradient(
+      105deg,
+      rgba(46, 61, 77, 0.45) 0%,
+      rgba(46, 61, 77, 0.25) 50%,
+      rgba(82, 177, 225, 0.15) 100%
+    ),
+    url("/assets/logistic/hero_web.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.logisticaPage__heroCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  max-width: 590px;
+  width: 100%;
+  padding: 24px;
+  border-radius: var(--lp-radius-lg);
+  background: var(--lp-hero-card-bg);
+  backdrop-filter: blur(8px);
+}
+
+.logisticaPage__pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 24px;
+  border-radius: var(--lp-radius-lg);
+  background: var(--lp-pill-bg);
+}
+
+.logisticaPage__pillText {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--lp-link);
+}
+
+.logisticaPage__heroTitle {
+  margin: 0;
+  font-family: var(--lp-font-display);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.14;
+  color: var(--lp-ink);
+}
+
+.logisticaPage__heroLead {
+  margin: 0;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+  color: var(--lp-ink);
+}
+
+.logisticaPage__ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* -------------------------------------------------------------------------- */
+/* CTAs */
+/* -------------------------------------------------------------------------- */
+
+.logisticaPage__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  border-radius: var(--lp-radius-sm);
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.logisticaPage__cta:hover {
+  opacity: 0.92;
+}
+
+.logisticaPage__cta:focus-visible {
+  outline: 2px solid var(--lp-link);
+  outline-offset: 3px;
+}
+
+.logisticaPage__cta_yellow {
+  background: var(--lp-accent);
+  color: var(--lp-cta-yellow-fg);
+}
+
+.logisticaPage__cta_blue {
+  background: var(--lp-link);
+  color: var(--lp-cta-blue-fg);
+}
+
+.logisticaPage__ctaLabel {
+  word-wrap: break-word;
+  text-align: center;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Metrics strip */
+/* -------------------------------------------------------------------------- */
+
+.logisticaPage__metrics {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: var(--lp-section-y) var(--lp-pad-x);
+  background: var(--lp-bg);
+}
+
+.logisticaPage__metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: min(100%, 272px);
+  flex: 1 1 200px;
+  max-width: 290px;
+}
+
+.logisticaPage__metricValue {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  font-family: var(--lp-font-display);
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.14;
+  color: var(--lp-link);
+}
+
+.logisticaPage__metricLabel {
+  margin: 0;
+  padding: 0 10px;
+  text-align: center;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--lp-muted);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Section titles */
+/* -------------------------------------------------------------------------- */
+
+.logisticaPage__sectionHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  width: 100%;
+}
+
+.logisticaPage__sectionTitle {
+  margin: 0;
+  flex: 1 1 280px;
+  text-align: center;
+  font-family: var(--lp-font-display);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--lp-ink);
+}
+
+.logisticaPage__sectionSub {
+  margin: 0;
+  max-width: 900px;
+  text-align: center;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--lp-muted);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Testimonials */
+/* -------------------------------------------------------------------------- */
+
+.logisticaPage__testimonials {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(2.5rem, 5vw, 5rem);
+  padding: var(--lp-section-y) var(--lp-pad-x);
+  background: var(--lp-bg-white);
+}
+
+.logisticaPage__quoteGrid {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: stretch;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.logisticaPage__quoteCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  flex: 1 1 280px;
+  max-width: 420px;
+  padding: 35px;
+  border-radius: var(--lp-radius-md);
+  background: var(--lp-bg);
+}
+
+.logisticaPage__quoteStat {
+  margin: 0;
+  font-family: var(--lp-font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--lp-link);
+}
+
+.logisticaPage__quoteTitle {
+  margin: 0;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 600;
+  color: var(--lp-ink);
+}
+
+.logisticaPage__quoteBody {
+  margin: 0;
+  font-family: "Inter", var(--lp-font-body);
+  font-size: 18px;
+  line-height: 28px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--lp-ink);
+}
+
+.logisticaPage__quoteAuthor {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 600;
+  color: var(--lp-ink);
+}
+
+.logisticaPage__quoteRole {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+  color: var(--lp-muted);
+}
+
+.logisticaPage__sectionCtaWrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Problem / solution */
+/* -------------------------------------------------------------------------- */
+
+.logisticaPage__splitSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(2.5rem, 5vw, 5rem);
+  padding: var(--lp-section-y) var(--lp-pad-x);
+  background: var(--lp-bg);
+}
+
+.logisticaPage__splitIntro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.logisticaPage__compareGrid {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: stretch;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.logisticaPage__compareCard {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1 1 300px;
+  padding: 30px;
+  border-radius: var(--lp-radius-md);
+  background: var(--lp-bg-white);
+}
+
+.logisticaPage__compareCard_inverse {
+  padding: 24px;
+  background: var(--lp-inverse);
+}
+
+.logisticaPage__compareHeading {
+  margin: 0;
+  font-family: var(--lp-font-display);
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 600;
+  color: var(--lp-ink);
+}
+
+.logisticaPage__compareHeading_inverse {
+  color: var(--lp-accent);
+}
+
+.logisticaPage__listRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+}
+
+.logisticaPage__listIcon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  margin-top: 2px;
+  color: var(--lp-icon-bullets);
+}
+
+.logisticaPage__listIcon_inverse {
+  color: var(--lp-accent);
+}
+
+.logisticaPage__listText {
+  flex: 1 1 auto;
+  margin: 0;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--lp-ink);
+}
+
+.logisticaPage__listText_inverse {
+  color: var(--lp-on-inverse-card);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Features (agent) */
+/* -------------------------------------------------------------------------- */
+
+.logisticaPage__features {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 32px;
+  padding: var(--lp-section-y) var(--lp-pad-x);
+  background: var(--lp-bg-white);
+}
+
+.logisticaPage__featuresIntro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.logisticaPage__featuresStack {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 32px 0;
+  width: 100%;
+}
+
+.logisticaPage__featurePanel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+  padding: 24px;
+  border-radius: var(--lp-radius-lg);
+  background: var(--lp-bg);
+}
+
+.logisticaPage__featureCol {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1 1 280px;
+  min-width: 0;
+}
+
+.logisticaPage__featureIconWrap {
+  width: 48px;
+  height: 48px;
+  color: var(--lp-ink);
+}
+
+.logisticaPage__featureTitle {
+  margin: 0;
+  font-family: var(--lp-font-display);
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 600;
+  color: var(--lp-ink);
+}
+
+.logisticaPage__featureDesc {
+  margin: 0;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--lp-muted);
+}
+
+.logisticaPage__featureBullets {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.logisticaPage__featureBullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.logisticaPage__featureBulletIcon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  margin-top: 2px;
+  color: var(--lp-accent);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Cost stats */
+/* -------------------------------------------------------------------------- */
+
+.logisticaPage__costSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(2rem, 4vw, 3rem);
+  padding: var(--lp-section-y) var(--lp-pad-x);
+  background: var(--lp-bg);
+  overflow: hidden;
+}
+
+.logisticaPage__costGrid {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  padding: clamp(2rem, 5vw, 5rem) 0;
+}
+
+.logisticaPage__costCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: min(100%, 300px);
+}
+
+.logisticaPage__costValue {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  font-family: var(--lp-font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--lp-link);
+}
+
+.logisticaPage__costLabel {
+  margin: 0;
+  text-align: center;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--lp-ink);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Process steps */
+/* -------------------------------------------------------------------------- */
+
+.logisticaPage__process {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(2.5rem, 5vw, 5rem);
+  padding: var(--lp-section-y) var(--lp-pad-x);
+  background: var(--lp-bg-white);
+}
+
+.logisticaPage__processGrid {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: stretch;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.logisticaPage__processCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: min(100%, 500px);
+  padding: 35px;
+  border-radius: var(--lp-radius-md);
+  background: var(--lp-bg);
+}
+
+.logisticaPage__processCard > header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.logisticaPage__processStepNum {
+  display: block;
+  font-family: var(--lp-font-display);
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 600;
+  color: var(--lp-link);
+}
+
+.logisticaPage__processCardTitle {
+  margin: 0;
+  font-family: var(--lp-font-display);
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 600;
+  color: var(--lp-ink);
+}
+
+.logisticaPage__processCardBody {
+  margin: 0;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--lp-muted);
+}
+
+/* -------------------------------------------------------------------------- */
+/* FAQ */
+/* -------------------------------------------------------------------------- */
+
+.logisticaPage__faqSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: var(--lp-section-y) var(--lp-pad-x);
+  background: var(--lp-bg);
+  overflow: hidden;
+}
+
+.logisticaPage__faqList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.logisticaPage__faqItem {
+  width: 100%;
+}
+
+.logisticaPage__faqCard {
+  border-radius: var(--lp-radius-lg);
+  background: var(--lp-bg-white);
+  border: 1px solid var(--lp-faq-card-border);
+  overflow: hidden;
+}
+
+.logisticaPage__faqToggle {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 32px 32px 0;
+  padding-bottom: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+}
+
+.logisticaPage__faqToggle:focus-visible {
+  outline: 2px solid var(--lp-link);
+  outline-offset: 2px;
+}
+
+.logisticaPage__faqQuestion {
+  flex: 1 1 auto;
+  margin: 0 0 32px;
+  padding: 0;
+  font-family: var(--lp-font-display);
+  font-size: clamp(1.15rem, 2vw, 1.75rem);
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--lp-ink);
+}
+
+.logisticaPage__faqChevronWrap {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--lp-ink);
+}
+
+.logisticaPage__faqChevron {
+  transition: transform 0.2s ease;
+}
+
+.logisticaPage__faqChevron_open {
+  transform: rotate(180deg);
+}
+
+.logisticaPage__faqPanel {
+  padding: 0 32px 32px;
+}
+
+.logisticaPage__faqDivider {
+  height: 1px;
+  width: 100%;
+  margin: 0 0 16px;
+  border: none;
+  background: var(--lp-link);
+}
+
+.logisticaPage__faqAnswer {
+  margin: 0;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--lp-muted);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Closing band */
+/* -------------------------------------------------------------------------- */
+
+.logisticaPage__closing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+  min-height: 320px;
+  padding: var(--lp-section-y) var(--lp-pad-x);
+  background: var(--lp-closing-bg);
+}
+
+.logisticaPage__closingTitle {
+  margin: 0;
+  max-width: 56rem;
+  text-align: center;
+  font-family: var(--lp-font-display);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--lp-closing-fg);
+}
+
+.logisticaPage__closingText {
+  margin: 0;
+  max-width: 52rem;
+  padding: 0 22px;
+  text-align: center;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--lp-closing-fg);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Footer */
+/* -------------------------------------------------------------------------- */
+
+.logisticaPage__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 50px var(--lp-pad-x);
+  background: var(--lp-footer-surface);
+}
+
+.logisticaPage__logoFooter {
+  width: 100px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.logisticaPage__logoFooter_dark {
+  display: none;
+  width: 100px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.logisticaPage__footerTagline {
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--lp-muted);
+}
+
+.logisticaPage__footerRule {
+  width: 100%;
+  max-width: 1440px;
+  margin-top: 5px;
+  padding: 5px 50px 0;
+  border-top: 1px solid var(--lp-link);
+}
+
+.logisticaPage__footerBottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+
+.logisticaPage__footerCopy {
+  flex: 1 1 200px;
+  max-width: 320px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--lp-muted);
+}
+
+.logisticaPage__footerLinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 24px;
+}
+
+.logisticaPage__footerLink {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--lp-muted);
+  text-decoration: none;
+}
+
+.logisticaPage__footerLink:hover {
+  text-decoration: underline;
+  color: var(--lp-ink);
+}
+
+.logisticaPage__footerLink:focus-visible {
+  outline: 2px solid var(--lp-link);
+  outline-offset: 2px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Tema oscuro: solo preferencia del sistema (sin toggle en esta landing) */
+/* -------------------------------------------------------------------------- */
+
+@media (prefers-color-scheme: dark) {
+  .logisticaPage {
+    color-scheme: dark;
+    --lp-bg: #2e3d4d;
+    --lp-bg-white: #1a252f;
+    --lp-ink: #f1f3f4;
+    --lp-muted: #f1f3f4;
+    --lp-link: #6bc3ed;
+    --lp-accent: #f7c95c;
+    --lp-inverse: #2e3d4d;
+    --lp-pill-bg: #1a252f;
+    --lp-hero-bg-base: #1a252f;
+    --lp-hero-card-bg: rgba(46, 61, 77, 0.7);
+    --lp-cta-yellow-fg: #2e3d4d;
+    --lp-cta-blue-fg: #1a252f;
+    --lp-closing-bg: #1a252f;
+    --lp-closing-fg: #f1f3f4;
+    --lp-footer-surface: #2e3d4d;
+    --lp-on-inverse-card: #f1f3f4;
+    --lp-icon-bullets: #ffffff;
+    --lp-faq-card-border: rgba(107, 195, 237, 0.35);
+  }
+
+  .logisticaPage__hero {
+    background-image: linear-gradient(
+        105deg,
+        rgba(26, 37, 47, 0.78) 0%,
+        rgba(46, 61, 77, 0.55) 50%,
+        rgba(107, 195, 237, 0.12) 100%
+      ),
+      url("/assets/logistic/hero_web.png");
+  }
+
+  .logisticaPage__compareCard_inverse {
+    background: var(--lp-bg-white);
+  }
+
+  .logisticaPage__logoFooter {
+    display: none;
+  }
+
+  .logisticaPage__logoFooter_dark {
+    display: block;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Utilidades: copys distintos desktop / móvil (mismo CTA, misma GA label) */
+/* -------------------------------------------------------------------------- */
+
+.logisticaPage__ctaLabelMobile {
+  display: none;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Móvil (mock ~390px): tipografía, paddings 24px, CTAs 48px altura, radius 10px */
+/* -------------------------------------------------------------------------- */
+
+@media (max-width: 767px) {
+  .logisticaPage {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .logisticaPage__ctaLabelDesktop {
+    display: none;
+  }
+
+  .logisticaPage__ctaLabelMobile {
+    display: inline;
+  }
+
+  .logisticaPage__topBar {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .logisticaPage__logoTop {
+    width: 70px;
+    height: 25px;
+  }
+
+  /* Hero */
+  .logisticaPage__hero {
+    min-height: 0;
+    padding: 48px 24px;
+    align-content: flex-start;
+    background-image: linear-gradient(
+        105deg,
+        rgba(46, 61, 77, 0.45) 0%,
+        rgba(46, 61, 77, 0.25) 50%,
+        rgba(82, 177, 225, 0.15) 100%
+      ),
+      url("/assets/logistic/hero_mobile.png");
+  }
+
+  .logisticaPage__heroCard {
+    flex: 1 1 auto;
+    max-width: none;
+    align-items: center;
+    text-align: center;
+  }
+
+  .logisticaPage__pill {
+    align-self: stretch;
+    flex-wrap: wrap;
+    padding: 10px 12px;
+  }
+
+  .logisticaPage__pillText {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  .logisticaPage__heroTitle {
+    font-size: 32px;
+    line-height: 38px;
+    text-align: center;
+    align-self: stretch;
+  }
+
+  .logisticaPage__heroLead {
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    align-self: stretch;
+  }
+
+  .logisticaPage__ctaRow {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .logisticaPage__cta {
+    min-height: 48px;
+    box-sizing: border-box;
+    padding: 16px 20px;
+    border-radius: 10px;
+  }
+
+  /* Métricas */
+  .logisticaPage__metrics {
+    padding: 48px 24px;
+    gap: 24px;
+  }
+
+  .logisticaPage__metric {
+    flex: 1 1 100%;
+    max-width: none;
+    min-width: 0;
+  }
+
+  .logisticaPage__metricValue {
+    font-size: 32px;
+    line-height: 38px;
+  }
+
+  .logisticaPage__metricLabel {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* Títulos de sección */
+  .logisticaPage__sectionTitle {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .logisticaPage__sectionSub {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* Testimonios */
+  .logisticaPage__testimonials {
+    padding: 48px 24px;
+    gap: 48px;
+  }
+
+  .logisticaPage__quoteGrid {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 24px;
+  }
+
+  .logisticaPage__quoteCard {
+    flex: none;
+    max-width: none;
+    width: 100%;
+    padding: 24px;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .logisticaPage__quoteStat {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .logisticaPage__quoteTitle {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .logisticaPage__quoteBody {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .logisticaPage__quoteAuthor {
+    font-family: "Inter", var(--lp-font-body);
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .logisticaPage__quoteRole {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* Problema / solución */
+  .logisticaPage__splitSection {
+    padding: 48px 24px;
+    gap: 24px;
+  }
+
+  .logisticaPage__splitIntro {
+    gap: 24px;
+  }
+
+  .logisticaPage__compareGrid {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 32px;
+  }
+
+  .logisticaPage__compareCard {
+    flex: none;
+    width: 100%;
+    padding: 30px;
+  }
+
+  .logisticaPage__compareCard_inverse {
+    padding: 24px;
+  }
+
+  .logisticaPage__compareHeading {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  .logisticaPage__listText {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .logisticaPage__listText_inverse {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* Features */
+  .logisticaPage__features {
+    padding: 48px 24px;
+    gap: 24px;
+  }
+
+  .logisticaPage__featuresIntro {
+    gap: 32px;
+  }
+
+  .logisticaPage__featuresStack {
+    padding: 32px 0;
+    gap: 24px;
+  }
+
+  .logisticaPage__featurePanel {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .logisticaPage__featureCol {
+    flex: none;
+    width: 100%;
+    gap: 24px;
+  }
+
+  .logisticaPage__featureTitle {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  .logisticaPage__featureDesc {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .logisticaPage__featureBullets {
+    gap: 24px;
+  }
+
+  .logisticaPage__featureBullet .logisticaPage__listText {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* Costos */
+  .logisticaPage__costSection {
+    padding: 48px 24px;
+    gap: 24px;
+  }
+
+  .logisticaPage__costGrid {
+    padding: 48px 0;
+    gap: 32px;
+  }
+
+  .logisticaPage__costCell {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .logisticaPage__costValue {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .logisticaPage__costLabel {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* Proceso */
+  .logisticaPage__process {
+    padding: 48px 24px;
+    gap: 48px;
+  }
+
+  .logisticaPage__splitIntro .logisticaPage__sectionSub {
+    padding: 0 4px;
+  }
+
+  .logisticaPage__processGrid {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 24px;
+  }
+
+  .logisticaPage__processCard {
+    width: 100%;
+    max-width: none;
+    padding: 24px;
+    gap: 12px;
+  }
+
+  .logisticaPage__processStepNum {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  .logisticaPage__processCardTitle {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  .logisticaPage__processCardBody {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* FAQ */
+  .logisticaPage__faqSection {
+    padding: 48px 24px;
+    gap: 48px;
+  }
+
+  .logisticaPage__faqList {
+    gap: 16px;
+  }
+
+  .logisticaPage__faqToggle {
+    padding: 24px 24px 0;
+  }
+
+  .logisticaPage__faqQuestion {
+    margin-bottom: 24px;
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  .logisticaPage__faqPanel {
+    padding: 0 24px 24px;
+  }
+
+  .logisticaPage__faqAnswer {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* Cierre */
+  .logisticaPage__closing {
+    min-height: 0;
+    padding: 48px 24px;
+    gap: 24px;
+  }
+
+  .logisticaPage__closingTitle {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .logisticaPage__closingText {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* Footer */
+  .logisticaPage__footer {
+    min-height: 213px;
+    box-sizing: border-box;
+    padding: 48px 24px;
+  }
+
+  .logisticaPage__logoFooter,
+  .logisticaPage__logoFooter_dark {
+    width: 70px;
+    height: 24px;
+  }
+
+  .logisticaPage__footerTagline {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .logisticaPage__footerRule {
+    padding: 5px 24px 0;
+  }
+
+  .logisticaPage__footerBottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .logisticaPage__footerCopy {
+    max-width: none;
+    width: 100%;
+    text-align: center;
+  }
+
+  .logisticaPage__footerLinks {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (prefers-color-scheme: dark) and (max-width: 767px) {
+  .logisticaPage__hero {
+    background-image: linear-gradient(
+        105deg,
+        rgba(26, 37, 47, 0.78) 0%,
+        rgba(46, 61, 77, 0.55) 50%,
+        rgba(107, 195, 237, 0.12) 100%
+      ),
+      url("/assets/logistic/hero_mobile.png");
+  }
+}

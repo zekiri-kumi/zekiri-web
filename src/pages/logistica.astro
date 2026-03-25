@@ -1,0 +1,39 @@
+---
+import Layout from "../layouts/main.astro";
+import LogisticaApp from "@/components/logistica/LogisticaApp";
+import { SITE_URL, faqSchema, serviceSchema } from "@/lib/seo";
+import { LOGISTICA_FAQ } from "@/lib/logistica-content";
+
+const canonicalPath = "/logistica";
+
+const content = {
+  title: "Automatización aduanera con IA para logística y frontera México-EE.UU. | Zékiri",
+  description:
+    "Procesa facturas, cartas porte y bills of lading con IA: detecta errores antes de la frontera, sincroniza con tu operador en EE.UU. y reduce tiempo de cruce. Auditoría gratuita.",
+  language: "es",
+  canonicalPath,
+  breadcrumbItems: [
+    { name: "Inicio", url: SITE_URL + "/" },
+    { name: "Logística y aduanas", url: SITE_URL + canonicalPath },
+  ],
+  jsonLd: [
+    faqSchema([...LOGISTICA_FAQ]),
+    serviceSchema(
+      SITE_URL + canonicalPath,
+      "Automatización aduanera con IA para logística LATAM",
+      "Validación documental inteligente para cruces fronterizos: integración con TMS/WMS, compliance T-MEC y sincronización con operadores en Estados Unidos."
+    ),
+  ],
+};
+---
+
+<Layout content={content}>
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com" />
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    slot="head"
+    href="https://fonts.googleapis.com/css2?family=Inter:ital@0;1&family=Open+Sans:wght@400;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+  <LogisticaApp client:load />
+</Layout>

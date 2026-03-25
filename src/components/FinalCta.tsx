@@ -16,7 +16,7 @@ export function FinalCta() {
           {subtitle}
         </p>
       </div>
-      <CtaButton />
+      <CtaButton gaLabel="landing_final_cta" />
     </section>
   );
 }

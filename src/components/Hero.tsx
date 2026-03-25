@@ -51,7 +51,7 @@ export function Hero() {
             {t.bullets[1]}
           </p>
         </div>
-        <CtaButton />
+        <CtaButton gaLabel="landing_hero_cta" />
       </div>
     </section>
   );

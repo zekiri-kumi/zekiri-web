@@ -255,9 +255,14 @@ function SectionTopBar() {
           height={35}
         />
       </a>
-      <div className={cn(styles.softwarePage__cta, styles.softwarePage__cta_blue)}>
-        <div className={styles.softwarePage__ctaLabel_white}>Agendar llamada</div>
-      </div>
+      <a
+        href="/#contact"
+        className={cn(styles.softwarePage__cta, styles.softwarePage__cta_blue)}
+        data-ga-event="cta_click"
+        data-ga-label="software_top_agendar_llamada"
+      >
+        <span className={styles.softwarePage__ctaLabel_white}>Agendar llamada</span>
+      </a>
     </div>
   );
 }
@@ -285,9 +290,14 @@ function SectionHero() {
           eliminar procesos manuales y proteger datos críticos — con ROI reportado de hasta 362%.
         </div>
       </div>
-      <div className={cn(styles.softwarePage__cta, styles.softwarePage__cta_yellow)}>
-        <div className={styles.softwarePage__ctaLabel_dark}>Agendar diagnóstico gratuito</div>
-      </div>
+      <a
+        href="/#contact"
+        className={cn(styles.softwarePage__cta, styles.softwarePage__cta_yellow)}
+        data-ga-event="cta_click"
+        data-ga-label="software_hero_diagnostico"
+      >
+        <span className={styles.softwarePage__ctaLabel_dark}>Agendar diagnóstico gratuito</span>
+      </a>
     </div>
   );
 }
@@ -338,9 +348,14 @@ function SectionTestimonials() {
         ))}
       </div>
 
-      <div className={cn(styles.softwarePage__cta, styles.softwarePage__cta_outline)}>
-        <div className={styles.softwarePage__ctaLabel_dark}>Ver más casos de éxito</div>
-      </div>
+      <a
+        href="/#contact"
+        className={cn(styles.softwarePage__cta, styles.softwarePage__cta_outline)}
+        data-ga-event="cta_click"
+        data-ga-label="software_testimonials_mas_casos"
+      >
+        <span className={styles.softwarePage__ctaLabel_dark}>Ver más casos de éxito</span>
+      </a>
     </div>
   );
 }
@@ -398,9 +413,14 @@ function SectionProblemSolution() {
         </div>
       </div>
 
-      <div className={cn(styles.softwarePage__cta, styles.softwarePage__cta_blue)}>
-        <div className={styles.softwarePage__ctaLabel_white}>Evaluar mi arquitectura actual</div>
-      </div>
+      <a
+        href="/#contact"
+        className={cn(styles.softwarePage__cta, styles.softwarePage__cta_blue)}
+        data-ga-event="cta_click"
+        data-ga-label="software_problem_evaluar_arquitectura"
+      >
+        <span className={styles.softwarePage__ctaLabel_white}>Evaluar mi arquitectura actual</span>
+      </a>
     </div>
   );
 }
@@ -482,9 +502,14 @@ function SectionKpiCtaBand() {
           integración y plan de modernización.
         </div>
       </div>
-      <div className={cn(styles.softwarePage__cta, styles.softwarePage__cta_yellow)}>
-        <div className={styles.softwarePage__ctaLabel_dark}>Agendar diagnóstico gratuito</div>
-      </div>
+      <a
+        href="/#contact"
+        className={cn(styles.softwarePage__cta, styles.softwarePage__cta_yellow)}
+        data-ga-event="cta_click"
+        data-ga-label="software_kpi_diagnostico"
+      >
+        <span className={styles.softwarePage__ctaLabel_dark}>Agendar diagnóstico gratuito</span>
+      </a>
     </div>
   );
 }
@@ -575,9 +600,14 @@ function SectionClosingCta() {
           Evalúa tu arquitectura actual y descubre el potencial de ahorro y eficiencia.
         </div>
       </div>
-      <div className={cn(styles.softwarePage__cta, styles.softwarePage__cta_yellow)}>
-        <div className={styles.softwarePage__ctaLabel_dark}>Agendar diagnóstico gratuito</div>
-      </div>
+      <a
+        href="/#contact"
+        className={cn(styles.softwarePage__cta, styles.softwarePage__cta_yellow)}
+        data-ga-event="cta_click"
+        data-ga-label="software_closing_diagnostico"
+      >
+        <span className={styles.softwarePage__ctaLabel_dark}>Agendar diagnóstico gratuito</span>
+      </a>
     </div>
   );
 }

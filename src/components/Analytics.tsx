@@ -54,8 +54,14 @@ export function Analytics() {
       if (!link) return;
       const event = link.getAttribute("data-ga-event");
       const label = link.getAttribute("data-ga-label") || "";
+      const href = link instanceof HTMLAnchorElement ? link.href : undefined;
       if (event && GA_ID && window.gtag) {
-        window.gtag("event", event, { event_category: "engagement", event_label: label });
+        window.gtag("event", event, {
+          event_category: "engagement",
+          event_label: label,
+          cta_label: label,
+          ...(href ? { link_url: href } : {}),
+        });
       }
       if (META_PIXEL_ID && window.fbq && (event === "cta_click" || event === "form_submit")) {
         window.fbq("track", "Contact");
@@ -76,7 +82,11 @@ export function Analytics() {
 export function trackFormConversion() {
   if (!hasConsent()) return;
   if (GA_ID && window.gtag) {
-    window.gtag("event", "form_submit", { event_category: "conversion", event_label: "contact" });
+    window.gtag("event", "form_submit", {
+      event_category: "conversion",
+      event_label: "contact",
+      form_id: "contact",
+    });
   }
   if (META_PIXEL_ID && window.fbq) {
     window.fbq("track", "Lead");

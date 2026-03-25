@@ -3,6 +3,7 @@
  * 404 page: SEO-safe (noindex), accessible, with link back to home.
  */
 import Layout from "../layouts/main.astro";
+import { Analytics } from "@/components/Analytics";
 import { SITE_URL } from "@/lib/seo";
 
 const content = {
@@ -22,9 +23,12 @@ const content = {
     </p>
     <a
       href="/"
+      data-ga-event="cta_click"
+      data-ga-label="404_back_home"
       class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-8 text-base font-semibold text-primary-foreground transition-opacity hover:opacity-90 focus-visible:outline focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
     >
       Back to home
     </a>
   </main>
+  <Analytics client:load />
 </Layout>

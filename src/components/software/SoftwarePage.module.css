@@ -99,6 +99,17 @@
   display: inline-flex;
 }
 
+a.softwarePage__cta {
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+a.softwarePage__cta:focus-visible {
+  outline: 2px solid var(--Color-Icons-Blue, #52b1e1);
+  outline-offset: 2px;
+}
+
 .softwarePage__cta_blue {
   background: var(--Color-CTA-Blue, #52b1e1);
   /* BEM: --blue */
@@ -1628,6 +1639,10 @@
 
   .softwarePage__heroSub {
     color: #f1f3f4;
+  }
+
+  a.softwarePage__cta:focus-visible {
+    outline-color: #6bc3ed;
   }
 
   /* Marcas */

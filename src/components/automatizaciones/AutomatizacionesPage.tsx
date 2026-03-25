@@ -11,12 +11,12 @@ import {
 import { cn } from "@/lib/utils";
 import { automatizacionesFaq } from "@/lib/automatizaciones-content";
 
-function CtaAccent({ className }: { className?: string }) {
+function CtaAccent({ className, gaLabel = "automatizaciones_diagnostico" }: { className?: string; gaLabel?: string }) {
   return (
     <a
       href="/#contact"
       data-ga-event="cta_click"
-      data-ga-label="automatizaciones_diagnostico"
+      data-ga-label={gaLabel}
       className={cn(
         "inline-flex items-center justify-center gap-2.5 rounded-xl bg-[#F7C95C] px-6 py-4 text-base font-semibold leading-5 text-[#2E3D4D] transition-opacity hover:opacity-90 focus-visible:outline focus-visible:ring-2 focus-visible:ring-[#52B1E1] focus-visible:ring-offset-2 dark:focus-visible:ring-[#6BC3ED]",
         className
@@ -172,7 +172,7 @@ export function AutomatizacionesPage() {
                   Tu crecimiento no debería sentirse como descontrol. No necesitas trabajar más.
                   Necesitas automatizaciones que trabajen por ti.
                 </p>
-                <CtaAccent className="w-full sm:w-auto" />
+                <CtaAccent className="w-full sm:w-auto" gaLabel="automatizaciones_hero_diagnostico" />
                 <div className="flex w-full flex-col gap-3 sm:hidden">
                   <CheckRow>Nunca vuelvas a perder un lead</CheckRow>
                   <CheckRow>Recupera 15-20 horas semanales</CheckRow>
@@ -366,7 +366,7 @@ export function AutomatizacionesPage() {
               </div>
             ))}
           </div>
-          <CtaAccent className="w-full sm:w-auto" />
+          <CtaAccent className="w-full sm:w-auto" gaLabel="automatizaciones_stats_diagnostico" />
         </section>
 
         {/* Timeline */}
@@ -491,7 +491,7 @@ export function AutomatizacionesPage() {
                 Nuevas necesidades = nuevas automatizaciones a medida.
               </p>
             </div>
-            <CtaAccent className="w-full sm:w-auto" />
+            <CtaAccent className="w-full sm:w-auto" gaLabel="automatizaciones_pricing_diagnostico" />
           </div>
         </section>
 
@@ -570,7 +570,7 @@ export function AutomatizacionesPage() {
             Si tienes entre 50K y 250K seguidores, facturas más de $50K al año y estás al borde del
             burnout por la carga administrativa, estás en el momento perfecto.
           </p>
-          <CtaAccent className="w-full sm:w-auto" />
+          <CtaAccent className="w-full sm:w-auto" gaLabel="automatizaciones_final_diagnostico" />
         </section>
 
         {/* Footer strip (mockup style) */}
