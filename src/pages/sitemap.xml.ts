@@ -12,6 +12,7 @@ const SITE_ENTRIES: { path: string; changefreq?: "always" | "hourly" | "daily" |
   { path: "/automatizaciones", changefreq: "weekly", priority: 0.9 },
   { path: "/software", changefreq: "weekly", priority: 0.9 },
   { path: "/logistica", changefreq: "weekly", priority: 0.9 },
+  { path: "/sass", changefreq: "weekly", priority: 0.85 },
 ];
 
 function escapeXml(unsafe: string): string {

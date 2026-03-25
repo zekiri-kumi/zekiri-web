@@ -1,0 +1,39 @@
+---
+import Layout from "../layouts/main.astro";
+import SassApp from "@/components/sass/SassApp";
+import { SITE_URL, faqSchema, serviceSchema } from "@/lib/seo";
+import { sassFaq } from "@/lib/sass-content";
+
+const canonicalPath = "/sass";
+
+const content = {
+  title: "Automatización con IA que libera tiempo y multiplica resultados | Zékiri",
+  description:
+    "Automatiza desde tareas repetitivas hasta decisiones inteligentes. IA para operaciones, datos, comunicación e integración de sistemas. Agenda una consultoría gratuita.",
+  language: "es",
+  canonicalPath,
+  breadcrumbItems: [
+    { name: "Inicio", url: SITE_URL + "/" },
+    { name: "Automatización con IA", url: SITE_URL + canonicalPath },
+  ],
+  jsonLd: [
+    faqSchema([...sassFaq]),
+    serviceSchema(
+      SITE_URL + canonicalPath,
+      "Automatización con inteligencia artificial",
+      "Diagnóstico, diseño e implementación de flujos con IA: operaciones, reporting, soporte e integración de sistemas para escalar con datos confiables."
+    ),
+  ],
+};
+---
+
+<Layout content={content}>
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com" />
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    slot="head"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600&display=swap"
+    rel="stylesheet"
+  />
+  <SassApp client:load />
+</Layout>
