@@ -2,15 +2,14 @@
 import Layout from "../../layouts/main.astro";
 import ProyectosApp from "@/components/proyectos/ProyectosApp";
 import { SITE_URL } from "@/lib/seo";
-import { PROJECTS, type Project } from "@/lib/proyectos-content";
+import { PROJECTS } from "@/lib/proyectos-content";
 
-export const prerender = true;
+// Server-rendered like the rest of the site: prerendered folders made Netlify add a trailing-slash redirect.
+export const prerender = false;
 
-export function getStaticPaths() {
-  return PROJECTS.map((project) => ({ params: { slug: project.slug }, props: { project } }));
-}
+const project = PROJECTS.find((candidate) => candidate.slug === Astro.params.slug);
+if (!project) return Astro.rewrite("/404");
 
-const { project } = Astro.props as { project: Project };
 const canonicalPath = `/proyectos/${project.slug}`;
 
 const content = {
