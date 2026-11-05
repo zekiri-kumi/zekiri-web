@@ -1,7 +1,7 @@
 export type Language = "en" | "es";
 
 export type Translations = {
-  nav: { home: string; whatWeDo: string; process: string; faq: string; contact: string; cta: string };
+  nav: { home: string; whatWeDo: string; process: string; projects: string; faq: string; contact: string; cta: string };
   banner: { text: string };
   theme: { switchToDark: string; switchToLight: string };
   hero: {
@@ -52,6 +52,7 @@ export const messages: Record<Language, Translations> = {
       home: "Home",
       whatWeDo: "What we automate",
       process: "Process",
+      projects: "Projects",
       faq: "FAQ",
       contact: "Contact",
       cta: "Get a quote",
@@ -204,6 +205,7 @@ export const messages: Record<Language, Translations> = {
       home: "Inicio",
       whatWeDo: "Qué podemos automatizar",
       process: "Proceso",
+      projects: "Proyectos",
       faq: "Preguntas frecuentes",
       contact: "Contacto",
       cta: "Solicitar cotización",

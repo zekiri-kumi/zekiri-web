@@ -1,0 +1,39 @@
+---
+import Layout from "../../layouts/main.astro";
+import ProyectosApp from "@/components/proyectos/ProyectosApp";
+import { SITE_URL } from "@/lib/seo";
+import { PROJECTS, type Project } from "@/lib/proyectos-content";
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  return PROJECTS.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+
+const { project } = Astro.props as { project: Project };
+const canonicalPath = `/proyectos/${project.slug}`;
+
+const content = {
+  title: `${project.sector}: caso de software a medida | Zékiri`,
+  description: project.headline,
+  language: "es",
+  canonicalPath,
+  ogImage: SITE_URL + project.screens[0].src,
+  breadcrumbItems: [
+    { name: "Inicio", url: SITE_URL + "/" },
+    { name: "Proyectos", url: SITE_URL + "/proyectos" },
+    { name: project.sector, url: SITE_URL + canonicalPath },
+  ],
+};
+---
+
+<Layout content={content}>
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com" />
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    slot="head"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600&display=swap"
+    rel="stylesheet"
+  />
+  <ProyectosApp client:load slug={project.slug} />
+</Layout>

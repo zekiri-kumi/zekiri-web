@@ -5,6 +5,7 @@
  */
 import type { APIRoute } from "astro";
 import { SITE_URL } from "@/lib/seo";
+import { PROJECTS } from "@/lib/proyectos-content";
 
 const SITE_ENTRIES: { path: string; changefreq?: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never"; priority?: number }[] = [
   { path: "/", changefreq: "weekly", priority: 1 },
@@ -13,6 +14,8 @@ const SITE_ENTRIES: { path: string; changefreq?: "always" | "hourly" | "daily" |
   { path: "/software", changefreq: "weekly", priority: 0.9 },
   { path: "/logistica", changefreq: "weekly", priority: 0.9 },
   { path: "/sass", changefreq: "weekly", priority: 0.85 },
+  { path: "/proyectos", changefreq: "monthly", priority: 0.8 },
+  ...PROJECTS.map((project) => ({ path: `/proyectos/${project.slug}`, changefreq: "monthly" as const, priority: 0.6 })),
 ];
 
 function escapeXml(unsafe: string): string {

@@ -1,0 +1,31 @@
+---
+import Layout from "../../layouts/main.astro";
+import ProyectosApp from "@/components/proyectos/ProyectosApp";
+import { SITE_URL } from "@/lib/seo";
+import { PROJECTS } from "@/lib/proyectos-content";
+
+const canonicalPath = "/proyectos";
+
+const content = {
+  title: "Proyectos de software a medida | Zékiri",
+  description: `${PROJECTS.length} casos de software a medida: plataformas de distribución, apps de campo, portales de clientes y sistemas internos, con el problema, la solución y sus pantallas.`,
+  language: "es",
+  canonicalPath,
+  ogImage: SITE_URL + PROJECTS[0].screens[0].src,
+  breadcrumbItems: [
+    { name: "Inicio", url: SITE_URL + "/" },
+    { name: "Proyectos", url: SITE_URL + canonicalPath },
+  ],
+};
+---
+
+<Layout content={content}>
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com" />
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    slot="head"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600&display=swap"
+    rel="stylesheet"
+  />
+  <ProyectosApp client:load />
+</Layout>

@@ -2,27 +2,38 @@ import { useLanguage } from "@/components/LanguageProvider";
 import { messages } from "@/lib/i18n";
 import { CtaButton } from "@/components/CtaButton";
 import { motion } from "framer-motion";
+import { trackButtonClick } from "@/lib/gtag-click";
 
 export function Hero() {
   const { language } = useLanguage();
   const t = messages[language].hero;
+  const projectsLabel = messages[language].nav.projects;
 
   return (
     <section
       id="home"
       className="flex w-full flex-col gap-10 self-stretch bg-surface px-6 pb-[73px] pt-6"
     >
-      <div className="h-[33px] w-[105px]">
-        <img
-          src="/assets/logo.png"
-          alt="Zékiri — AI Automation"
-          width={105}
-          height={34}
-          className="h-9 w-auto"
-          loading="eager"
-          decoding="async"
-          fetchPriority="high"
-        />
+      <div className="flex items-center justify-between self-stretch">
+        <div className="h-[33px] w-[105px]">
+          <img
+            src="/assets/logo.png"
+            alt="Zékiri — AI Automation"
+            width={105}
+            height={34}
+            className="h-9 w-auto"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+          />
+        </div>
+        <a
+          href="/proyectos"
+          className="text-sm font-medium text-foreground/80 hover:text-foreground"
+          onClick={() => trackButtonClick("home_nav_projects")}
+        >
+          {projectsLabel}
+        </a>
       </div>
       <div className="flex flex-col items-center gap-10 self-stretch">
         <div className="flex flex-col items-center gap-10 self-stretch">
