@@ -3,6 +3,7 @@
  * the plain types from here and receive the data as props.
  */
 import { getCollection, type CollectionEntry } from "astro:content";
+import { topicForProject, type BlogTopic } from "./blog-topics";
 import { PROJECTS, projectBySlug, type Project, type ProjectScreen } from "./proyectos-content";
 import { SERVICES, type Service } from "./services-content";
 
@@ -15,7 +16,11 @@ export type ArticleSummary = {
   description: string;
   /** Sector of the case the article draws on, or a generic label when it draws on none. */
   sector: string;
+  /** Kind of business the article is written for. */
+  topic: BlogTopic;
   projectSlug: string | null;
+  /** Brand color of the case, used to tint the cover. */
+  accent: string | null;
   cover: ProjectScreen | null;
   publishedAt: string;
   publishedLabel: string;
@@ -90,7 +95,9 @@ export function toArticleSummary(entry: ArticleEntry): ArticleSummary {
     title: entry.data.title,
     description: entry.data.description,
     sector: project?.sector ?? GENERAL_SECTOR,
+    topic: topicForProject(entry.data.project),
     projectSlug: project?.slug ?? null,
+    accent: project?.accent ?? null,
     cover: articleCover(entry, project),
     publishedAt: entry.data.publishedAt.toISOString(),
     publishedLabel: DATE_FORMAT.format(entry.data.publishedAt),

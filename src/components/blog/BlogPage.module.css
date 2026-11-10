@@ -7,23 +7,244 @@
   padding: 0 var(--home-gutter);
 }
 
-/* Index */
+/*
+ * Index: covers carry most of a list's information scent, so every card leads with its case
+ * screenshot; topic chips let an owner jump to their own kind of business.
+ */
+.blog__index {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px var(--home-gutter) 88px;
+}
+
 .blog__index-head {
-  padding: 56px 0 8px;
+  max-width: 760px;
+}
+
+.blog__index-title {
+  margin: 0;
+  color: var(--projects-ink);
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4.6vw, 46px);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 
 .blog__index-lead {
+  max-width: 640px;
   margin: 20px 0 0;
   font-size: 18px;
   line-height: 1.6;
 }
 
-.blog__list {
+.blog__section-title {
+  margin: 0 0 20px;
+  color: var(--projects-ink);
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.blog__start {
+  margin-top: 48px;
+}
+
+.blog__start-list,
+.blog__grid {
+  display: grid;
+  gap: 20px;
   margin: 0;
-  padding: 24px 0 88px;
+  padding: 0;
   list-style: none;
 }
 
+.blog__start .blog__card {
+  background: var(--projects-soft);
+}
+
+.blog__browse {
+  margin-top: 64px;
+}
+
+/* Phones: one scrollable row of chips instead of five wrapped rows above the first card */
+.blog__chips {
+  display: flex;
+  gap: 8px;
+  margin: 0 calc(var(--home-gutter) * -1) 24px;
+  padding: 2px var(--home-gutter) 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.blog__chips::-webkit-scrollbar {
+  display: none;
+}
+
+.blog__chip {
+  padding: 8px 14px;
+  border: 1px solid var(--projects-line-strong);
+  border-radius: 999px;
+  background: var(--projects-bg);
+  color: var(--projects-ink);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.blog__chip span {
+  margin-left: 2px;
+  color: var(--projects-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.blog__chip:hover {
+  border-color: var(--projects-muted);
+}
+
+.blog__chip[aria-pressed="true"] {
+  border-color: var(--projects-primary);
+  background: var(--projects-primary);
+  color: var(--projects-on-primary);
+}
+
+.blog__chip[aria-pressed="true"] span {
+  color: inherit;
+  opacity: 0.75;
+}
+
+.blog__chip:focus-visible {
+  outline: 2px solid var(--projects-focus);
+  outline-offset: 2px;
+}
+
+.blog__card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: clip;
+  border: 1px solid var(--projects-line);
+  border-radius: 14px;
+  background: var(--projects-bg);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.2s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.blog__card:hover {
+  border-color: color-mix(in srgb, var(--project-accent, var(--projects-cyan)) 45%, var(--projects-line));
+  box-shadow: var(--projects-shadow);
+  transform: translateY(-3px);
+}
+
+.blog__card:focus-visible {
+  outline: 2px solid var(--projects-focus);
+  outline-offset: 3px;
+}
+
+.blog__card-media {
+  display: flex;
+  justify-content: center;
+  aspect-ratio: 16 / 9;
+  /* Without this the box grows to fit a tall phone screenshot instead of keeping its ratio */
+  min-height: 0;
+  overflow: clip;
+  padding: 20px 20px 0;
+  border-bottom: 1px solid var(--projects-line);
+  background: color-mix(in srgb, var(--project-accent, var(--projects-cyan)) 10%, var(--projects-soft));
+}
+
+.blog__card-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px 8px 0 0;
+  box-shadow: var(--projects-shadow);
+}
+
+/* Phone screens: a narrow strip from the top of the screen, like a phone peeking up */
+.blog__card-media[data-device="mobile"] img {
+  width: 46%;
+  border-radius: 18px 18px 0 0;
+}
+
+.blog__card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 20px 22px 22px;
+}
+
+.blog__card-topic {
+  margin: 0 0 8px;
+  color: var(--projects-cyan-strong);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.blog__card-title {
+  margin: 0;
+  color: var(--projects-ink);
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+.blog__card-text {
+  margin: 10px 0 0;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.blog__card-foot {
+  margin: auto 0 0;
+  padding-top: 16px;
+  font-size: 13px;
+  color: var(--projects-muted);
+}
+
+@media (min-width: 700px) {
+  .blog__chips {
+    flex-wrap: wrap;
+    margin: 0 0 28px;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .blog__start-list,
+  .blog__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .blog__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blog__card,
+  .blog__chip {
+    transition: none;
+  }
+
+  .blog__card:hover {
+    transform: none;
+  }
+}
+
+/* Article lists inside an article (related reading) */
 .blog__entry {
   padding: 32px 0;
   border-bottom: 1px solid var(--projects-line);
@@ -224,8 +445,8 @@
 }
 
 @media (min-width: 900px) {
-  .blog__index-head {
-    padding-top: 88px;
+  .blog__index {
+    padding-top: 72px;
   }
 
   .blog__article-head {

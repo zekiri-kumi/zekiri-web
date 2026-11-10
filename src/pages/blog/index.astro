@@ -2,19 +2,23 @@
 import Layout from "../../layouts/main.astro";
 import BlogIndexApp from "@/components/blog/BlogIndexApp";
 import { publishedArticles, toArticleSummary } from "@/lib/blog";
+import { topicOrder } from "@/lib/blog-topics";
 import { BLOG_PATH, IS_BLOG_LISTED } from "@/lib/blog-paths";
 import { SITE_URL } from "@/lib/seo";
 
 // Server-rendered like the rest of the site: prerendered folders made Netlify add a trailing-slash redirect.
 export const prerender = false;
 
-const articles = (await publishedArticles()).map(toArticleSummary);
+// Grouped by the kind of business they are written for; inside a topic the usual order holds.
+const articles = (await publishedArticles())
+  .map(toArticleSummary)
+  .sort((first, second) => topicOrder(first.topic) - topicOrder(second.topic));
 
 const content = {
   noindex: !IS_BLOG_LISTED,
-  title: "Blog de software a medida: cómo resolvimos problemas reales | Zékiri",
+  title: "Problemas de negocio resueltos con software | Blog de Zékiri",
   description:
-    "Cómo resolvimos problemas de distribución, estudios jurídicos, crédito, servicio técnico y obra con software a medida. Casos reales de Zékiri, en Bolivia.",
+    "Artículos para dueños de distribuidoras, estudios jurídicos, servicios técnicos, tiendas y más: cómo resolver problemas del día a día, con y sin software.",
   language: "es",
   canonicalPath: BLOG_PATH,
   breadcrumbItems: [
