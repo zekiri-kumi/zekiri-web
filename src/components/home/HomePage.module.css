@@ -51,7 +51,7 @@
   display: inline-flex;
   align-items: center;
   padding: 13px 22px;
-  border: 1px solid var(--projects-line);
+  border: 1px solid var(--projects-line-strong);
   border-radius: 8px;
   color: var(--projects-ink);
   font-family: var(--font-display);
@@ -114,7 +114,8 @@
   margin-top: 32px;
 }
 
-.home__hero-facts {
+/* Scoped under .home so it beats .projects__facts whatever order the two sheets load in. */
+.home .home__hero-facts {
   margin-top: 48px;
 }
 
@@ -487,7 +488,7 @@
 }
 
 .home__faq-item summary:focus-visible {
-  outline: 2px solid var(--projects-cyan);
+  outline: 2px solid var(--projects-focus);
   outline-offset: 3px;
 }
 
@@ -536,6 +537,12 @@
   max-width: 480px;
   margin: 18px 0 0;
   font-size: 17px;
+}
+
+/* Links on the navy band need the light focus ring; the form keeps the page's own. */
+.home__contact-data,
+.home__footer {
+  --projects-focus: #5fd0f2;
 }
 
 .home__contact-data {
@@ -589,7 +596,7 @@
 .home__field textarea {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid #c5cdd5;
+  border: 1px solid var(--projects-line-strong);
   border-radius: 8px;
   background: #ffffff;
   color: #1a2531;
@@ -605,8 +612,8 @@
 
 .home__field input:focus-visible,
 .home__field textarea:focus-visible {
-  border-color: #0596c0;
-  outline: 2px solid color-mix(in srgb, #08b3e5 45%, transparent);
+  border-color: var(--projects-focus);
+  outline: 2px solid color-mix(in srgb, var(--projects-cyan) 45%, transparent);
   outline-offset: 1px;
 }
 
@@ -636,29 +643,24 @@
 
 @media (prefers-color-scheme: dark) {
   .home__form {
-    border: 1px solid #2a3644;
-    background: #1f2937;
-    color: #d5dce3;
+    border: 1px solid var(--projects-line);
+    background: var(--projects-frame);
+    color: var(--projects-text);
   }
 
   .home__field label {
-    color: #ffffff;
+    color: var(--projects-ink);
   }
 
   .home__field label span {
-    color: #96a2ae;
+    color: var(--projects-muted);
   }
 
   .home__field input,
   .home__field textarea {
-    border-color: #3b4858;
-    background: #111827;
-    color: #ffffff;
-  }
-
-  .home__field input:focus-visible,
-  .home__field textarea:focus-visible {
-    border-color: #08b3e5;
+    border-color: var(--projects-line-strong);
+    background: var(--projects-bg);
+    color: var(--projects-ink);
   }
 
   .home__form-status--sent {

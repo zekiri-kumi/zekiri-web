@@ -1,12 +1,22 @@
 /* BEM block: projects — scoped tokens; dark via prefers-color-scheme only */
 
 .projects {
+  /*
+   * Brand pair from the logo: navy #2c3e51 and cyan #00b1e1. Navy carries the weight (text,
+   * primary buttons) and cyan is the accent. Cyan sits at mid luminance, so a label on it is
+   * weak in either color; in light mode the primary button is navy with a white label instead.
+   */
   --projects-cyan: #08b3e5;
   --projects-cyan-strong: #067a9e;
+  --projects-primary: #1a2632;
+  --projects-primary-hover: #2c3e51;
+  --projects-on-primary: #ffffff;
+  --projects-focus: #067a9e;
   --projects-ink: #1a2531;
   --projects-text: #2e3f51;
   --projects-muted: #66727f;
   --projects-line: #e3e7eb;
+  --projects-line-strong: #c5cdd5;
   --projects-bg: #ffffff;
   --projects-soft: #f4f6f8;
   --projects-frame: #ffffff;
@@ -32,17 +42,27 @@
   box-sizing: border-box;
 }
 
+/*
+ * Dark surfaces share the logo navy's hue (211) instead of a neutral gray-blue, and the cyan
+ * moves to a lighter, softer tone: the full-strength cyan glares on dark and reads dim as text.
+ */
 @media (prefers-color-scheme: dark) {
   .projects {
-    --projects-cyan-strong: #0596c0;
+    --projects-cyan: #4ccaf0;
+    --projects-cyan-strong: #5fd0f2;
+    --projects-primary: #4ccaf0;
+    --projects-primary-hover: #71d5f4;
+    --projects-on-primary: #0b1722;
+    --projects-focus: #5fd0f2;
     --projects-ink: #ffffff;
     --projects-text: #d5dce3;
     --projects-muted: #96a2ae;
-    --projects-line: #2a3644;
-    --projects-bg: #111827;
-    --projects-soft: #18212e;
-    --projects-frame: #1f2937;
-    --projects-frame-bar: #2a3644;
+    --projects-line: #263544;
+    --projects-line-strong: #3a4b5d;
+    --projects-bg: #101923;
+    --projects-soft: #141e29;
+    --projects-frame: #1a2632;
+    --projects-frame-bar: #263544;
   }
 }
 
@@ -103,8 +123,8 @@
   align-items: center;
   padding: 10px 18px;
   border-radius: 8px;
-  background: var(--projects-cyan);
-  color: #0b1722;
+  background: var(--projects-primary);
+  color: var(--projects-on-primary);
   font-family: var(--font-display);
   font-size: 14px;
   font-weight: 600;
@@ -114,11 +134,11 @@
 }
 
 .projects__button:hover {
-  background: #3fc6ee;
+  background: var(--projects-primary-hover);
 }
 
 .projects a:focus-visible {
-  outline: 2px solid var(--projects-cyan);
+  outline: 2px solid var(--projects-focus);
   outline-offset: 3px;
 }
 
@@ -172,21 +192,38 @@
   align-items: end;
 }
 
+/* Labels on one row and values on the next, so values of different sizes share a baseline. */
 .projects__facts {
-  display: flex;
-  gap: 32px;
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-auto-flow: column;
+  justify-content: start;
+  gap: 2px 32px;
   margin: 0;
   padding-top: 20px;
   border-top: 1px solid var(--projects-line);
 }
 
+.projects__facts > div {
+  display: contents;
+}
+
+/* Too narrow for one line each: share the width, with extra room for the text value. */
+@media (max-width: 560px) {
+  .projects__facts {
+    grid-template-columns: 1fr 1fr 1.4fr;
+  }
+}
+
 .projects__facts dt {
+  align-self: end;
   font-size: 13px;
   color: var(--projects-muted);
 }
 
 .projects__facts dd {
-  margin: 2px 0 0;
+  align-self: baseline;
+  margin: 0;
   color: var(--projects-ink);
   font-family: var(--font-display);
   font-size: 28px;
@@ -646,7 +683,13 @@
 }
 
 /* Closing */
+/* Navy band in both modes: its button and focus ring take the light cyan so they stay visible. */
 .projects__closing {
+  --projects-primary: #4ccaf0;
+  --projects-primary-hover: #71d5f4;
+  --projects-on-primary: #0b1722;
+  --projects-focus: #5fd0f2;
+
   background: #1a2531;
   color: #c9d3dc;
 }
