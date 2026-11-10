@@ -1,8 +1,6 @@
-import type { CSSProperties } from "react";
 import { PROJECTS } from "@/lib/proyectos-content";
-import { trackButtonClick } from "@/lib/gtag-click";
-import { ProjectShowcase } from "./DeviceFrames";
-import { caseNumber, ProjectsClosing, ProjectsNav } from "./ProjectsChrome";
+import { ProjectCard } from "./ProjectCard";
+import { ProjectsClosing, ProjectsNav } from "./ProjectsChrome";
 import styles from "./ProyectosPage.module.css";
 
 export function ProjectsIndexPage() {
@@ -46,28 +44,13 @@ export function ProjectsIndexPage() {
 
         <section className={styles["projects__list"]} aria-label="Casos">
           {PROJECTS.map((project, index) => (
-            <a
+            <ProjectCard
               key={project.slug}
-              href={`/proyectos/${project.slug}`}
-              className={styles["projects__card"]}
-              style={{ "--project-accent": project.accent } as CSSProperties}
-              onClick={() => trackButtonClick(`projects_card_${project.slug.replaceAll("-", "_")}`)}
-            >
-              <div className={styles["projects__card-media"]}>
-                <ProjectShowcase screens={project.screens} isPriority={index < 2} maxPhones={2} />
-              </div>
-              <div className={styles["projects__card-body"]}>
-                <p className={styles["projects__card-meta"]}>
-                  <span>{caseNumber(index)}</span>
-                  {project.years}
-                </p>
-                <h2 className={styles["projects__card-title"]}>{project.sector}</h2>
-                <p className={styles["projects__card-text"]}>{project.headline}</p>
-                <p className={styles["projects__card-foot"]}>
-                  {project.platforms.slice(0, 3).join(" · ")}
-                </p>
-              </div>
-            </a>
+              project={project}
+              gaPrefix="projects"
+              titleTag="h2"
+              isPriority={index < 2}
+            />
           ))}
         </section>
       </main>

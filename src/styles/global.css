@@ -156,6 +156,17 @@
   }
 }
 
+/* Page-to-page cross-fade and smooth anchor scrolling, only when motion is welcome */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 @keyframes industries-marquee {
   from {
     transform: translateX(-50%);

@@ -4,7 +4,18 @@
  * Production-ready: no placeholders; use env for IDs.
  */
 
+import {
+  COMPANY_CITY,
+  COMPANY_COUNTRY,
+  COMPANY_COUNTRY_CODE,
+  COMPANY_EMAIL,
+  COMPANY_PHONE,
+} from "./company";
+
 export const SITE_URL = "https://zekiri.io";
+
+/** One-line description of the company, shared by the Organization and WebSite schemas. */
+const SITE_DESCRIPTION = `Empresa de desarrollo de software a medida y automatización de procesos en ${COMPANY_CITY}, ${COMPANY_COUNTRY}.`;
 
 /** Default OG image path (absolute URL for social crawlers). */
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/logo.png`;
@@ -32,15 +43,7 @@ export function alternateUrls(canonicalPath: string, language: Locale): { lang: 
   const clean = canonicalPath.startsWith("/") ? canonicalPath : `/${canonicalPath}`;
   const withoutTrailing = clean.replace(/\/+$/, "") || "/";
 
-  // Home has two language versions: / (en) and /?lang=es (es).
-  if (withoutTrailing === "/" || withoutTrailing === "/?lang=es") {
-    return [
-      { lang: "en", url: `${SITE_URL}/` },
-      { lang: "es", url: `${SITE_URL}/?lang=es` },
-    ];
-  }
-
-  // Other pages only expose their own locale unless an explicit alternate exists.
+  // Every page exists in a single locale; add explicit alternates here if a translation ships.
   return [{ lang: language, url: canonicalUrl(withoutTrailing) }];
 }
 
@@ -53,12 +56,23 @@ export function organizationSchema() {
     name: "Zékiri",
     url: SITE_URL,
     logo: DEFAULT_OG_IMAGE,
-    description: "AI automation that frees time and multiplies results.",
+    description: SITE_DESCRIPTION,
+    email: COMPANY_EMAIL,
+    telephone: COMPANY_PHONE,
+    // City and country only: no street address is published on the site.
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: COMPANY_CITY,
+      addressCountry: COMPANY_COUNTRY_CODE,
+    },
+    areaServed: { "@type": "Country", name: COMPANY_COUNTRY },
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
-      email: "contact@zekiri.io",
-      availableLanguage: ["English", "Spanish"],
+      email: COMPANY_EMAIL,
+      telephone: COMPANY_PHONE,
+      areaServed: COMPANY_COUNTRY_CODE,
+      availableLanguage: ["Spanish", "English"],
     },
   };
 }
@@ -70,9 +84,9 @@ export function websiteSchema(canonical: string) {
     "@type": "WebSite",
     name: "Zékiri",
     url: SITE_URL,
-    description: "AI automation that frees time and multiplies results.",
+    description: SITE_DESCRIPTION,
     publisher: { "@id": `${SITE_URL}/#organization` },
-    inLanguage: ["en", "es"],
+    inLanguage: ["es"],
   };
 }
 

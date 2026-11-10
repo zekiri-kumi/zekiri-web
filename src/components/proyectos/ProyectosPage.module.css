@@ -2,7 +2,7 @@
 
 .projects {
   --projects-cyan: #08b3e5;
-  --projects-cyan-strong: #0596c0;
+  --projects-cyan-strong: #067a9e;
   --projects-ink: #1a2531;
   --projects-text: #2e3f51;
   --projects-muted: #66727f;
@@ -34,6 +34,7 @@
 
 @media (prefers-color-scheme: dark) {
   .projects {
+    --projects-cyan-strong: #0596c0;
     --projects-ink: #ffffff;
     --projects-text: #d5dce3;
     --projects-muted: #96a2ae;
@@ -53,6 +54,8 @@
   border-bottom: 1px solid var(--projects-line);
   background: color-mix(in srgb, var(--projects-bg) 88%, transparent);
   backdrop-filter: blur(8px);
+  /* Keeps the header in place while the rest of the page cross-fades between pages */
+  view-transition-name: site-nav;
 }
 
 .projects__nav-inner {
@@ -101,7 +104,7 @@
   padding: 10px 18px;
   border-radius: 8px;
   background: var(--projects-cyan);
-  color: #ffffff;
+  color: #0b1722;
   font-family: var(--font-display);
   font-size: 14px;
   font-weight: 600;
@@ -111,7 +114,7 @@
 }
 
 .projects__button:hover {
-  background: var(--projects-cyan-strong);
+  background: #3fc6ee;
 }
 
 .projects a:focus-visible {
@@ -237,24 +240,29 @@
 .projects__card {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  /* clip, not hidden: hidden would make the card the scroller of the showcase's view timeline */
+  overflow: clip;
   border: 1px solid var(--projects-line);
   border-radius: 14px;
   background: var(--projects-bg);
   color: inherit;
   text-decoration: none;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .projects__card:hover {
   border-color: color-mix(in srgb, var(--project-accent) 45%, var(--projects-line));
-  transform: translateY(-2px);
+  box-shadow: var(--projects-shadow);
+  transform: translateY(-4px);
 }
 
 .projects__card-media {
   position: relative;
   aspect-ratio: 16 / 10;
-  overflow: hidden;
+  overflow: clip;
   padding: 28px 28px 0;
   background: color-mix(in srgb, var(--project-accent) 9%, var(--projects-soft));
   border-bottom: 1px solid var(--projects-line);
@@ -374,6 +382,51 @@
 
 .projects__showcase-phones .projects__phone {
   width: 30%;
+}
+
+/*
+ * Depth on scroll: the phone drifts against the desktop screen while the showcase crosses the
+ * viewport. Scroll-driven, so it runs off the main thread; browsers without support and
+ * visitors who prefer reduced motion keep the static layout.
+ */
+@keyframes projects-phone-drift {
+  from {
+    translate: 0 var(--projects-drift, 16%);
+  }
+
+  to {
+    translate: 0 calc(var(--projects-drift, 16%) * -1);
+  }
+}
+
+@keyframes projects-screen-drift {
+  from {
+    translate: 0 -3%;
+  }
+
+  to {
+    translate: 0 3%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .projects__showcase-float,
+    .projects__showcase-phones .projects__phone:nth-child(even) {
+      animation: projects-phone-drift linear both;
+      animation-timeline: view();
+    }
+
+    /* Phones side by side are larger than the floating one, so they travel less */
+    .projects__showcase-phones .projects__phone {
+      --projects-drift: 6%;
+    }
+
+    .projects__showcase > .projects__browser {
+      animation: projects-screen-drift linear both;
+      animation-timeline: view();
+    }
+  }
 }
 
 /* Case study */

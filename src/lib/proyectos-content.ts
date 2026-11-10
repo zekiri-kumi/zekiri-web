@@ -18,9 +18,12 @@ export type Project = {
   years: string;
   accent: string;
   screens: readonly ProjectScreen[];
+  /** Set to true to take the case off the site: lists, home, sitemap and its own URL (404). */
+  hidden?: boolean;
 };
 
-export const PROJECTS: readonly Project[] = [
+/** Every case, hidden ones included. Pages read PROJECTS instead. */
+export const ALL_PROJECTS: readonly Project[] = [
   {
     slug: "plataforma-distribucion-mayorista",
     sector: "Plataforma SaaS de distribución mayorista",
@@ -78,6 +81,7 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     slug: "tratamientos-cronicos",
+    hidden: true,
     sector: "Salud y tratamientos crónicos",
     headline: "Una plataforma para tratamientos de uso continuo que conecta al médico que prescribe, a la farmacia que despacha y al paciente que recibe, con cada orden generada a tiempo.",
     problem: "En un tratamiento crónico, cada mes alguien tiene que renovar la receta, validar la cobertura y coordinar la entrega. Cuando eso depende de planillas y mensajes, los pedidos se atrasan y no queda claro quién tiene el siguiente paso.",
@@ -576,3 +580,6 @@ export const PROJECTS: readonly Project[] = [
     ],
   },
 ];
+
+/** Published cases. The whole site reads this list, so a hidden case disappears everywhere. */
+export const PROJECTS: readonly Project[] = ALL_PROJECTS.filter((project) => !project.hidden);

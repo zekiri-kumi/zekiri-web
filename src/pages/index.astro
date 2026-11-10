@@ -1,28 +1,28 @@
 ---
 import Layout from "../layouts/main.astro";
-import LandingApp from "@/components/LandingApp";
-import type { Language } from "@/lib/i18n";
-import { messages } from "@/lib/i18n";
-import { faqSchema } from "@/lib/seo";
-
-// Get language from query params, default to 'en'
-const url = Astro.url;
-const langParam = url.searchParams.get("lang") as Language | null;
-const language: Language = (langParam === "en" || langParam === "es") ? langParam : "en";
-const t = messages[language];
-
-// Canonical: one URL per language to avoid duplicate content (/?lang=es for Spanish)
-const canonicalPath = language === "es" ? "/?lang=es" : "/";
+import HomeApp from "@/components/home/HomeApp";
+import { FAQ_ITEMS, HERO_PROJECT } from "@/lib/home-content";
+import { PROJECTS } from "@/lib/proyectos-content";
+import { SITE_URL, faqSchema } from "@/lib/seo";
 
 const content = {
-  title: t.meta.title,
-  description: t.meta.description,
-  language,
-  canonicalPath,
-  jsonLd: [faqSchema(t.faq.items)],
+  title: "Desarrollo de software a medida en Bolivia | Zékiri",
+  description: `Empresa de desarrollo de software en Cochabamba, Bolivia: sistemas a medida, apps móviles y automatización. +15 años y ${PROJECTS.length} casos. Diagnóstico sin costo.`,
+  language: "es",
+  canonicalPath: "/",
+  ogImage: SITE_URL + HERO_PROJECT.screens[0].src,
+  breadcrumbItems: [{ name: "Inicio", url: SITE_URL + "/" }],
+  jsonLd: [faqSchema([...FAQ_ITEMS])],
 };
 ---
 
 <Layout content={content}>
-    <LandingApp client:load />
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com" />
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    slot="head"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600&display=swap"
+    rel="stylesheet"
+  />
+  <HomeApp client:load />
 </Layout>
