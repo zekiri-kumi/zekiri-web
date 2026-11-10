@@ -3,8 +3,34 @@
   command = "npm run build"
   publish = "dist"
 
-# Alias común por typo / SEO
+# Retired campaign landings: the home is the single entry point.
+# `force` makes the rule win over the SSR route that still exists for each path.
+[[redirects]]
+  from = "/software"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sass"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/logistica"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/automatizaciones"
+  to = "/"
+  status = 301
+  force = true
+
+# Old typo alias of /logistica, pointed straight at the home to avoid a redirect chain.
 [[redirects]]
   from = "/logistca"
-  to = "/logistica"
+  to = "/"
   status = 301
