@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
-import { ProjectsClosing } from "@/components/proyectos/ProjectsChrome";
 import projectStyles from "@/components/proyectos/ProyectosPage.module.css";
 import type { ArticleSummary } from "@/lib/blog";
 import { BLOG_PATH } from "@/lib/blog-paths";
 import { trackButtonClick } from "@/lib/gtag-click";
+import { ArticleCta } from "./ArticleCta";
 import { ArticleEntry } from "./ArticleEntry";
 import styles from "./BlogPage.module.css";
 import { BlogShell } from "./BlogShell";
@@ -75,6 +75,7 @@ export default function BlogArticleApp({ article, service, related, children }: 
       <article className={styles["blog__column"]}>
         <ArticleHeader article={article} />
         <div className={styles["blog__body"]}>{children}</div>
+        <ArticleCta article={article} />
         <ArticleFollowUp article={article} service={service} />
       </article>
       {related.length > 0 && (
@@ -89,7 +90,6 @@ export default function BlogArticleApp({ article, service, related, children }: 
           </ul>
         </section>
       )}
-      <ProjectsClosing gaPrefix="blog_article" />
     </BlogShell>
   );
 }

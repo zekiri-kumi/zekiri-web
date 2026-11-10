@@ -12,9 +12,14 @@ export const CONTACT_LOCATION = `${COMPANY_CITY}, ${COMPANY_COUNTRY}`;
 const WHATSAPP_NUMBER = COMPANY_PHONE.replace("+", "");
 const WHATSAPP_GREETING = "Hola, quiero agendar un diagnóstico.";
 
+/** wa.me link that opens a chat with the company with the message already typed. */
+export function whatsappHref(message: string): string {
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
 export const CONTACT_WHATSAPP = {
   label: "+591 78337841",
-  href: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_GREETING)}`,
+  href: whatsappHref(WHATSAPP_GREETING),
 } as const;
 
 /** Case shown next to the hero headline. */

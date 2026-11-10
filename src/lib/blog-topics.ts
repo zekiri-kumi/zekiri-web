@@ -33,6 +33,20 @@ const TOPIC_BY_PROJECT: Record<string, BlogTopic> = {
   "lista-de-bodas": "Tiendas",
 };
 
+/** Question that opens the call to action at the end of an article, by topic. */
+export const CTA_QUESTION_BY_TOPIC: Record<BlogTopic, string> = {
+  Distribuidoras: "¿Tu distribuidora tiene este problema?",
+  "Estudios jurídicos": "¿Tu estudio tiene este problema?",
+  Crédito: "¿Tu entidad de crédito tiene este problema?",
+  "Servicio técnico": "¿Tu servicio técnico tiene este problema?",
+  "Alimentos a domicilio": "¿Tu negocio de delivery tiene este problema?",
+  Construcción: "¿Tus obras tienen este problema?",
+  "Mentoría y emprendimiento": "¿Tu programa tiene este problema?",
+  Eventos: "¿Tus eventos tienen este problema?",
+  Tiendas: "¿Tu tienda tiene este problema?",
+  [GENERAL_TOPIC]: "¿Quieres ver qué conviene en tu empresa?",
+};
+
 /** Topic of an article from the case it draws on; articles without a case are general. */
 export function topicForProject(projectSlug: string | undefined): BlogTopic {
   if (!projectSlug) return GENERAL_TOPIC;
