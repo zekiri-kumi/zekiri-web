@@ -1,0 +1,41 @@
+---
+import Layout from "../../layouts/main.astro";
+import ServiceApp from "@/components/services/ServiceApp";
+import { SITE_URL, canonicalUrl, faqSchema, serviceSchema } from "@/lib/seo";
+import { SERVICES } from "@/lib/services-content";
+
+// Server-rendered like the case pages: prerendered folders made Netlify add a trailing-slash redirect.
+export const prerender = false;
+
+const service = SERVICES.find((candidate) => candidate.slug === Astro.params.slug);
+if (!service) return Astro.rewrite("/404");
+
+const canonicalPath = `/servicios/${service.slug}`;
+
+const content = {
+  title: service.metaTitle,
+  description: service.metaDescription,
+  language: "es",
+  canonicalPath,
+  ogImage: SITE_URL + service.cases[0].screens[0].src,
+  breadcrumbItems: [
+    { name: "Inicio", url: SITE_URL + "/" },
+    { name: service.name, url: SITE_URL + canonicalPath },
+  ],
+  jsonLd: [
+    serviceSchema(canonicalUrl(canonicalPath), service.name, service.metaDescription),
+    faqSchema([...service.faqs]),
+  ],
+};
+---
+
+<Layout content={content}>
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com" />
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    slot="head"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600&display=swap"
+    rel="stylesheet"
+  />
+  <ServiceApp client:load slug={service.slug} />
+</Layout>

@@ -23,7 +23,7 @@ export type Project = {
 };
 
 /** Every case, hidden ones included. Pages read PROJECTS instead. */
-export const ALL_PROJECTS: readonly Project[] = [
+const ALL_PROJECTS: readonly Project[] = [
   {
     slug: "plataforma-distribucion-mayorista",
     sector: "Plataforma SaaS de distribución mayorista",
@@ -583,3 +583,17 @@ export const ALL_PROJECTS: readonly Project[] = [
 
 /** Published cases. The whole site reads this list, so a hidden case disappears everywhere. */
 export const PROJECTS: readonly Project[] = ALL_PROJECTS.filter((project) => !project.hidden);
+
+/** Looks a case up among all of them, hidden or not, so a typo fails instead of dropping the case. */
+export function projectBySlug(slug: string): Project {
+  const project = ALL_PROJECTS.find((candidate) => candidate.slug === slug);
+  if (!project) throw new Error(`Unknown project slug "${slug}"`);
+  return project;
+}
+
+/** For the slots that have no substitute: hiding the case they point to must fail the build. */
+export function publishedProjectBySlug(slug: string): Project {
+  const project = projectBySlug(slug);
+  if (project.hidden) throw new Error(`Project "${slug}" is hidden but a page still uses it`);
+  return project;
+}

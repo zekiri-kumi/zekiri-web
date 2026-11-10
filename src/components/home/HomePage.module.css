@@ -336,6 +336,15 @@
   background: var(--projects-bg);
 }
 
+.home__service-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.home__service-title a:hover {
+  color: var(--projects-cyan-strong);
+}
+
 .home__service-title {
   margin: 0;
   color: var(--projects-ink);
@@ -743,12 +752,18 @@
 
 @media (min-width: 768px) {
   .home__footer-inner {
-    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 48px;
   }
 
   .home__footer-legal {
     grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home__footer-inner {
+    grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr));
   }
 }
 

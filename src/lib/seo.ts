@@ -131,5 +131,6 @@ export function serviceSchema(canonical: string, name: string, description: stri
     description,
     url: canonical,
     provider: { "@id": `${SITE_URL}/#organization` },
+    areaServed: { "@type": "Country", name: COMPANY_COUNTRY },
   };
 }

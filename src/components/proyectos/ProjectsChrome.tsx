@@ -5,7 +5,7 @@ import styles from "./ProyectosPage.module.css";
 export const CONTACT_HREF = "/#contact";
 export const CONTACT_EMAIL = COMPANY_EMAIL;
 
-type NavSection = "home" | "projects";
+type NavSection = "home" | "projects" | "services";
 
 export const NAV_LINKS = [
   { href: "/#servicios", label: "Servicios", gaLabel: "services" },

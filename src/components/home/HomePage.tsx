@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { ProjectsNav } from "@/components/proyectos/ProjectsChrome";
+import { FAQ_ITEMS } from "@/lib/home-content";
 import projectStyles from "@/components/proyectos/ProyectosPage.module.css";
 import { ClientLogos } from "./ClientLogos";
 import { FeaturedProjects } from "./FeaturedProjects";
@@ -25,7 +26,7 @@ export function HomePage() {
         <FeaturedProjects />
         <HomeServices />
         <HomeProcess />
-        <HomeFaq />
+        <HomeFaq heading="Lo que nos preguntan antes de empezar" items={FAQ_ITEMS} />
         <HomeContact />
       </main>
       <HomeFooter />

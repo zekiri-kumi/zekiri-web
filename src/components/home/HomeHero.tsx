@@ -1,10 +1,9 @@
-import type { CSSProperties } from "react";
-import { ProjectShowcase } from "@/components/proyectos/DeviceFrames";
 import { CONTACT_HREF } from "@/components/proyectos/ProjectsChrome";
 import projectStyles from "@/components/proyectos/ProyectosPage.module.css";
 import { trackButtonClick } from "@/lib/gtag-click";
 import { HERO_PROJECT } from "@/lib/home-content";
 import { PROJECTS } from "@/lib/proyectos-content";
+import { HeroCaseVisual } from "./HeroCaseVisual";
 import styles from "./HomePage.module.css";
 
 export function HomeHero() {
@@ -53,25 +52,7 @@ export function HomeHero() {
         </dl>
       </div>
 
-      <figure
-        className={styles["home__hero-visual"]}
-        style={{ "--project-accent": HERO_PROJECT.accent } as CSSProperties}
-      >
-        <a
-          href={`/proyectos/${HERO_PROJECT.slug}`}
-          className={styles["home__hero-stage"]}
-          aria-label={`Ver el caso: ${HERO_PROJECT.sector}`}
-          onClick={() => trackButtonClick("home_hero_case")}
-        >
-          <ProjectShowcase screens={HERO_PROJECT.screens} isPriority />
-        </a>
-        <figcaption className={styles["home__hero-caption"]}>
-          <span>
-            {HERO_PROJECT.sector} · {HERO_PROJECT.years}
-          </span>
-          <span>Pantallas con datos de ejemplo</span>
-        </figcaption>
-      </figure>
+      <HeroCaseVisual project={HERO_PROJECT} gaLabel="home_hero_case" />
     </section>
   );
 }

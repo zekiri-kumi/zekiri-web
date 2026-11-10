@@ -6,9 +6,11 @@
 import type { APIRoute } from "astro";
 import { SITE_URL } from "@/lib/seo";
 import { PROJECTS } from "@/lib/proyectos-content";
+import { SERVICES } from "@/lib/services-content";
 
 const SITE_ENTRIES: { path: string; changefreq?: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never"; priority?: number }[] = [
   { path: "/", changefreq: "weekly", priority: 1 },
+  ...SERVICES.map((service) => ({ path: `/servicios/${service.slug}`, changefreq: "monthly" as const, priority: 0.9 })),
   { path: "/proyectos", changefreq: "monthly", priority: 0.8 },
   ...PROJECTS.map((project) => ({ path: `/proyectos/${project.slug}`, changefreq: "monthly" as const, priority: 0.6 })),
 ];

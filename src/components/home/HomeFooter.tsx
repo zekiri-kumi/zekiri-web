@@ -1,5 +1,6 @@
 import { CONTACT_EMAIL, CONTACT_HREF, NAV_LINKS } from "@/components/proyectos/ProjectsChrome";
 import { CONTACT_LOCATION, CONTACT_WHATSAPP } from "@/lib/home-content";
+import { SERVICES } from "@/lib/services-content";
 import styles from "./HomePage.module.css";
 
 const FOOTER_LINKS = [...NAV_LINKS, { href: CONTACT_HREF, label: "Contacto" }];
@@ -22,6 +23,16 @@ export function HomeFooter() {
             Desarrollo de software a medida y automatización para empresas en Bolivia.
           </p>
         </div>
+        <nav aria-label="Servicios">
+          <h2 className={styles["home__footer-title"]}>Servicios</h2>
+          <ul className={styles["home__footer-list"]}>
+            {SERVICES.map((service) => (
+              <li key={service.slug}>
+                <a href={`/servicios/${service.slug}`}>{service.name}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
         <nav aria-label="Pie de página">
           <h2 className={styles["home__footer-title"]}>Sitio</h2>
           <ul className={styles["home__footer-list"]}>

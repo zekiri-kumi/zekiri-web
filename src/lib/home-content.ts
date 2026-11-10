@@ -1,5 +1,10 @@
 import { COMPANY_CITY, COMPANY_COUNTRY, COMPANY_PHONE } from "@/lib/company";
-import { ALL_PROJECTS, PROJECTS, type Project } from "@/lib/proyectos-content";
+import {
+  PROJECTS,
+  projectBySlug,
+  publishedProjectBySlug,
+  type Project,
+} from "@/lib/proyectos-content";
 
 export const CONTACT_LOCATION = `${COMPANY_CITY}, ${COMPANY_COUNTRY}`;
 
@@ -11,19 +16,6 @@ export const CONTACT_WHATSAPP = {
   label: "+591 78337841",
   href: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_GREETING)}`,
 } as const;
-
-function projectBySlug(slug: string): Project {
-  const project = ALL_PROJECTS.find((candidate) => candidate.slug === slug);
-  if (!project) throw new Error(`home-content: unknown project slug "${slug}"`);
-  return project;
-}
-
-/** For the slots that have no substitute: hiding the case they point to must fail the build. */
-function publishedProjectBySlug(slug: string): Project {
-  const project = projectBySlug(slug);
-  if (project.hidden) throw new Error(`home-content: project "${slug}" is hidden but the home uses it`);
-  return project;
-}
 
 /** Case shown next to the hero headline. */
 export const HERO_PROJECT = publishedProjectBySlug("plataforma-distribucion-mayorista");
@@ -70,31 +62,6 @@ export const CLIENT_LOGOS: readonly ClientLogo[] = [
   { name: "Clicket", src: "/assets/brands/clicket.webp", zoom: 1.5 },
   { name: "QFix", src: "/assets/brands/qfix.jpg", tone: "dark", zoom: 1.5 },
   { name: "DUD", src: "/assets/brands/dud.jpg", tone: "dark" },
-];
-
-export type Service = {
-  title: string;
-  text: string;
-  /** Case that shows this service in a real project. */
-  example: Project;
-};
-
-export const SERVICES: readonly Service[] = [
-  {
-    title: "Sistemas a medida",
-    text: "Back office, portales de clientes y plataformas multiempresa que reemplazan las planillas y los sistemas que ya no alcanzan.",
-    example: publishedProjectBySlug("estudios-juridicos"),
-  },
-  {
-    title: "Apps para tu equipo en campo",
-    text: "Apps para vendedores, técnicos, almacén y supervisores de obra, conectadas al sistema central de la empresa.",
-    example: publishedProjectBySlug("supervision-de-obra"),
-  },
-  {
-    title: "Integraciones y automatización",
-    text: "Conectamos lo que ya usas (ERP, facturación, pagos) y automatizamos los pasos que hoy se hacen a mano, con IA donde aporta.",
-    example: HERO_PROJECT,
-  },
 ];
 
 export type ProcessStep = {

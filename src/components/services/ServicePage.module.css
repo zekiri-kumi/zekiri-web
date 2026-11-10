@@ -1,0 +1,25 @@
+/* Service pages reuse the home and portfolio styles; only what is specific to them lives here. */
+.service__deliverables {
+  display: grid;
+  gap: 20px;
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.service__deliverable-text {
+  margin: 12px 0 0;
+  font-size: 16px;
+}
+
+.service__cases-more {
+  margin-top: 40px;
+}
+
+@media (min-width: 700px) {
+  .service__deliverables {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+    margin-top: 56px;
+  }
+}
