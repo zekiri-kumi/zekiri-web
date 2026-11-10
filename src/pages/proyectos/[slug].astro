@@ -1,6 +1,8 @@
 ---
 import Layout from "../../layouts/main.astro";
 import ProyectosApp from "@/components/proyectos/ProyectosApp";
+import { publishedArticles } from "@/lib/blog";
+import { IS_BLOG_LISTED } from "@/lib/blog-paths";
 import { SITE_URL } from "@/lib/seo";
 import { PROJECTS } from "@/lib/proyectos-content";
 
@@ -11,6 +13,13 @@ const project = PROJECTS.find((candidate) => candidate.slug === Astro.params.slu
 if (!project) return Astro.rewrite("/404");
 
 const canonicalPath = `/proyectos/${project.slug}`;
+
+// While the blog is unlisted, case pages do not point to it.
+const articles = IS_BLOG_LISTED
+  ? (await publishedArticles())
+      .filter((entry) => entry.data.project === project.slug)
+      .map((entry) => ({ slug: entry.id, title: entry.data.title }))
+  : [];
 
 const content = {
   title: `${project.sector}: caso de software a medida | Zékiri`,
@@ -34,5 +43,5 @@ const content = {
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600&display=swap"
     rel="stylesheet"
   />
-  <ProyectosApp client:load slug={project.slug} />
+  <ProyectosApp client:load slug={project.slug} articles={articles} />
 </Layout>

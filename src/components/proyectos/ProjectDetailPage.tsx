@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { PROJECTS, type Project, type ProjectScreen } from "@/lib/proyectos-content";
+import { articlePath } from "@/lib/blog-paths";
 import { trackButtonClick } from "@/lib/gtag-click";
 import { DeviceFrame, ProjectShowcase } from "./DeviceFrames";
 import { caseNumber, ProjectsClosing, ProjectsNav } from "./ProjectsChrome";
@@ -71,7 +72,28 @@ function SiblingNav({ index }: { index: number }) {
   );
 }
 
-export function ProjectDetailPage({ slug }: { slug: string }) {
+/** Blog article about a problem this case solved. */
+export type CaseArticleLink = { slug: string; title: string };
+
+function CaseArticles({ project, articles }: { project: Project; articles: CaseArticleLink[] }) {
+  if (articles.length === 0) return null;
+  return (
+    <div className={styles["projects__case-article"]}>
+      <p>Sobre este tipo de problema, en el blog:</p>
+      <ul>
+        {articles.map((article) => (
+          <li key={article.slug}>
+            <a href={articlePath(article.slug)} onClick={() => trackButtonClick(`project_${gaKey(project)}_article`)}>
+              {article.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export function ProjectDetailPage({ slug, articles }: { slug: string; articles: CaseArticleLink[] }) {
   const index = PROJECTS.findIndex((candidate) => candidate.slug === slug);
   if (index === -1) throw new Error(`Unknown project slug: ${slug}`);
   const project = PROJECTS[index];
@@ -127,6 +149,7 @@ export function ProjectDetailPage({ slug }: { slug: string }) {
                   <dd>{project.years}</dd>
                 </div>
               </dl>
+              <CaseArticles project={project} articles={articles} />
             </section>
             <section aria-labelledby="project-built-title">
               <h2 id="project-built-title" className={styles["projects__section-title"]}>

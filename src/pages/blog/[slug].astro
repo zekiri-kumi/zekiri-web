@@ -1,0 +1,67 @@
+---
+import { render } from "astro:content";
+import Layout from "../../layouts/main.astro";
+import BlogArticleApp from "@/components/blog/BlogArticleApp";
+import { articleService, publishedArticles, relatedArticles, toArticleSummary } from "@/lib/blog";
+import { BLOG_PATH, IS_BLOG_LISTED, articlePath } from "@/lib/blog-paths";
+import { DEFAULT_OG_IMAGE, SITE_URL, blogPostingSchema, canonicalUrl } from "@/lib/seo";
+
+// Server-rendered like the rest of the site: prerendered folders made Netlify add a trailing-slash redirect.
+export const prerender = false;
+
+const RELATED_COUNT = 3;
+
+const articles = await publishedArticles();
+const entry = articles.find((candidate) => candidate.id === Astro.params.slug);
+if (!entry) return Astro.rewrite("/404");
+
+const article = toArticleSummary(entry);
+const service = articleService(entry);
+const { Content } = await render(entry);
+
+const related = relatedArticles(articles, entry, RELATED_COUNT).map(toArticleSummary);
+
+const canonicalPath = articlePath(entry.id);
+const publishedAt = entry.data.publishedAt;
+const updatedAt = entry.data.updatedAt ?? publishedAt;
+// Articles without a case have no screenshot; social cards fall back to the site default.
+const coverUrl = article.cover ? SITE_URL + article.cover.src : undefined;
+
+const content = {
+  noindex: !IS_BLOG_LISTED,
+  title: `${entry.data.seoTitle ?? entry.data.title} | Zékiri`,
+  description: entry.data.description,
+  language: "es",
+  canonicalPath,
+  ogImage: coverUrl,
+  article: { publishedAt, updatedAt },
+  breadcrumbItems: [
+    { name: "Inicio", url: SITE_URL + "/" },
+    { name: "Blog", url: SITE_URL + BLOG_PATH },
+    { name: entry.data.title, url: SITE_URL + canonicalPath },
+  ],
+  jsonLd: [
+    blogPostingSchema({
+      canonical: canonicalUrl(canonicalPath),
+      headline: entry.data.title,
+      description: entry.data.description,
+      image: coverUrl ?? DEFAULT_OG_IMAGE,
+      publishedAt,
+      updatedAt,
+    }),
+  ],
+};
+---
+
+<Layout content={content}>
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com" />
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    slot="head"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600&display=swap"
+    rel="stylesheet"
+  />
+  <BlogArticleApp client:load article={article} service={{ slug: service.slug, name: service.name }} related={related}>
+    <Content />
+  </BlogArticleApp>
+</Layout>

@@ -122,6 +122,32 @@ export function breadcrumbSchema(pathSegments: { name: string; url: string }[]) 
   };
 }
 
+type BlogPostingInput = {
+  canonical: string;
+  headline: string;
+  description: string;
+  image: string;
+  publishedAt: Date;
+  updatedAt: Date;
+};
+
+/** BlogPosting JSON-LD. The author is the company: articles are signed by the team. */
+export function blogPostingSchema(article: BlogPostingInput) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: article.headline,
+    description: article.description,
+    image: [article.image],
+    datePublished: article.publishedAt.toISOString(),
+    dateModified: article.updatedAt.toISOString(),
+    inLanguage: "es",
+    mainEntityOfPage: { "@type": "WebPage", "@id": article.canonical },
+    author: { "@type": "Organization", "@id": `${SITE_URL}/#organization`, name: "Zékiri", url: SITE_URL },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+  };
+}
+
 /** Service schema for local business / service pages. */
 export function serviceSchema(canonical: string, name: string, description: string) {
   return {

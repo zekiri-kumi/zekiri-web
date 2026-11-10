@@ -34,6 +34,8 @@ interface LayoutContent {
   ogImage?: string;
   /** Additional JSON-LD schema objects to inject (e.g. FAQPage). */
   jsonLd?: Record<string, unknown>[];
+  /** Publication dates of an article page. Switches Open Graph to the article type. */
+  article?: { publishedAt: Date; updatedAt: Date };
 }
 
 const { content } = Astro.props as { content: LayoutContent };
@@ -85,7 +87,13 @@ const robotsContent = content.noindex ? "noindex, nofollow" : "index, follow";
     <meta name="geo.placename" content={`${COMPANY_CITY}, ${COMPANY_COUNTRY}`} />
 
     <!-- Open Graph (Facebook, LinkedIn, etc.) -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={content.article ? "article" : "website"} />
+    {content.article && (
+      <>
+        <meta property="article:published_time" content={content.article.publishedAt.toISOString()} />
+        <meta property="article:modified_time" content={content.article.updatedAt.toISOString()} />
+      </>
+    )}
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={content.title} />
     <meta property="og:description" content={content.description} />

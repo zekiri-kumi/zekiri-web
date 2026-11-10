@@ -1,0 +1,36 @@
+---
+import Layout from "../../layouts/main.astro";
+import BlogIndexApp from "@/components/blog/BlogIndexApp";
+import { publishedArticles, toArticleSummary } from "@/lib/blog";
+import { BLOG_PATH, IS_BLOG_LISTED } from "@/lib/blog-paths";
+import { SITE_URL } from "@/lib/seo";
+
+// Server-rendered like the rest of the site: prerendered folders made Netlify add a trailing-slash redirect.
+export const prerender = false;
+
+const articles = (await publishedArticles()).map(toArticleSummary);
+
+const content = {
+  noindex: !IS_BLOG_LISTED,
+  title: "Blog de software a medida: cómo resolvimos problemas reales | Zékiri",
+  description:
+    "Cómo resolvimos problemas de distribución, estudios jurídicos, crédito, servicio técnico y obra con software a medida. Casos reales de Zékiri, en Bolivia.",
+  language: "es",
+  canonicalPath: BLOG_PATH,
+  breadcrumbItems: [
+    { name: "Inicio", url: SITE_URL + "/" },
+    { name: "Blog", url: SITE_URL + BLOG_PATH },
+  ],
+};
+---
+
+<Layout content={content}>
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com" />
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    slot="head"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600&display=swap"
+    rel="stylesheet"
+  />
+  <BlogIndexApp client:load articles={articles} />
+</Layout>

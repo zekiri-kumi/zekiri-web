@@ -1,3 +1,4 @@
+import { BLOG_PATH, IS_BLOG_LISTED } from "@/lib/blog-paths";
 import { COMPANY_EMAIL } from "@/lib/company";
 import { trackButtonClick } from "@/lib/gtag-click";
 import styles from "./ProyectosPage.module.css";
@@ -5,12 +6,13 @@ import styles from "./ProyectosPage.module.css";
 export const CONTACT_HREF = "/#contact";
 export const CONTACT_EMAIL = COMPANY_EMAIL;
 
-type NavSection = "home" | "projects" | "services";
+type NavSection = "home" | "projects" | "services" | "blog";
 
 export const NAV_LINKS = [
   { href: "/#servicios", label: "Servicios", gaLabel: "services" },
   { href: "/proyectos", label: "Proyectos", gaLabel: "projects", section: "projects" },
   { href: "/#proceso", label: "Cómo trabajamos", gaLabel: "process" },
+  ...(IS_BLOG_LISTED ? ([{ href: BLOG_PATH, label: "Blog", gaLabel: "blog", section: "blog" }] as const) : []),
 ] as const;
 
 /** 1-based, zero-padded case number ("01"). */
