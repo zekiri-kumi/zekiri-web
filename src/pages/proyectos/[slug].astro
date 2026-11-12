@@ -4,12 +4,12 @@ import ProyectosApp from "@/components/proyectos/ProyectosApp";
 import { publishedArticles } from "@/lib/blog";
 import { IS_BLOG_LISTED } from "@/lib/blog-paths";
 import { SITE_URL } from "@/lib/seo";
-import { PROJECTS } from "@/lib/proyectos-content";
+import { projectForPage } from "@/lib/proyectos-content";
 
 // Server-rendered like the rest of the site: prerendered folders made Netlify add a trailing-slash redirect.
 export const prerender = false;
 
-const project = PROJECTS.find((candidate) => candidate.slug === Astro.params.slug);
+const project = projectForPage(Astro.params.slug ?? "");
 if (!project) return Astro.rewrite("/404");
 
 const canonicalPath = `/proyectos/${project.slug}`;
@@ -27,6 +27,7 @@ const content = {
   language: "es",
   canonicalPath,
   ogImage: SITE_URL + project.screens[0].src,
+  noindex: project.unlisted === true,
   breadcrumbItems: [
     { name: "Inicio", url: SITE_URL + "/" },
     { name: "Proyectos", url: SITE_URL + "/proyectos" },

@@ -20,6 +20,8 @@ export type Project = {
   screens: readonly ProjectScreen[];
   /** Set to true to take the case off the site: lists, home, sitemap and its own URL (404). */
   hidden?: boolean;
+  /** Set to true to keep the case out of lists, home and sitemap while its own URL still works, with noindex. */
+  unlisted?: boolean;
 };
 
 /** Every case, hidden ones included. Pages read PROJECTS instead. */
@@ -125,6 +127,55 @@ const ALL_PROJECTS: readonly Project[] = [
         width: 1600,
         height: 1000,
         caption: "Calendario del mes: qué se genera, qué espera confirmación y qué está atrasado",
+      },
+    ],
+  },
+  {
+    slug: "citas-medicas-r7k2vq",
+    unlisted: true,
+    sector: "Salud: citas médicas y bandeja del médico",
+    headline: "Las citas médicas que piden las pacientes al inscribirse llegan ordenadas al equipo médico, y cada una termina con el medicamento indicado y la primera orden generada.",
+    problem: "Cada paciente nueva necesitaba una consulta antes de empezar su tratamiento, y los casos se repartían entre pestañas con nombres del sistema. El médico tenía que saber dónde buscar, las consultas con problemas graves no se distinguían del resto y la paciente no sabía qué le faltaba para empezar.",
+    features: [
+      "La paciente pide su cita al inscribirse, con el motivo y el turno que prefiere",
+      "Agenda de citas por estado: pendientes, en proceso, finalizadas y rechazadas",
+      "Alerta visible en las consultas con problemas médicos graves",
+      "Detalle de la cita con datos de la paciente, historia clínica y prescripción",
+      "Bandeja del médico con lo que espera su acción, lo vencido primero",
+      "Resolver la cita elige el medicamento y genera la primera orden del tratamiento",
+    ],
+    platforms: ["Panel del equipo médico", "Back office", "Portal de pacientes (PWA)"],
+    stack: ["Next.js", "React", "Tailwind CSS", "Angular", "Ionic"],
+    years: "2022–2026",
+    accent: "#6a3474",
+    screens: [
+      {
+        src: "/assets/proyectos/citas-medicas-r7k2vq/01-desktop.webp",
+        device: "desktop",
+        width: 1600,
+        height: 1000,
+        caption: "Bandeja del médico: pacientes que esperan un medicamento y entregas por confirmar, con lo vencido primero",
+      },
+      {
+        src: "/assets/proyectos/citas-medicas-r7k2vq/02-mobile.webp",
+        device: "mobile",
+        width: 520,
+        height: 1125,
+        caption: "La paciente ve el día y el turno de su cita y qué le falta a cada terapia para empezar",
+      },
+      {
+        src: "/assets/proyectos/citas-medicas-r7k2vq/03-desktop.webp",
+        device: "desktop",
+        width: 1600,
+        height: 1000,
+        caption: "Agenda de citas por estado, con alerta en los casos graves y el detalle de la paciente al costado",
+      },
+      {
+        src: "/assets/proyectos/citas-medicas-r7k2vq/04-desktop.webp",
+        device: "desktop",
+        width: 1600,
+        height: 1000,
+        caption: "Al resolver la cita, el médico elige el medicamento y se genera la primera orden",
       },
     ],
   },
@@ -582,7 +633,12 @@ const ALL_PROJECTS: readonly Project[] = [
 ];
 
 /** Published cases. The whole site reads this list, so a hidden case disappears everywhere. */
-export const PROJECTS: readonly Project[] = ALL_PROJECTS.filter((project) => !project.hidden);
+export const PROJECTS: readonly Project[] = ALL_PROJECTS.filter((project) => !project.hidden && !project.unlisted);
+
+/** The case a /proyectos/<slug> URL serves: published or unlisted, never hidden. */
+export function projectForPage(slug: string): Project | undefined {
+  return ALL_PROJECTS.find((candidate) => candidate.slug === slug && !candidate.hidden);
+}
 
 /** Looks a case up among all of them, hidden or not, so a typo fails instead of dropping the case. */
 export function projectBySlug(slug: string): Project {

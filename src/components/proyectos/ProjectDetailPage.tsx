@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { PROJECTS, type Project, type ProjectScreen } from "@/lib/proyectos-content";
+import { PROJECTS, projectForPage, type Project, type ProjectScreen } from "@/lib/proyectos-content";
 import { articlePath } from "@/lib/blog-paths";
 import { trackButtonClick } from "@/lib/gtag-click";
 import { DeviceFrame, ProjectShowcase } from "./DeviceFrames";
@@ -94,9 +94,11 @@ function CaseArticles({ project, articles }: { project: Project; articles: CaseA
 }
 
 export function ProjectDetailPage({ slug, articles }: { slug: string; articles: CaseArticleLink[] }) {
-  const index = PROJECTS.findIndex((candidate) => candidate.slug === slug);
-  if (index === -1) throw new Error(`Unknown project slug: ${slug}`);
-  const project = PROJECTS[index];
+  const project = projectForPage(slug);
+  if (!project) throw new Error(`Unknown project slug: ${slug}`);
+  // An unlisted case has no place in the numbered list, so it shows no number and no siblings.
+  const index = PROJECTS.indexOf(project);
+  const isListed = index !== -1;
   // Phone-only projects show their captioned screens in the hero band instead of repeating them below.
   const hasDesktop = project.screens.some((screen) => screen.device === "desktop");
 
@@ -115,7 +117,7 @@ export function ProjectDetailPage({ slug, articles }: { slug: string; articles: 
               ← Proyectos
             </a>
             <p className={styles["projects__eyebrow"]}>
-              Caso {caseNumber(index)} · {project.years}
+              {isListed ? `Caso ${caseNumber(index)} · ${project.years}` : project.years}
             </p>
             <h1 className={styles["projects__title"]}>{project.sector}</h1>
             <p className={styles["projects__lead"]}>{project.headline}</p>
@@ -166,7 +168,7 @@ export function ProjectDetailPage({ slug, articles }: { slug: string; articles: 
           {hasDesktop && <ScreenGallery project={project} />}
         </article>
 
-        <SiblingNav index={index} />
+        {isListed && <SiblingNav index={index} />}
       </main>
 
       <ProjectsClosing gaPrefix={`project_${gaKey(project)}`} />
