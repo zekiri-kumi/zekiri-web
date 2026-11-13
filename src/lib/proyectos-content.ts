@@ -630,6 +630,61 @@ const ALL_PROJECTS: readonly Project[] = [
       },
     ],
   },
+  {
+    slug: "venta-de-entradas-de-cine",
+    sector: "Cines y entretenimiento",
+    headline: "Una web para que el público de un cine en Chile compre sus entradas en línea y un panel para controlar, función por función, quién entró a cada sala.",
+    problem: "Las entradas se vendían solo en boletería: el público hacía una fila para comprar y otra para entrar, y el cine recién sabía cuánta gente tuvo cada función al cerrar la caja. En la puerta cada entrada se revisaba a ojo, sin forma de detectar una que ya se había usado o que era de otra función.",
+    features: [
+      "Cartelera en línea por complejo y día, con películas, salas y horarios de cada función",
+      "Compra de entradas por tipo de tarifa con pago en línea, desde la computadora o el celular",
+      "Entrada digital con código QR que llega al correo del comprador y vale para toda la compra",
+      "Lectura del QR en la puerta de la sala, con aviso si la entrada ya se usó o es de otra función",
+      "Panel en vivo con entradas vendidas y personas que ya entraron en cada función",
+      "Administración de películas, salas, funciones y precios",
+    ],
+    platforms: ["Web de compra", "Panel de administración"],
+    stack: ["Angular", "Ionic"],
+    years: "2018–2019",
+    accent: "#4b2c83",
+    screens: [
+      {
+        src: "/assets/proyectos/venta-de-entradas-de-cine/01-desktop.webp",
+        device: "desktop",
+        width: 1600,
+        height: 1000,
+        caption: "Cartelera del complejo con los horarios de cada función y las que ya están agotadas",
+      },
+      {
+        src: "/assets/proyectos/venta-de-entradas-de-cine/02-mobile.webp",
+        device: "mobile",
+        width: 520,
+        height: 1125,
+        caption: "El público elige la función y cuántas entradas de cada tarifa quiere antes de pagar",
+      },
+      {
+        src: "/assets/proyectos/venta-de-entradas-de-cine/03-mobile.webp",
+        device: "mobile",
+        width: 520,
+        height: 1125,
+        caption: "La entrada llega con un código QR que vale para todas las personas de la compra",
+      },
+      {
+        src: "/assets/proyectos/venta-de-entradas-de-cine/04-desktop.webp",
+        device: "desktop",
+        width: 1600,
+        height: 1000,
+        caption: "Panel en vivo: entradas vendidas y personas que ya entraron en cada función del día",
+      },
+      {
+        src: "/assets/proyectos/venta-de-entradas-de-cine/05-mobile.webp",
+        device: "mobile",
+        width: 520,
+        height: 1125,
+        caption: "En la puerta de la sala se lee el QR y se ve al instante si la entrada es válida",
+      },
+    ],
+  },
 ];
 
 /** Published cases. The whole site reads this list, so a hidden case disappears everywhere. */

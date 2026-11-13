@@ -31,6 +31,7 @@ const TOPIC_BY_PROJECT: Record<string, BlogTopic> = {
   "aceleradora-de-startups": "Mentoría y emprendimiento",
   "control-de-acceso": "Eventos",
   "lista-de-bodas": "Tiendas",
+  "venta-de-entradas-de-cine": "Eventos",
 };
 
 /** Question that opens the call to action at the end of an article, by topic. */
