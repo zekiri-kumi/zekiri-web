@@ -5,6 +5,7 @@ description: "Pedidos tomados por fuera, un almacén donde no se sabe quién pre
 project: "plataforma-distribucion-mayorista"
 service: "automatizacion-de-procesos"
 publishedAt: 2026-11-10
+coverScreen: 2
 ---
 
 Si diriges una distribuidora mayorista, es probable que reconozcas al menos uno de estos tres problemas. Las distribuidoras de este proyecto tenían los tres: vendedores que tomaban pedidos por fuera del sistema, almacenes sin control de quién había preparado qué, y datos que no coincidían con el ERP. Todas necesitaban lo mismo y ninguna podía costear un desarrollo propio.

@@ -5,6 +5,7 @@ description: "En una tienda de productos frescos no todo se vende por unidad. C�
 project: "alimentos-a-domicilio"
 service: "sistemas-web-a-medida"
 publishedAt: 2026-11-10
+coverScreen: 2
 ---
 
 Una tienda en línea de ropa o de electrónica vende cosas que se cuentan. Una de frutas y verduras vende tomates por kilo, lechugas por unidad, perejil por atado y huevos por maple, y cada una de esas unidades tiene su manera de equivocarse.

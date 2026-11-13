@@ -5,6 +5,7 @@ description: "En un servicio técnico con varias sucursales, el repuesto no siem
 project: "servicio-tecnico"
 service: "sistemas-web-a-medida"
 publishedAt: 2026-11-10
+coverScreen: 2
 ---
 
 Con una sola sucursal, saber si hay un repuesto es cuestión de abrir un cajón. Con tres o cuatro, la pregunta cambia: hay que saber si hay, dónde está y cuánto tarda en llegar a la sucursal donde espera el equipo. Si eso se averigua por teléfono, el técnico espera, el cliente espera, y a veces se compra un repuesto que estaba en la sucursal de al lado.

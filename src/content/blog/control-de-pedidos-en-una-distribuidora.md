@@ -5,7 +5,7 @@ description: "Una distribuidora recibía pedidos por teléfono, mensajes y papel
 project: "distribucion-consumo-masivo"
 service: "desarrollo-de-aplicaciones-moviles"
 publishedAt: 2026-11-10
-coverScreen: 3
+coverScreen: 2
 ---
 
 Cuando los pedidos de tu distribuidora entran por tres canales a la vez, el control se vuelve una cuestión de memoria. En una distribuidora de consumo masivo para la que trabajamos llegaban por teléfono, por mensajes y en papel, sin que se viera el stock real ni en qué etapa estaba cada entrega. El cliente no sabía cuándo iba a recibir su mercadería, y el vendedor salía a ruta sin conocer el saldo ni el crédito disponible de cada cliente.

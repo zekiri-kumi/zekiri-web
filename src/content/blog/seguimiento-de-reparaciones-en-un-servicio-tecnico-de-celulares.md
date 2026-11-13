@@ -5,6 +5,7 @@ description: "Una cadena de servicio técnico no sabía en qué estado estaba ca
 project: "servicio-tecnico"
 service: "sistemas-web-a-medida"
 publishedAt: 2026-11-10
+coverScreen: 1
 ---
 
 Quien tiene un servicio técnico conoce la pregunta: «¿cómo va mi celular?». Una cadena de reparación con varias sucursales para la que trabajamos no podía contestarla sin buscar. No se sabía en qué estado estaba cada uno, quién lo tenía ni si había repuesto, y las confirmaciones con el cliente y los envíos entre sucursales se perdían en papeles y en llamadas que nadie anotaba.
