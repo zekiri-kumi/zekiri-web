@@ -12,7 +12,7 @@ import {
   COMPANY_PHONE,
 } from "./company";
 
-export const SITE_URL = "https://zekiri.io";
+export const SITE_URL = "https://zekiri.com";
 
 /** One-line description of the company, shared by the Organization and WebSite schemas. */
 const SITE_DESCRIPTION = `Empresa de desarrollo de software a medida y automatización de procesos en ${COMPANY_CITY}, ${COMPANY_COUNTRY}.`;

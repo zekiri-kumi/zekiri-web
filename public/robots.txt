@@ -9,4 +9,4 @@ Disallow: /api/
 Disallow: /markdown-page
 
 # Sitemap location (helps discovery)
-Sitemap: https://zekiri.io/sitemap.xml
+Sitemap: https://zekiri.com/sitemap.xml

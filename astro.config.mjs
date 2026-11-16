@@ -8,7 +8,7 @@ import netlify from '@astrojs/netlify';
 // https://astro.build/config
 // Netlify: usa este adapter para que las rutas y el API funcionen en Netlify (Node no se ejecuta ahí).
 export default defineConfig({
-  site: 'https://zekiri.io',
+  site: 'https://zekiri.com',
   output: 'server',
   adapter: netlify(),
   vite: {
